@@ -1,0 +1,400 @@
+/* Override Google font neon effect with custom controlled glow */
+.font-effect-neon {
+  color: whitesmoke; 
+  text-shadow:
+    0 0 4px rgba(158, 209, 209, 0.6),
+    0 0 6px rgba(158, 209, 209, 0.4),
+    0 0 8px rgba(158, 209, 209, 0.25);
+}
+
+/* Remove Google's default glow */
+.font-effect-neon {
+  -webkit-text-fill-color: #9ED1D1;
+}
+
+
+
+/* ===== ORIGINAL FILE CONTENT (from Debottam)*/
+body {
+  background: radial-gradient(circle, #213145, #000);
+  color: #DFC4A8;
+  text-align: center;
+  font-family: "Segoe UI", sans-serif;
+}
+
+h1 {
+  letter-spacing: 2px;
+  color: #9ED1D1;
+}
+
+/* ===== BOARD ===== */
+.game-board {
+  max-width: 360px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  perspective: 1000px;
+}
+
+/* ===== CARD ===== */
+.card {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  cursor: pointer;
+  background-color: transparent;
+  border: #DFC4A8 2px solid;
+  border-radius: 12px;
+}
+
+.card.flip {
+  transform: rotateY(180deg);
+}
+
+/* ===== CARD FACES ===== */
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FRONT */
+.card-front {
+  background: linear-gradient(135deg, #24647F, #213145);
+  font-size: 32px;
+}
+
+/* BACK */
+.card-back {
+  transform: rotateY(180deg);
+  background: transparent;
+  padding: 6px;
+  text-align: center;
+}
+
+/* IMAGE CARD */
+.card-back img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.card-name {
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: #DFC4A8;
+}
+
+/* TEXT CARD */
+.card-text {
+  font-size: 0.8rem;
+  color: #DFC4A8;
+  padding: 8px;
+}
+
+/* ===== FEEDBACK ===== */
+.correct {
+  box-shadow: 0 0 20px lime;
+  pointer-events: none;
+}
+
+.wrong {
+  box-shadow: 0 0 20px red;
+}
+
+.shake {
+  animation: shake 0.35s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0) rotateY(180deg); }
+  25% { transform: translateX(-5px) rotateY(180deg); }
+  50% { transform: translateX(5px) rotateY(180deg); }
+  75% { transform: translateX(-5px) rotateY(180deg); }
+  100% { transform: translateX(0) rotateY(180deg); }
+}
+
+/* ===== SCORE ===== */
+.score-board {
+  color: #9ED1D1;
+  margin-bottom: 10px;
+}
+
+/*BG - behind-most background set to #24647F */
+/*
+.backwrap {
+  background: #24647F;  base color 
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;  background can't steal clicks 
+  z-index: -999;
+}
+
+
+
+/* Add subtle animated gradient layers on top of the base color (some animations not showing) */
+.backwrap {
+  background-image:/*
+    radial-gradient(circle at 15% 25%, rgba(158,209,209,0.06), transparent 18%),
+    radial-gradient(circle at 80% 75%, rgba(223,196,168,0.04), transparent 20%),*/
+    radial-gradient(circle at 15% 25%, rgba(158,209,209,0.18), transparent 60%),
+    radial-gradient(circle at 80% 75%, rgba(223,196,168,0.14), transparent 65%)
+
+    linear-gradient(180deg, #24647F 0%, #213145 100%);
+
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;  /* background can't steal clicks */
+  z-index: -999;  
+  background-blend-mode: screen, screen, normal;
+  background-size: 300% 300%, 300% 300%, 100% 100%;
+  
+    animation:
+    bgMove 18s ease-in-out infinite alternate,
+    colorDrift 90s linear infinite;
+  will-change: background-position, filter;
+}
+
+/* Very slow hue temperature shift */
+@keyframes colorDrift {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(8deg);   /* slight warmth */
+  }
+  100% {
+    filter: hue-rotate(0deg);
+  }
+}
+
+
+/* keyframes for subtle background motion */
+@keyframes bgMove {
+  0% {
+    background-position: 0% 0%, 100% 100%, 0% 0%;
+  }
+  50% {
+    background-position: 50% 25%, 50% 75%, 0% 0%;
+  }
+  100% {
+    background-position: 100% 50%, 0% 100%, 0% 0%;
+  }
+}
+
+*/
+
+/* Shapes & Animation */
+.back-shapes {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  pointer-events: none; /* ensure shapes never intercept clicks */
+}
+
+.back-shapes img {
+  opacity: 0.2;
+  position: absolute;
+  width: 1.5%;
+}
+
+/* Floating defaults &  animation */
+.floating {
+  position: absolute;
+  /* animation properties: duration can be overridden per shape via inline style if needed */
+  animation-name: floating;
+  -webkit-animation-name: floating;
+  animation-duration: 5s;
+  -webkit-animation-duration: 5s;
+  animation-timing-function: linear;
+  -webkit-animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  will-change: transform;
+  pointer-events: none; /* ensure shapes never intercept clicks(do not remove) */
+}
+
+/* CIRCLE (outline only) */
+.back-shapes .floating.circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #9ED1D1;
+  background: transparent;
+  opacity: 0.95;
+  box-shadow: 0 4px 14px rgba(158,209,209,0.08);
+}
+
+/* SQUARE (outline only) */
+.back-shapes .floating.square {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: 2px solid #9ED1D1;
+  background: transparent;
+  opacity: 0.95;
+  box-shadow: 0 4px 14px rgba(158,209,209,0.08);
+}
+
+/* TRIANGLE (outline only) - using inline SVG background for stroke-only triangle */
+.back-shapes .floating.triangle {
+  width: 42px;
+  height: 36px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 86'><polygon points='50,6 6,80 94,80' fill='none' stroke='%239ED1D1' stroke-width='6' stroke-linejoin='round' /></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.95;
+  background-color: transparent;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.08));
+}
+
+/* CROSS (plus) - using inline SVG stroke-only plus sign */
+.back-shapes .floating.cross {
+  width: 36px;
+  height: 36px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g fill='none' stroke='%239ED1D1' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'><line x1='50' y1='10' x2='50' y2='90'/><line x1='10' y1='50' x2='90' y2='50'/></g></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.95;
+  background-color: transparent;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.08));
+}
+
+/* ensure floating shapes are transparent and stroke-only */
+.back-shapes .floating { background-color: transparent !important; }
+
+/* ===== Floating keyframes (different snappy  animation) ===== 
+@keyframes floating {
+  0% {
+    transform: translateY(0%) rotate(-25deg) translateX(0);
+    opacity: 0.95;
+  }
+  25% {
+    transform: translateY(80%) rotate(5deg) translateX(-6%);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(200%) rotate(55deg) translateX(0%);
+    opacity: 0.85;
+  }
+  75% {
+    transform: translateY(80%) rotate(5deg) translateX(6%);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(0%) rotate(-55deg) translateX(0);
+    opacity: 0.95;
+  }
+}
+@-webkit-keyframes floating {
+  0% { -webkit-transform: translateY(0%) rotate(-25deg) translateX(0); opacity:0.95; }
+  25% { -webkit-transform: translateY(80%) rotate(5deg) translateX(-6%); opacity:0.9; }
+  50% { -webkit-transform: translateY(160%) rotate(25deg) translateX(0%); opacity:0.85; }
+  75% { -webkit-transform: translateY(80%) rotate(5deg) translateX(6%); opacity:0.9; }
+  100% { -webkit-transform: translateY(0%) rotate(-25deg) translateX(0); opacity:0.95; }
+}
+*/
+
+
+@keyframes floating {
+  0% {
+    transform: translateY(0%) rotate(-55deg);
+  }
+  50% {
+    transform: translateY(300%) rotate(55deg);
+  }
+  100% {
+    transform: translateY(0%) rotate(-55deg);
+  }
+}
+@-webkit-keyframes floating {
+  0% {
+    -webkit-transform: translateY(0%);
+  }
+  50% {
+    -webkit-transform: translateY(300%);
+  }
+  100% {
+    -webkit-transform: translateY(0%);
+  }
+}
+/* ===== NEW ADDITIONS ===== */
+
+/* TIMER styling - top-left; uses requested palette */
+.timer {
+  position: fixed;
+  left: 14px;
+  top: 14px;
+  z-index: 1000;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #213145 0%, #A75E53 100%);
+  color: #213145; /* darker text so text gradient stands out */
+  font-weight: 700;
+  font-family: "Segoe UI", sans-serif;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  min-width: 72px;
+  text-align: center;
+  user-select: none;
+}
+
+/* Glowing numbers using background-clip for nicer look */
+.timer .timeText {
+  background: linear-gradient(90deg, #9ED1D1, #DFC4A8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+}
+
+/* Unified control button design */
+#controlBtn {
+  display: none;
+  background: linear-gradient(135deg, rgba(158,209,209,0.95), rgba(223,196,168,0.95));
+  border: 0;
+  padding: 10px 18px;
+  border-radius: 8px;
+  color: #213145;
+  margin-top: 10px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  font-weight: 700;
+  font-family: "Segoe UI", sans-serif;
+}
+#controlBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+}
+
+/* Card hover glow (requested) */
+.card:hover {
+  transform: translateY(-4px) scale(1.02); /* subtle lift */
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.45),
+    0 0 18px rgba(158,209,209,0.55),
+    0 0 36px rgba(223,196,168,0.28);
+}
+
+/* Responsive tweaks so timer never overlaps header on narrow screens */
+@media (max-width: 420px) {
+  .timer { left: 8px; top: 8px; padding: 6px 10px; min-width: 64px; }
+  h1 { font-size: 1.05rem; }
+  .game-board { max-width: 320px; gap: 8px; }
+}
