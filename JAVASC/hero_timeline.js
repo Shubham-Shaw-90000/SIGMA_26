@@ -11,25 +11,25 @@ const timelineData = [
     year: "2021",
     title: "Inception Point",
     desc: "The project begins with a single line of code and a vision.",
-    img: "../Assets/CC2021.avif",
+    img: "./Assets/CC2021.avif",
   },
   {
     year: "2022",
     title: "First Divergence",
     desc: "Systems split as complexity grows. The architecture expands.",
-    img: "../Assets/CC2022.avif",
+    img: "./Assets/CC2022.avif",
   },
   {
     year: "2023",
     title: "Neural Integration",
     desc: "AI models merged with frontend logic creating organic motion.",
-    img: "../Assets/CC2023.avif",
+    img: "./Assets/CC2023.avif",
   },
   {
     year: "2024",
     title: "Horizon Event",
     desc: "The final singularity. Design and code become indistinguishable.",
-    img: "../Assets/CC2023.avif",
+    img: "./Assets/CC2023.avif",
   },
 ];
 
@@ -253,4 +253,5 @@ window.addEventListener('load', () => {
     requestAnimationFrame(() => {
         buildAndInitTimeline();
     });
+
 });
