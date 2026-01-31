@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pebbles Magazine</title>
+  <link rel="stylesheet" href="../CSS/Pebbles.css" />
+</head>
+
+<body>
+  <!-- Texture for print feel -->
+  <div class="noise-overlay"></div>
+
+  <nav id="navbar">
+    <a href="#hero" class="logo-mark">PEBBLES</a>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="#showcase">Issues</a></li>
+      <li><a href="#issues">Archive</a></li>
+      <li><a href="#team">Team</a></li>
+    </ul>
+  </nav>
+
+  <!--  HERO SECTION -->
+  <section id="area" class="hero viewport">
+    <div class="hero-content">
+      <h1 class="hero-title"><span>The</span>PEBBLES</h1>
+      <p class="hero-tagline">A Ripple in the Sea of SCIENCE</p>
+    </div>
+  </section>
+
+  <!-- SHOWCASE SECTION -->
+  <section id="showcase">
+    <div class="section-header">
+      <h2 class="section-title">This Week</h2>
+      <div class="section-desc">
+        Curated perspectives on the invisible forces shaping our reality.
+      </div>
+    </div>
+
+    <div class="mosaic-grid">
+      <!-- Hero Card: Spans 2 cols, 2 rows -->
+      <a href="#" class="card span-col-2 span-row-2">
+        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1000&auto=format&fit=crop"
+          class="card-bg" alt="Nebula" />
+        <div class="card-content">
+          <span class="tag">Cover Story</span>
+          <h3>The Silence of Dark Energy</h3>
+          <p>
+            New theoretical models suggest the expansion of the universe isn't
+            just accelerating—it's evolving.
+          </p>
+        </div>
+      </a>
+
+      <!-- Standard Card -->
+      <a href="#" class="card about">
+        <div class="card-content">
+          <h3>
+            Pebbles is much more than a publication; it is a curated lens on
+            the contemporary world. Born from a desire to slow down the
+            consumption of content, we focus on long-form journalism, visual
+            essays, and critical thought.
+          </h3>
+          <p>Beyond editing: Power of print in a digital age.</p>
+        </div>
+      </a>
+
+      <!-- Tall Card -->
+      <a href="#" class="card span-row-2">
+        <div class="live-indicator" title="Live Update"></div>
+        <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=600&auto=format&fit=crop"
+          class="card-bg" id="dynamic-img" alt="Data" />
+        <div class="card-content">
+          <span class="tag">Live Data</span>
+          <h3 id="dynamic-title">Global Temps</h3>
+          <p id="dynamic-desc">
+            Real-time thermal anomaly mapping from Sentinel-6 satellites.
+          </p>
+        </div>
+      </a>
+
+      <!-- Standard Card -->
+      <a href="#" class="card">
+        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=600&auto=format&fit=crop"
+          class="card-bg" alt="Lab" />
+        <div class="card-content">
+          <span class="tag">Materials</span>
+          <h3>Liquid Glass</h3>
+          <p>A new state of matter discovered at absolute zero.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Previous Issues Section -->
+  <section id="issues">
+    <div class="section-header">
+      <h2 class="section-title">Selected Editions</h2>
+
+      <div class="issues-nav">
+        <button class="arrow left" aria-label="Previous">←</button>
+        <button class="arrow right" aria-label="Next">→</button>
+      </div>
+    </div>
+
+    <div class="issues-scroll" id="issuesScroll">
+      <div class="issues-track">
+        <!-- Issue 01 -->
+        <article class="issue-card">
+          <div class="issue-cover">
+            <img src="../Assets/Pebbles25.avif" alt="Pebbles25" decoding="async" />
+          </div>
+          <div class="issue-meta">
+            <span>2025</span>
+            <span>Vol. V</span>
+          </div>
+          <h3 class="issue-title">An Endless Odyssey</h3>
+          <p class="issue-desc">
+            A voyage through the ever-unfolding conundrums of the universe.
+          </p>
+          <a href="https://drive.google.com/file/d/131DP-2CVLe4bbF3F1uAAClXhiK1MZtRY/view?usp=drivesdk" target="_blank " class="issue-link">View Issue</a>
+        </article>
+
+        <!-- Issue 02 -->
+        <article class="issue-card">
+          <div class="issue-cover">
+            <img src="../Assets/Pebbles24.avif" alt="Pebbles24" decoding="async" />
+          </div>
+          <div class="issue-meta">
+            <span>2024</span>
+            <span>Vol. IV</span>
+          </div>
+          <h3 class="issue-title">Mysterious Alchemy</h3>
+          <p class="issue-desc">
+            Where the unseen whispers secrets to the curious mind.
+          </p>
+          <a href="https://drive.google.com/file/d/1iiMeaLS2VoY46czaN_YYRCprvuYUAEYg/view" target="_blank" class="issue-link">View Issue</a>
+        </article>
+
+        <!-- Issue 03 -->
+        <article class="issue-card">
+          <div class="issue-cover">
+            <img src="../Assets/Pebbles23.avif" alt="Pebbles23" decoding="async" />
+          </div>
+          <div class="issue-meta">
+            <span>2023</span>
+            <span>Vol. III</span>
+          </div>
+          <h3 class="issue-title">Connecting Visions</h3>
+          <p class="issue-desc">
+           The Heart of Discovery beats with the Symphony of Collaboration.
+          </p>
+          <a href="https://drive.google.com/file/d/1fYpio_o4D8moQZGUhwZ9v5mgJhdy-Fur/view" target="_blank" class="issue-link">View Issue</a>
+        </article>
+
+        <!-- Issue 04 -->
+        <article class="issue-card">
+          <div class="issue-cover">
+            <img src="../Assets/Pebbles22.avif" alt="Pebbles22" decoding="async" />
+          </div>
+          <div class="issue-meta">
+            <span>2022</span>
+            <span>Vol. II</span>
+          </div>
+          <h3 class="issue-title">The Infinite Loop of Enquiry</h3>
+          <p class="issue-desc">
+           Where every answer sparks a new question.
+          </p>
+          <a href="https://drive.google.com/file/d/1pir-Jj4dOBB6BFVKb_2_DQ8PQqo12VFO/view" target="_blank" class="issue-link">View Issue</a>
+        </article>
+
+        <!-- Issue 05 -->
+        <article class="issue-card">
+          <div class="issue-cover">
+            <img src="../Assets/Pebbles21.avif" alt="Pebbles21" decoding="async" />
+          </div>
+          <div class="issue-meta">
+            <span>2021</span>
+            <span>Vol. I</span>
+          </div>
+          <h3 class="issue-title">Thriving on Turmoil</h3>
+          <p class="issue-desc">
+            From disruption to discovery—exploring science that flourishes in adversity.
+          </p>
+          <a href="https://drive.google.com/file/d/1HgKrEljz_KHCOq54jJcPR8xgo5ZKefTf/view" target="_blank" class="issue-link">View Issue</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM SECTION -->
+  <section id="team">
+    <div class="section-header">
+      <h2 class="section-title">The Editors</h2>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="../Assets/Rajanya Bandyopadhyay_edinchief.avif" alt="Rajanya Bandyopadhyay" />
+        </div>
+        <div class="member-name">Rajanya Bandyopadhyay</div>
+        <div class="member-role">Editor-In-Chief</div>
+      </div>
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="../Assets/Archit Basak_Associate Editor-In-Chief.avif" alt="Archit Basak" />
+        </div>
+        <div class="member-name">Archit Basak</div>
+        <div class="member-role">Asso. Editor-In-Chief</div>
+      </div>
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="../Assets/Akansha Jaiswal _edmember.avif" alt="Akansha Jaiswal" />
+        </div>
+        <div class="member-name">Akansha Jaiswal</div>
+        <div class="member-role">Board Member</div>
+      </div>
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="../Assets/Divija Ghosh_edbmember.avif" alt="Divija Ghosh" />
+        </div>
+        <div class="member-name">Divija Ghosh</div>
+        <div class="member-role">Board Member</div>
+      </div>
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="../Assets/Abhijoy Prabal_edmember.avif" alt="Abhijoy prabal" />
+        </div>
+        <div class="member-name">Abhijoy Prabal</div>
+        <div class="member-role">Board Member</div>
+      </div>
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="../Assets/Nirjar Chandra_edbmember.avif" alt="Nirjar Chandra" />
+        </div>
+        <div class="member-name">Nirjar Chandra</div>
+        <div class="member-role">Board Member</div>
+      </div>
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="../Assets/Shreetama Dey_edbmember.avif" alt="Shreetama Dey" />
+        </div>
+        <div class="member-name">Shreetama Dey</div>
+        <div class="member-role">Board Member</div>
+      </div>
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="../Assets/Srabonti Chattopadhyay_edbmember.avif" alt="Srabonti Chattopadhyay" />
+        </div>
+        <div class="member-name">Srabonti Chattopadhyay</div>
+        <div class="member-role">Board Member</div>
+      </div>
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="../Assets/Tanusha Paine_edbmember.avif" alt="Tanusha Paine" />
+        </div>
+        <div class="member-name">Tanusha Paine</div>
+        <div class="member-role">Board Member</div>
+      </div>
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="../Assets/Toyesha Maji - SXCSA Photo.avif" alt="Toyesha Maji" />
+        </div>
+        <div class="member-name">Toyesha Maji</div>
+        <div class="member-role">Board Member</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="copyright">
+      &copy; 2026 Pebbles Magazine. All rights reserved.<br>
+      Designed for the curious.
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="../JAVASC/jquery.ripples-min.js"></script>
+  <script src="../JAVASC/Pebbles.js"></script> 
+</body>
+
+</html>

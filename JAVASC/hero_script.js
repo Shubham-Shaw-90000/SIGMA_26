@@ -1,65 +1,90 @@
- document.addEventListener("DOMContentLoaded", () => {
-        const canvas = document.getElementById("mainCanvas");
-        const letters = document.querySelectorAll(".hero-item");
+document.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("mainCanvas");
+  const letters = document.querySelectorAll(".hero-item");
 
-        // --- OPTIMIZATION 1: Cached Rects ---
-        let canvasRect = canvas
-          ? canvas.getBoundingClientRect()
-          : { left: 0, top: 0 };
+  // --- OPTIMIZATION 1: Cached Rects ---
+  let canvasRect = canvas
+    ? canvas.getBoundingClientRect()
+    : { left: 0, top: 0 };
 
-        window.addEventListener("resize", () => {
-          canvasRect = canvas.getBoundingClientRect();
+  window.addEventListener("resize", () => {
+    canvasRect = canvas.getBoundingClientRect();
+  });
+
+  // --- OPTIMIZATION 2: Single Mouse Listener for Cursor Light ---
+  if (canvas) {
+    let tx = 0,
+      ty = 0;
+    let isRendering = false;
+
+    canvas.addEventListener("mousemove", (e) => {
+      tx = e.clientX - canvasRect.left;
+      ty = e.clientY - canvasRect.top;
+
+      if (!isRendering) {
+        requestAnimationFrame(() => {
+          canvas.style.setProperty("--tx", `${tx}px`);
+          canvas.style.setProperty("--ty", `${ty}px`);
+          isRendering = false;
         });
+        isRendering = true;
+      }
+    });
+  }
 
-        // --- OPTIMIZATION 2: Single Mouse Listener for Cursor Light ---
-        if (canvas) {
-          let tx = 0,
-            ty = 0;
-          let isRendering = false;
+  // --- OPTIMIZATION 3: Delegated & Calculated Tilt ---
+  letters.forEach((letter) => {
+    const themeColor = letter.style.getPropertyValue("--theme");
 
-          canvas.addEventListener("mousemove", (e) => {
-            tx = e.clientX - canvasRect.left;
-            ty = e.clientY - canvasRect.top;
+    letter.addEventListener("mouseenter", () => {
+      if (themeColor) {
+        canvas.style.setProperty("--active-glow", themeColor);
+      }
+    });
 
-            if (!isRendering) {
-              requestAnimationFrame(() => {
-                canvas.style.setProperty("--tx", `${tx}px`);
-                canvas.style.setProperty("--ty", `${ty}px`);
-                isRendering = false;
-              });
-              isRendering = true;
-            }
-          });
-        }
+    letter.addEventListener("mouseleave", () => {
+      canvas.style.setProperty("--active-glow", "255, 255, 255");
+      letter.style.setProperty("--rx", "0deg");
+      letter.style.setProperty("--ry", "0deg");
+    });
 
-        // --- OPTIMIZATION 3: Delegated & Calculated Tilt ---
-        letters.forEach((letter) => {
-          const themeColor = letter.style.getPropertyValue("--theme");
+    letter.addEventListener("mousemove", (e) => {
+      const rect = letter.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
 
-          letter.addEventListener("mouseenter", () => {
-            if (themeColor) {
-              canvas.style.setProperty("--active-glow", themeColor);
-            }
-          });
+      const xPct = (x / rect.width - 0.5) * 2;
+      const yPct = (y / rect.height - 0.5) * 2;
 
-          letter.addEventListener("mouseleave", () => {
-            canvas.style.setProperty("--active-glow", "255, 255, 255");
-            letter.style.setProperty("--rx", "0deg");
-            letter.style.setProperty("--ry", "0deg");
-          });
+      const maxRot = 15;
 
-          letter.addEventListener("mousemove", (e) => {
-            const rect = letter.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+      letter.style.setProperty("--rx", `${-yPct * maxRot}deg`);
+      letter.style.setProperty("--ry", `${xPct * maxRot}deg`);
+    });
+  });
+});
 
-            const xPct = (x / rect.width - 0.5) * 2;
-            const yPct = (y / rect.height - 0.5) * 2;
+//Phone and Email Copy
+document.addEventListener("DOMContentLoaded", () => {
 
-            const maxRot = 15;
-
-            letter.style.setProperty("--rx", `${-yPct * maxRot}deg`);
-            letter.style.setProperty("--ry", `${xPct * maxRot}deg`);
-          });
+    function copyToClipboard(value, label) {
+        navigator.clipboard.writeText(value).then(() => {
+            alert(label + " copied: " + value);
         });
-      });
+    }
+
+    document.querySelectorAll(".copy-phone").forEach(el => {
+        el.addEventListener("click", e => {
+            e.preventDefault();
+            copyToClipboard(el.dataset.phone, "Phone number");
+        });
+    });
+
+    document.querySelectorAll(".copy-email").forEach(el => {
+        el.addEventListener("click", e => {
+            e.preventDefault();
+            copyToClipboard(el.dataset.email, "Email");
+        });
+    });
+
+});

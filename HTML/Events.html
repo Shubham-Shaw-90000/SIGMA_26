@@ -1,292 +1,409 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sigma 2026</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Importing Playfair Display (Serif) and Inter (Sans) for Editorial Vibe -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
-     <link rel="stylesheet" href="../CSS/Events.css" />
-  </head>
-  <body>
-    <!-- Texture Overlay -->
-    <div class="noise-overlay"></div>
 
-    <!-- Navigation (Minimal) -->
-    <nav
-      style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 20px;
-        display: flex;
-        justify-content: space-between;
-        z-index: 100;
-        mix-blend-mode: difference;
-      "
-    >
-      <div
-        style="
-          font-family: &quot;Playfair Display&quot;, serif;
-          font-weight: 700;
-          font-size: 1.2rem;
-        "
-      >
-        SIGMA.
-      </div>
-    </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sigma 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Importing Playfair Display (Serif) and Inter (Sans) for Editorial Vibe -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../CSS/Events.css" />
+</head>
 
-    <!-- Hero Section -->
-    <header class="hero">
-      <div class="hero-meta-top">St. Xavier's College, Park Street</div>
-      <h1 class="hero-title">SIGMA</h1>
-      <p class="hero-tagline">The 2026 Edition</p>
+<body>
+  <!-- Texture Overlay -->
+  <div class="noise-overlay"></div>
 
-      <div class="hero-details">
-        <span>March 25-26, 2026</span>
-        <span>Main Campus Arena</span>
-        <span>Vol. 26</span>
-      </div>
+  <nav id="navbar">
+    <a href="#hero" class="logo-mark">SIGMA</a>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="#academic">Academic</a></li>
+      <li><a href="#creative">Creative</a></li>
+      <li><a href="#gaming">Gaming</a></li>
+      <li><a href="#technical">Technical</a></li>
+    </ul>
+  </nav>
 
-      <button class="btn-download">Download Brochure</button>
-    </header>
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-meta-top">
+      St. Xavier's College(Autonomous), Park Street
+    </div>
+    <h1 class="hero-title">SIGMA</h1>
+    <p class="hero-tagline">Perplexing Paradigms</p>
 
-    <section id="events">
-      <!-- CATEGORY: ACADEMIC -->
-      <div class="event-category">
-        <div class="section-header">
-          <h2 class="section-title">Academic Events</h2>
+    <div class="hero-details">
+      <span>March 25-26, 2026</span>
+      <span>Main Campus Arena</span>
+      <span>Vol. 26</span>
+    </div>
 
-          <div class="events-nav">
-            <button class="arrow left" data-target="academicScroll">←</button>
-            <button class="arrow right" data-target="academicScroll">→</button>
-          </div>
-        </div>
+    <a href="../Assets/SIGMA26_RULEBOOK.pdf" download class="btn-download">Download Brochure</a>
 
-        <div class="events-scroll" id="academicScroll">
-          <div class="events-track">
-            <article class="event-card">
-              <div class="event-poster">
-                <img
-                src="../Assets/Eureka.avif"
-                alt="Eureka"
-                decoding="async"
-              />
-              </div>
+  </header>
 
-              <div class="event-meta">
-                <span>Inter-College</span>
-                <span>Team</span>
-              </div>
+  <!-- ABOUT SECTION -->
+  <section class="about-section" id="about">
+    <div class="about-body">
+      <p>
+        Science is ever evolving, with today’s certainties often challenged by tomorrow’s discoveries. <span class="highlight">SIGMA 2026</span>,
+        themed <span class="highlight">Perplexing Paradigms</span>, celebrates ideas and phenomena that defy expectations, driving curiosity, critical
+        thinking, and innovation. It invites participants to question established norms, embrace uncertainty, and
+        explore the frontiers of scientific inquiry—where every discovery opens the door to new questions and deeper
+        understanding..
+      </p>
+    </div>
+  </section>
 
-              <h3 class="event-title">Eureka</h3>
+  <section id="editorial-section">
+    <!-- CATEGORY: ACADEMIC -->
+    <div class="event-category">
+      <div class="section-header">
+        <h2 class="section-title" id="academic">Academic Events</h2>
 
-              <p class="event-desc">
-                Present innovative research ideas before an expert jury.
-              </p>
-
-              <a href="#" class="event-link">View Details</a>
-            </article>
-
-            <article class="event-card">
-              <div class="event-poster">
-                <span>02</span>
-              </div>
-
-              <div class="event-meta">
-                <span>Technical</span>
-                <span>Individual</span>
-              </div>
-
-              <h3 class="event-title">Model Exhibition</h3>
-
-              <p class="event-desc">
-                Showcase working models and applied engineering concepts.
-              </p>
-
-              <a href="#" class="event-link">View Details</a>
-            </article>
-
-            <article class="event-card">
-              <div class="event-poster">
-                <span>02</span>
-              </div>
-
-              <div class="event-meta">
-                <span>Technical</span>
-                <span>Individual</span>
-              </div>
-
-              <h3 class="event-title">Model Exhibition</h3>
-
-              <p class="event-desc">
-                Showcase working models and applied engineering concepts.
-              </p>
-
-              <a href="#" class="event-link">View Details</a>
-            </article>
-
-            <article class="event-card">
-              <div class="event-poster">
-                <span>02</span>
-              </div>
-
-              <div class="event-meta">
-                <span>Technical</span>
-                <span>Individual</span>
-              </div>
-
-              <h3 class="event-title">Model Exhibition</h3>
-
-              <p class="event-desc">
-                Showcase working models and applied engineering concepts.
-              </p>
-
-              <a href="#" class="event-link">View Details</a>
-            </article>
-
-            <article class="event-card">
-              <div class="event-poster">
-                <span>02</span>
-              </div>
-
-              <div class="event-meta">
-                <span>Technical</span>
-                <span>Individual</span>
-              </div>
-
-              <h3 class="event-title">Model Exhibition</h3>
-
-              <p class="event-desc">
-                Showcase working models and applied engineering concepts.
-              </p>
-
-              <a href="#" class="event-link">View Details</a>
-            </article>
-          </div>
+        <div class="events-nav">
+          <button class="arrow left" data-target="academicScroll">←</button>
+          <button class="arrow right" data-target="academicScroll">→</button>
         </div>
       </div>
 
-      <!-- CATEGORY: SPORTS -->
-      <div class="event-category">
-        <div class="section-header">
-          <h2 class="section-title">Sports Events</h2>
+      <div class="events-scroll" id="academicScroll">
+        <div class="events-track">
+          <article class="event-card">
+            <div class="event-poster">
+              <img src="../Assets/Showitoff.avif" alt="ShowItOff" decoding="async" />
+            </div>
 
-          <div class="events-nav">
-            <button class="arrow left" data-target="sportsScroll">←</button>
-            <button class="arrow right" data-target="sportsScroll">→</button>
-          </div>
-        </div>
+            <div class="event-meta">
+              <span>Inter-College</span>
+              <span>Team</span>
+            </div>
 
-        <div class="events-scroll" id="sportsScroll">
-          <div class="events-track">
-            <article class="event-card">
-              <div class="event-poster">
-                <span>01</span>
-              </div>
+            <h3 class="event-title">Show It Off</h3>
 
-              <div class="event-meta">
-                <span>Inter-College</span>
-                <span>Team</span>
-              </div>
+            <p class="event-desc">
+              Present innovative research papers before an expert jury.
+            </p>
 
-              <h3 class="event-title">Paper Presentation</h3>
+            <a href="#" class="event-link">View Details</a>
+          </article>
 
-              <p class="event-desc">
-                Present innovative research ideas before an expert jury.
-              </p>
+          <article class="event-card">
+            <div class="event-poster">
+              <img src="../Assets/Eureka.avif" alt="Eureka" decoding="async" />
+            </div>
 
-              <a href="#" class="event-link">View Details</a>
-            </article>
+            <div class="event-meta">
+              <span>Intra-College</span>
+              <span>Team</span>
+            </div>
 
-            <article class="event-card">
-              <div class="event-poster">
-                <span>02</span>
-              </div>
+            <h3 class="event-title">Eureka</h3>
 
-              <div class="event-meta">
-                <span>Technical</span>
-                <span>Individual</span>
-              </div>
+            <p class="event-desc">
+              Showcase working models and applied science concepts.
+            </p>
 
-              <h3 class="event-title">Model Exhibition</h3>
+            <a href="#" class="event-link">View Details</a>
+          </article>
 
-              <p class="event-desc">
-                Showcase working models and applied engineering concepts.
-              </p>
+          <article class="event-card">
+            <div class="event-poster">
+              <img src="../Assets/Qudos.avif" alt="Qudos" decoding="async" />
+            </div>
 
-              <a href="#" class="event-link">View Details</a>
-            </article>
+            <div class="event-meta">
+              <span>Inter-College</span>
+              <span>Team</span>
+            </div>
 
-            <article class="event-card">
-              <div class="event-poster">
-                <span>02</span>
-              </div>
+            <h3 class="event-title">Qudos</h3>
 
-              <div class="event-meta">
-                <span>Technical</span>
-                <span>Individual</span>
-              </div>
+            <p class="event-desc">
+              Expect the unexpected in a quiz that turns knowledge into a
+              thrilling game.
+            </p>
 
-              <h3 class="event-title">Model Exhibition</h3>
+            <a href="#" class="event-link">View Details</a>
+          </article>
 
-              <p class="event-desc">
-                Showcase working models and applied engineering concepts.
-              </p>
+          <article class="event-card">
+            <div class="event-poster">
+              <img src="../Assets/ChainReaction.avif" alt="Chain Reaction" decoding="async" />
+            </div>
 
-              <a href="#" class="event-link">View Details</a>
-            </article>
+            <div class="event-meta">
+              <span>Intra-College</span>
+              <span>Individual</span>
+            </div>
 
-            <article class="event-card">
-              <div class="event-poster">
-                <span>02</span>
-              </div>
+            <h3 class="event-title">Chain Reaction</h3>
 
-              <div class="event-meta">
-                <span>Technical</span>
-                <span>Individual</span>
-              </div>
+            <p class="event-desc">
+              A high-voltage debate where science, logic, and curiosity go
+              head-to-head.
+            </p>
 
-              <h3 class="event-title">Model Exhibition</h3>
+            <a href="#" class="event-link">View Details</a>
+          </article>
 
-              <p class="event-desc">
-                Showcase working models and applied engineering concepts.
-              </p>
+          <article class="event-card">
+            <div class="event-poster">
+              <img src="../Assets/InfiniteDivergence.avif" alt="Infinite InfiniteDivergence" decoding="async" />
+            </div>
 
-              <a href="#" class="event-link">View Details</a>
-            </article>
-          </div>
+            <div class="event-meta">
+              <span>Inter-College</span>
+              <span>Individual</span>
+            </div>
+
+            <h3 class="event-title">Infinite Divergence</h3>
+
+            <p class="event-desc">
+              A high-energy battle of numbers, logic, and speed.
+            </p>
+
+            <a href="#" class="event-link">View Details</a>
+          </article>
         </div>
       </div>
-    </section>
+    </div>
 
-    <script>
-      const SCROLL_AMOUNT = 360;
+    <!--CATEGORY : CREATIVE EVENTS-->
 
-      document.querySelectorAll(".events-nav .arrow").forEach((button) => {
-        button.addEventListener("click", () => {
-          const targetId = button.dataset.target;
-          const container = document.getElementById(targetId);
+    <div class="event-category">
+      <div class="section-header">
+        <h2 class="section-title" id="creative">Creative Events</h2>
 
-          if (!container) return;
+        <div class="events-nav">
+          <button class="arrow left" data-target="sportsScroll">←</button>
+          <button class="arrow right" data-target="sportsScroll">→</button>
+        </div>
+      </div>
 
-          const direction = button.classList.contains("left") ? -1 : 1;
+      <div class="events-scroll" id="sportsScroll">
+        <div class="events-track">
+          <article class="event-card">
+            <div class="event-poster">
+              <img src="../Assets/InnovationHub.avif" alt="Innovation Hub" decoding="async" />
+            </div>
 
-          container.scrollBy({
-            left: SCROLL_AMOUNT * direction,
-            behavior: "smooth",
-          });
+            <div class="event-meta">
+              <span>Inter-College</span>
+              <span>Team</span>
+            </div>
+
+            <h3 class="event-title">Innovation Hub</h3>
+
+            <p class="event-desc">
+              A high-impact stage where bold ideas meet strategy, innovation,
+              and ambition.
+            </p>
+
+            <a href="#" class="event-link">View Details</a>
+          </article>
+
+          <article class="event-card">
+            <div class="event-poster">
+              <img src="../Assets/Posterpedia.avif" alt="Poster Pedia" decoding="async" />
+            </div>
+
+            <div class="event-meta">
+              <span>Inter-College</span>
+              <span>Team</span>
+            </div>
+
+            <h3 class="event-title">Posterpedia</h3>
+
+            <p class="event-desc">
+              A visual exploration where scientific ideas come alive through
+              design and creativity.
+            </p>
+
+            <a href="#" class="event-link">View Details</a>
+          </article>
+
+          <article class="event-card">
+            <div class="event-poster">
+              <img src="../Assets/Photography.avif" alt="Photography" decoding="async" />
+            </div>
+
+            <div class="event-meta">
+              <span>Inter-College</span>
+              <span>Individual</span>
+            </div>
+
+            <h3 class="event-title">Lumino Genesis</h3>
+
+            <p class="event-desc">
+              Exploring the wonders of science through a creative and curious
+              lens.
+            </p>
+
+            <a href="#" class="event-link">View Details</a>
+          </article>
+
+          <article class="event-card">
+            <div class="event-poster">
+              <img src="../Assets/StreakYourmark.avif" alt="StreakYourmark" decoding="async" />
+            </div>
+
+            <div class="event-meta">
+              <span>Technical</span>
+              <span>Individual</span>
+            </div>
+
+            <h3 class="event-title">Streak Your Mark</h3>
+
+            <p class="event-desc">
+              Where science meets art, transforming petri dishes into living
+              canvases.
+            </p>
+
+            <a href="#" class="event-link">View Details</a>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <!--CATEGORY : GAMING EVENTS-->
+
+    <div class="event-category">
+      <div class="section-header">
+        <h2 class="section-title" id="gaming">Gaming Events</h2>
+
+        <div class="events-nav">
+          <button class="arrow left" data-target="sportsScroll">←</button>
+          <button class="arrow right" data-target="sportsScroll">→</button>
+        </div>
+      </div>
+
+      <div class="events-scroll" id="sportsScroll">
+        <div class="events-track">
+          <article class="event-card">
+            <div class="event-poster">
+              <img src="../Assets/chess.avif" alt="Chess Summit" decoding="async" />
+            </div>
+
+            <div class="event-meta">
+              <span>Inter-College</span>
+              <span>Individual</span>
+            </div>
+
+            <h3 class="event-title">Chess Summit</h3>
+
+            <p class="event-desc">
+              A silent battlefield where strategy outsmarts strength and every
+              move matters.
+            </p>
+
+            <a href="#" class="event-link">View Details</a>
+          </article>
+
+          <article class="event-card">
+            <div class="event-poster">
+              <img src="../Assets/PlayWinRepeat.avif" alt="Play Win Repeat" decoding="async" />
+            </div>
+
+            <div class="event-meta">
+              <span>Inter-College</span>
+              <span>Individual</span>
+            </div>
+
+            <h3 class="event-title">Play Win Repeat</h3>
+
+            <p class="event-desc">
+              Where virtual boots meet real competition in a high-energy
+              football clash.
+            </p>
+
+            <a href="#" class="event-link">View Details</a>
+          </article>
+
+          <article class="event-card">
+            <div class="event-poster">
+              <img src="../Assets/TreasureHunt.avif" alt="Treasure Hunt" decoding="async" />
+            </div>
+
+            <div class="event-meta">
+              <span>Intra-College</span>
+              <span>Team</span>
+            </div>
+
+            <h3 class="event-title">Odyssey Obscuera</h3>
+
+            <p class="event-desc">
+              Decode the clues, race the clock, and uncover victory one step
+              at a time.
+            </p>
+
+            <a href="#" class="event-link">View Details</a>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORY: TECHNICAL -->
+    <div class="event-category">
+      <div class="section-header">
+        <h2 class="section-title" id="technical">Technical Events</h2>
+
+        <div class="events-nav">
+          <button class="arrow left" data-target="sportsScroll">←</button>
+          <button class="arrow right" data-target="sportsScroll">→</button>
+        </div>
+      </div>
+
+      <div class="events-scroll" id="sportsScroll">
+        <div class="events-track">
+          <article class="event-card">
+            <div class="event-poster">
+              <img src="../Assets/Hackathon.avif" alt="Hackathon" decoding="async" />
+            </div>
+
+            <div class="event-meta">
+              <span>Inter-College</span>
+              <span>Individual</span>
+            </div>
+
+            <h3 class="event-title">Hackathon</h3>
+
+            <p class="event-desc">
+              Where problem-solvers build, break, and innovate against the
+              clock.
+            </p>
+
+            <a href="#" class="event-link">View Details</a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const SCROLL_AMOUNT = 360;
+
+    document.querySelectorAll(".events-nav .arrow").forEach((button) => {
+      button.addEventListener("click", () => {
+        const targetId = button.dataset.target;
+        const container = document.getElementById(targetId);
+
+        if (!container) return;
+
+        const direction = button.classList.contains("left") ? -1 : 1;
+
+        container.scrollBy({
+          left: SCROLL_AMOUNT * direction,
+          behavior: "smooth",
         });
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>
-
-
-

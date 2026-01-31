@@ -253,5 +253,4 @@ window.addEventListener('load', () => {
     requestAnimationFrame(() => {
         buildAndInitTimeline();
     });
-
 });
