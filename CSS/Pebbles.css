@@ -631,7 +631,7 @@ img {
     justify-content: flex-start; 
     -webkit-overflow-scrolling: touch;
     gap: 1.5rem;
-    display: none;
+    /*display: none;*/
   }
   
   nav ul::-webkit-scrollbar {
@@ -780,4 +780,5 @@ img {
   .member-photo img {
     filter: grayscale(0%); 
   }
+
 }
