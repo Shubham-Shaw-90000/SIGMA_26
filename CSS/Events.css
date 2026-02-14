@@ -478,7 +478,7 @@ header.hero {
     justify-content: flex-start; 
     -webkit-overflow-scrolling: touch;
     gap: 1.5rem;
-    display: none;
+    /*display: none;*/
   }
   
   nav ul::-webkit-scrollbar {
@@ -563,4 +563,5 @@ header.hero {
     opacity: 0; 
     font-size: 0;
   }
+
 }
