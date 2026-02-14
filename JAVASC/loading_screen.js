@@ -8,44 +8,97 @@ gsap.registerPlugin(CustomEase, SplitText, ScrambleTextPlugin);
     const loadingWrapper = document.querySelector('.loading-screen-wrapper');
     if (!loadingWrapper) return; // Exit if loading screen not present
 
+    // =========================================================
+    // First-load detection using sessionStorage & Performance API
+    // =========================================================
+    let shouldPlayAnimation = true;
+
+    try {
+        // Check if page was reloaded manually
+        const navEntry = performance.getEntriesByType("navigation")[0];
+        const isReload = navEntry ? navEntry.type === 'reload' : performance.navigation.type === 1;
+
+        if (sessionStorage.getItem('siteLoaded') && !isReload) {
+            // If site was previously loaded AND this is not a manual refresh
+            shouldPlayAnimation = false;
+        } else {
+            // First visit or manual refresh: Set the flag
+            sessionStorage.setItem('siteLoaded', 'true');
+        }
+    } catch (e) {
+        // Safe fallback: If sessionStorage is blocked, default to playing animation
+        console.warn("SessionStorage access blocked. Playing loading animation by default.");
+        shouldPlayAnimation = true;
+    }
+
+    if (!shouldPlayAnimation) {
+        // --- SKIP LOADING ANIMATION ---
+        
+        // 1. Immediately remove the loading screen to prevent flash
+        loadingWrapper.remove();
+
+        // 2. Ensure Hero Section is visible and scaled correctly (simulating post-animation state)
+        const heroSection = document.querySelector(".college");
+        if (heroSection) {
+            gsap.set(heroSection, {
+                opacity: 1,
+                scale: 1,
+                visibility: "visible"
+            });
+        }
+
+        // 3. Show tap hint immediately if it exists
+        const tapHint = document.getElementById('tap-hint');
+        if (tapHint) {
+            gsap.set(tapHint, { opacity: 1, visibility: 'visible' });
+        }
+
+        // 4. Dispatch event so other scripts know loading is "done"
+        window.dispatchEvent(new CustomEvent('loadingComplete'));
+        
+        // Stop execution of the rest of the file
+        return; 
+    }
+    // =========================================================
+
     document.fonts.ready.then(() => {
         startLoadingAnimation();
     });
 
     function startLoadingAnimation() {
         const backgroundTextItems = document.querySelectorAll(".text-item");
-        const backgroundImages = {
-            default: document.getElementById("default-bg"),
-            precision: document.getElementById("focus-bg"),
-            analysis: document.getElementById("presence-bg"),
-            discovery: document.getElementById("feel-bg")
-        };
+        // const backgroundImages = {
+        //     default: document.getElementById("default-bg"),
+        //     precision: document.getElementById("focus-bg"),
+        //     analysis: document.getElementById("presence-bg"),
+        //     discovery: document.getElementById("feel-bg")
+        // };
 
-        function switchBackgroundImage(id) {
-            Object.values(backgroundImages).forEach((bg) => {
-                gsap.to(bg, {
-                    opacity: 0,
-                    duration: 0.8,
-                    ease: "customEase"
-                });
-            });
+        // function switchBackgroundImage(id) {
+        //     Object.values(backgroundImages).forEach((bg) => {
+        //         gsap.to(bg, {
+        //             opacity: 0,
+        //             duration: 0.8,
+        //             ease: "customEase"
+        //         });
+        //     });
 
-            if (backgroundImages[id]) {
-                gsap.to(backgroundImages[id], {
-                    opacity: 1,
-                    duration: 0.8,
-                    ease: "customEase",
-                    delay: 0.2
-                });
-            } else {
-                gsap.to(backgroundImages.default, {
-                    opacity: 1,
-                    duration: 0.8,
-                    ease: "customEase",
-                    delay: 0.2
-                });
-            }
-        }
+        //     if (backgroundImages[id]) {
+        //         gsap.to(backgroundImages[id], {
+        //             opacity: 1,
+        //             duration: 0.8,
+        //             ease: "customEase",
+        //             delay: 0.2
+        //         });
+        //     } else {
+        //         gsap.to(backgroundImages.default, {
+        //             opacity: 1,
+        //             duration: 0.8,
+        //             ease: "customEase",
+        //             delay: 0.2
+        //         });
+        //     }
+        // }
 
         const alternativeTexts = {
             precision: {
@@ -354,7 +407,7 @@ gsap.registerPlugin(CustomEase, SplitText, ScrambleTextPlugin);
             const toInners = toRow.querySelectorAll(".char-inner");
 
             forceResetKineticAnimation();
-            switchBackgroundImage(toRowId);
+            // switchBackgroundImage(toRowId);
             startKineticAnimation(toText);
 
             if (state.textRevealAnimation) {
@@ -390,9 +443,12 @@ gsap.registerPlugin(CustomEase, SplitText, ScrambleTextPlugin);
             timeline.to(
                 toInners,
                 {
-                    x: -35,
+                    // x: -5,
+                    // scale:2,
+                    textShadow: "0px 0px 10px #eaff94",
+                    color: "#f8ffde",
                     duration: 0.64,
-                    stagger: 0.04,
+                    stagger: 0.3,
                     ease: "customEase"
                 },
                 0.05
@@ -468,7 +524,7 @@ gsap.registerPlugin(CustomEase, SplitText, ScrambleTextPlugin);
                 const chars = splitTexts[rowId].chars;
                 const innerSpans = row.querySelectorAll(".char-inner");
 
-                switchBackgroundImage(rowId);
+                // switchBackgroundImage(rowId);
                 startKineticAnimation(text);
 
                 if (state.textRevealAnimation) {
@@ -492,9 +548,11 @@ gsap.registerPlugin(CustomEase, SplitText, ScrambleTextPlugin);
                 timeline.to(
                     innerSpans,
                     {
-                        x: -35,
+                        // x: -5,
+                        textShadow: "0px 0px 10px #eaff94",
+                        color: "#f8ffde",
                         duration: 0.64,
-                        stagger: 0.04,
+                        stagger: 0.3,
                         ease: "customEase"
                     },
                     0.05
@@ -507,7 +565,7 @@ gsap.registerPlugin(CustomEase, SplitText, ScrambleTextPlugin);
             currentRowIndex: 0,
             isLoading: true,
             loadingProgress: 0,
-            totalDuration: 12000 // 15 seconds
+            totalDuration: 120 // 15 seconds
         };
 
         const rowIds = ["precision", "analysis", "discovery"];
@@ -538,7 +596,12 @@ gsap.registerPlugin(CustomEase, SplitText, ScrambleTextPlugin);
             });
 
             // First, hide all loading screen elements
-            rectTimeline.to([backgroundFrame, backgroundImages, textBackground, mainContent, kineticType], {
+            const elementsToAnimate = [backgroundFrame, textBackground, mainContent, kineticType].filter(el => el !== null);
+            if (backgroundImages.length > 0) {
+                elementsToAnimate.push(...Array.from(backgroundImages));
+            }
+            
+            rectTimeline.to(elementsToAnimate, {
                 opacity: 0.2,
                 duration: 2.5,
                 ease: "power2.out"
@@ -563,51 +626,56 @@ gsap.registerPlugin(CustomEase, SplitText, ScrambleTextPlugin);
         }
 
         function transitionToHero() {
-    const rectangle = document.getElementById("expand-rectangle");
-    
-    // CHANGE 1: Select the College/Perspective section instead of the text
-    const perspectiveSection = document.querySelector(".hero_college"); 
-    // Select main hero to ensure it stays hidden
-    const mainHero = document.querySelector("#hero");
-    
-    // Ensure Main Hero Text is hidden (it has a solid background that blocks images)
-    if (mainHero) gsap.set(mainHero, { autoAlpha: 0 }); 
+            const rectangle = document.getElementById("expand-rectangle");
+            const heroSection = document.querySelector(".college");
 
-    // Prepare perspective section to be revealed
-    gsap.set(perspectiveSection, {
-        opacity: 0,
-        scale: 1.1, 
-        visibility: "visible",
-        zIndex: 50 // High enough to be seen, lower than loading screen
-    });
+            // Prepare hero section
+            gsap.set(heroSection, {
+                opacity: 0.7,
+                scale: 10,
+                visibility: "visible"
+            });
 
-    // Move rectangle to body so it doesn't get removed with loadingWrapper
-    document.body.appendChild(rectangle);
-    loadingWrapper.remove();
+            // Remove loading screen wrapper FIRST (but keep the rectangle)
+            // Move rectangle to body so it doesn't get removed
+            document.body.appendChild(rectangle);
+            loadingWrapper.remove();
 
-    const transitionTimeline = gsap.timeline({
-        onComplete: () => {
-            rectangle.remove();
-            // Dispatch event to tell perspective.js to enable zoom interaction
-            window.dispatchEvent(new CustomEvent('loadingComplete'));
+            const transitionTimeline = gsap.timeline({
+                onComplete: () => {
+                    // Remove the white rectangle after animation
+                    rectangle.remove();
+
+                    // Dispatch event
+                    window.dispatchEvent(new CustomEvent('loadingComplete'));
+
+                    // Show tap hint
+                    const tapHint = document.getElementById('tap-hint');
+                    if (tapHint) {
+                        gsap.to(tapHint, {
+                            opacity: 1,
+                            visibility: 'visible',
+                            duration: 0.8,
+                            delay: 0.5
+                        });
+                    }
+                }
+            });
+
+            // Fade out white rectangle while zooming in hero
+            transitionTimeline.to(rectangle, {
+                opacity: 0,
+                duration: 1.2,
+                ease: "power2.inOut"
+            }, 0);
+
+            transitionTimeline.to(heroSection, {
+                opacity: 1,
+                scale: 1,
+                duration: 1.2,
+                ease: "power2.out"
+            },0);
         }
-    });
-
-    // Fade out white rectangle
-    transitionTimeline.to(rectangle, {
-        opacity: 0,
-        duration: 1.2,
-        ease: "power2.inOut"
-    }, 0);
-
-    // CHANGE 2: Animate the Perspective Section IN
-    transitionTimeline.to(perspectiveSection, {
-        opacity: 1,
-        scale: 1,
-        duration: 1.2,
-        ease: "power2.out"
-    }, 0);
-}
 
         function cycleToNextRow() {
             if (!loadingState.isLoading) return;

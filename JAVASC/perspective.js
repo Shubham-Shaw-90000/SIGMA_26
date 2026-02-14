@@ -1,26 +1,105 @@
-let ready = false;
-let isZoomed = false;
-const zoomAmount = 150;
+const CONFIG = {
+    zoomAmount: 200,
+    parallaxStrength: 500,
+    parallaxDepth: 1,
+    mobileBreakpoint: 768,
+    animation: {
+        duration: 1,
+        zoomDuration: 2.5,
+        flashDuration: 2,
+        easeExpoIn: "expo.in",
+        easePower2: "power2.inOut"
+    }
+};
 
-// // Check if hero was already removed in this session
-// if (sessionStorage.getItem('heroRemoved') === 'true') {
-//     const hero = document.querySelector(".hero");
-//     if (hero) {
-//         hero.remove();
-//         isZoomed = true;
-//     }
-// }
+const state = {
+    ready: false,
+    zoomed: false,
+    loadingComplete: false,
+    mouse: { x: 0.5, y: 0.5 }, // Start center
+    isMobile: window.matchMedia(`(max-width: ${CONFIG.mobileBreakpoint}px)`).matches,
+    isTouch: ('ontouchstart' in window) || (navigator.maxTouchPoints > 0)
+};
 
-window.addEventListener("load", () => {
-    ready = true;
-    const layers = document.querySelectorAll('.layer');
+const DOM = {
+    layers: null,
+    flashImg: null,
+    container: null,
+    hero: null,
+    tapHint: null
+};
 
-    // setting layer properties
-    layers.forEach(layer => {
+function initPerspective() {
+    cacheDOM();
+
+    // =========================================================
+    // First-load detection for perspective animation
+    // =========================================================
+    // We check for the loading screen wrapper. If it's missing, loading was skipped 
+    // (return visit/internal nav), so we must skip the perspective animation too.
+    const isFirstLoad = document.querySelector('.loading-screen-wrapper') !== null;
+
+    if (!isFirstLoad) {
+        // --- SKIP ANIMATION & RENDER STATIC ---
+        
+        // 1. Remove the perspective intro (.college) completely
+        if (DOM.hero) {
+            DOM.hero.remove();
+            sessionStorage.setItem('heroRemoved', 'true');
+        }
+        
+        // 2. Hide the tap hint since there is no interaction
+        if (DOM.tapHint) {
+            DOM.tapHint.style.display = 'none';
+        }
+
+        // 3. CRITICAL: Ensure body scroll is enabled and Lenis is started
+        document.body.style.overflow = '';
+        if (window.lenis) {
+            window.lenis.start();
+            window.lenis.resize();
+        }
+        
+        // 4. CRITICAL: Signal that the hero transition is "done"
+        // This ensures other scripts (like hero text animations) start immediately.
+        window.dispatchEvent(new CustomEvent('heroAway'));
+        
+        // Stop execution of animation logic
+        return;
+    }
+    // =========================================================
+
+    checkInitialLoadingState();
+    setupLayers();
+    setupEventListeners();
+    
+    // Start animation loop
+    gsap.ticker.add(updateParallax);
+    
+    state.ready = true;
+}
+
+function cacheDOM() {
+    DOM.layers = document.querySelectorAll('.layer');
+    DOM.flashImg = document.getElementById('flash-img');
+    DOM.container = document.querySelector(".perspective-container");
+    DOM.hero = document.querySelector(".college");
+    DOM.tapHint = document.getElementById('tap-hint');
+}
+
+function checkInitialLoadingState() {
+    // If loading wrapper is missing, we consider loading complete
+    if (!document.querySelector('.loading-screen-wrapper')) {
+        state.loadingComplete = true;
+    }
+}
+
+function setupLayers() {
+    // Set initial properties for parallax layers
+    DOM.layers.forEach(layer => {
         const z = parseFloat(layer.dataset.z);
-        // Scale up images that are further back (negative z)
-        const scale = 1 + (Math.abs(z) * 0.05);
-
+        // Note: Scale logic preserved from original code (commented out or active)
+        
         gsap.set(layer, {
             xPercent: -50,
             yPercent: -50,
@@ -28,197 +107,196 @@ window.addEventListener("load", () => {
             top: "50%",
             x: 0,
             y: 0,
-            z: z,
-            // scale: scale,
-            // scale: z < 0 ? scale : 1  // Only scale layers with negative z
+            z: z
         });
     });
 
-    // setting flash glow properties - placing it at center of gate
-    gsap.set('#flash-img', {
-        xPercent: -50,
-        yPercent: -50,
-        left: "50%",
-        top: "50%",
-        x: 0,
-        y: 0,
-    })
-
-    // Mouse
-    let mouse = { x: 0.5, y: 0.5 };
-
-    document.addEventListener("mousemove", e => {
-        mouse.x = e.clientX / window.innerWidth;
-        mouse.y = e.clientY / window.innerHeight;
-    });
-
-    gsap.ticker.add(() => {
-        if (!ready) return;
-
-
-        layers.forEach(layer => {
-            const z = parseFloat(layer.dataset.z);
-            const depth = 1;// z / 20;
-
-            const moveX = (mouse.x - 0.5) * 500 * depth;
-            const moveY = (mouse.y - 0.5) * 500 * depth * 0.3;
-
-            gsap.to(layer, {
-                x: moveX,
-                y: moveY,
-                duration: 1,
-                // ease:'power3.in',
-                overwrite: 'auto',
-            });
+    // Set flash/glow image properties
+    // DESKTOP: -35% | MOBILE: -45%
+    if (DOM.flashImg) {
+        gsap.set(DOM.flashImg, {
+            xPercent: -50,
+            yPercent: state.isMobile ? -45 : -35,
+            left: "50%",
+            top: "50%",
+            x: 0,
+            y: 0,
         });
+    }
+}
 
+function setupEventListeners() {
+    // Mouse movement tracking
+    document.addEventListener("mousemove", handleMouseMove);
 
-
-    });
-
-    // Disable zoom trigger until loading is complete
-    let loadingComplete = !document.querySelector('.loading-screen-wrapper');
-
+    // Loading completion listener
     window.addEventListener('loadingComplete', () => {
-        loadingComplete = true;
+        state.loadingComplete = true;
     });
 
-    window.addEventListener('mousedown', () => {
-        if (!loadingComplete) return; // Don't allow zoom during loading
-        // flashZoomIn()
-        toggleZoom()
-    })
-});
+    // Zoom trigger
+    window.addEventListener('mousedown', handleZoomTrigger);
+}
 
-// function flashZoomIn() {
-//     const flashImg = document.getElementById('flash-img');
-//     gsap.fromTo(flashImg, {
-//         display: 'none',
-//         scale:0.1,
-//     },
-//         {
-//             display: 'block',
-//             scale: 10,
-//             duration:1,
-//     })
-// }
+function handleMouseMove(e) {
+    state.mouse.x = e.clientX / window.innerWidth;
+    state.mouse.y = e.clientY / window.innerHeight;
+}
+
+function handleZoomTrigger() {
+    // Guard: Don't allow zoom if loading isn't finished
+    if (!state.loadingComplete) return;
+    
+    toggleZoom();
+}
+
+function updateParallax() {
+    if (!state.ready) return;
+
+    DOM.layers.forEach(layer => {
+        // Calculate movement based on mouse position from center (0.5)
+        const moveX = (state.mouse.x - 0.5) * CONFIG.parallaxStrength * CONFIG.parallaxDepth;
+        const moveY = (state.mouse.y - 0.5) * CONFIG.parallaxStrength * CONFIG.parallaxDepth * 0.3;
+
+        gsap.to(layer, {
+            x: moveX,
+            y: moveY,
+            duration: CONFIG.animation.duration,
+            overwrite: 'auto',
+        });
+    });
+}
 
 function toggleZoom() {
-    if (isZoomed) return;
-    const flashImg = document.getElementById('flash-img');
-    const layers = document.querySelectorAll('.layer');
-    const container = document.querySelector(".perspective-container");
+    if (state.zoomed) return;
 
-    const t1 = gsap.timeline({
-        defaults: { duration: 1 },
-        onComplete: afterZoomIn,
+    // Hide tap hint immediately
+    if (DOM.tapHint) {
+        gsap.to(DOM.tapHint, {
+            opacity: 0,
+            visibility: 'hidden',
+            duration: 0.5
+        });
+    }
+
+    const tl = gsap.timeline({
+        defaults: { duration: CONFIG.animation.duration },
+        onComplete: cleanupHero,
     });
 
-    // Centers the gate to the center of the screen
-    t1.to(container, {
-        y: isZoomed ? "0" : "-35%",
-        duration: 2.5,
-        ease: "expo.in"
-    }, "<")
+    // 1. Center the gate (Camera move)
+    tl.to(DOM.container, {
+        y: state.isMobile ? "0%" : "-100%",
+        duration: CONFIG.animation.zoomDuration,
+        ease: CONFIG.animation.easeExpoIn
+    }, "<");
 
+    // Lock zoom state
+    state.zoomed = true;
 
-
-    // isZoomed = !isZoomed;
-    isZoomed = true;
-
-    // layers zooms stuff
-    layers.forEach(layer => {
+    // 2. Zoom layers
+    DOM.layers.forEach(layer => {
         const baseZ = parseFloat(layer.dataset.z);
-        const targetZ = isZoomed ? baseZ + zoomAmount : baseZ;
+        const targetZ = baseZ + CONFIG.zoomAmount;
 
-
-        t1.to(layer, {
+        tl.to(layer, {
             z: targetZ,
-            duration: 2.5,
-            ease: "expo.in"
+            duration: CONFIG.animation.zoomDuration,
+            ease: CONFIG.animation.easeExpoIn
         }, "<");
     });
 
-    // black image aniamtion
-
-    // just opacity
-    t1.fromTo(flashImg, {
-        display: 'none',
-        // scale: 0.001,
-        opacity: 0,
-    },
-        {
-            display: 'block',
-            // scale: 3,
-            opacity: 1,
-            duration: 2,
-            ease: "expo.in"
-        }, "-=2.5")
-
-
-    // rest of the animation of black img
-    t1.fromTo(flashImg, {
-        display: 'none',
-        scale: 0.001,
-        // roation:0,
-        // opacity: 0,
-    },
-        {
-            display: 'block',
-            scale: 4,
-            // opacity:1,
-            // rotation:1000000,
-            duration: 2.6,
-            ease: "expo.in"
-        }, "<")
-}
-
-function afterZoomIn() {
-    // remove the drawings from DOM
-    console.log("afterZoomIn");
-    const hero = document.querySelector(".hero_college");
-
-    if (hero) {
-
-        window.scrollTo(0, 0);
-        if (typeof lenis !== 'undefined') {
-            lenis.scrollTo(0, { immediate: true });
-        }
-        // Fade out animation
-        gsap.to(hero, {
+    // 3. Fade out Hero section
+    if (DOM.hero) {
+        tl.to(DOM.hero, {
             opacity: 0,
-            duration: 1, // Smooth fade out revealing the content underneath
-            ease: "power2.inOut",
-            onComplete: () => {
-                hero.remove();
-                sessionStorage.setItem('heroRemoved', 'true');
+            duration: CONFIG.animation.zoomDuration,
+            ease: CONFIG.animation.easeExpoIn,
+        }, "<");
+    }
 
-                // Force scroll to top AFTER hero is removed
-                window.scrollTo(0, 0);
-                if (typeof lenis !== 'undefined') {
-                    lenis.scrollTo(0, { immediate: true });
-                }
+    // 4. Flash Image Sequence
+    if (DOM.flashImg) {
+        // Initial appearance
+        tl.fromTo(DOM.flashImg, 
+            {
+                display: 'none',
+                opacity: 0,
+            },
+            {
+                display: 'block',
+                opacity: 1,
+                duration: CONFIG.animation.flashDuration,
+                ease: CONFIG.animation.easeExpoIn
+            }, 
+            "-=2.5"
+        );
 
-                // Enable scroll
-                if (typeof lenis !== 'undefined') {
-                    lenis.start();
-                }
-                document.body.style.setProperty('overflow', '');
-
-                // Dispatch event for animations.js to start the next sequence
-                window.dispatchEvent(new CustomEvent('heroAway'));
-
-                // Refresh ScrollTrigger and Lenis to account for the DOM change
-                if (typeof ScrollTrigger !== 'undefined') {
-                    ScrollTrigger.refresh();
-                }
-                if (typeof lenis !== 'undefined') {
-                    lenis.resize();
-                }
-            }
-        });
-    } else {
-        // If hero was somehow already removed, trigger the event anyway
-        window.dispatchEvent(new CustomEvent('heroAway'));
+        // Scale down/disappear effect
+        tl.fromTo(DOM.flashImg, 
+            {
+                display: 'none',
+                scale: 0.001,
+            },
+            {
+                display: 'block',
+                scale: 0,
+                duration: 2.6,
+                ease: CONFIG.animation.easeExpoIn
+            }, 
+            "<"
+        );
     }
 }
+
+function cleanupHero() {
+    console.log("afterZoomIn / cleanupHero");
+    
+    if (!DOM.hero) {
+        // Safety fallback if hero is missing
+        window.dispatchEvent(new CustomEvent('heroAway'));
+        return;
+    }
+
+    // Reset Scroll Position
+    window.scrollTo(0, 0);
+    if (window.lenis) {
+        window.lenis.scrollTo(0, { immediate: true });
+    }
+
+    // Smooth fade out revealing content
+    gsap.to(DOM.hero, {
+        opacity: 0,
+        duration: 0.5,
+        ease: CONFIG.animation.easePower2,
+        onComplete: () => {
+            // Remove from DOM
+            DOM.hero.remove();
+            sessionStorage.setItem('heroRemoved', 'true');
+
+            // Force scroll to top again after removal
+            window.scrollTo(0, 0);
+            if (window.lenis) {
+                window.lenis.scrollTo(0, { immediate: true });
+            }
+
+            // Enable Scroll (Lenis & Body)
+            if (window.lenis) {
+                window.lenis.start();
+            }
+            document.body.style.setProperty('overflow', '');
+            // Signal transition completion
+            window.dispatchEvent(new CustomEvent('heroAway'));
+
+            // Refresh libraries to detect layout changes
+            if (typeof ScrollTrigger !== 'undefined') {
+                ScrollTrigger.refresh();
+            }
+            if (window.lenis) {
+                window.lenis.resize();
+            }
+        }
+    });
+}
+
+window.addEventListener("load", initPerspective);

@@ -1,9 +1,15 @@
+console.log("timeline")
+
 // --- 1. Configuration & Data ---
+// Made config dynamic based on screen size
+const isMobile = window.innerWidth < 768;
+
 const config = {
-  eventSpacing: 800, // px between events
+  eventSpacing: isMobile ? 400 : 800, // Reduced spacing on mobile
   startPadding: window.innerWidth * 0.2,
   endPadding: window.innerWidth * 0.6,
-  branchYOffset: 80, // Vertical distance for branches
+  // Dynamic offset: Reduced to 8% of viewport height to pull branches closer to center
+  branchYOffset: window.innerHeight * 0.08, 
 };
 
 const timelineData = [
@@ -33,72 +39,76 @@ const timelineData = [
   },
 ];
 
-// --- 2. Setup DOM & Dimensions (DEFERRED) ---
-// Note: We do NOT run this immediately to allow LCP to paint first.
+// --- 2. Setup DOM & Dimensions ---
+gsap.registerPlugin(ScrollTrigger);
 
-function buildAndInitTimeline() {
-  gsap.registerPlugin(ScrollTrigger);
+const SCROLL_FACTOR = 0.5;
+const scrollContainer = document.getElementById("scroll-container");
+const svgCanvas = document.getElementById("timeline-svg");
+const spacer = document.getElementById("scroll-height-spacer");
 
-  const SCROLL_FACTOR = 1;
-  const scrollContainer = document.getElementById("scroll-container");
-  const svgCanvas = document.getElementById("timeline-svg");
-  const spacer = document.getElementById("scroll-height-spacer");
+// Calculate Total Width based on data
+const totalContentWidth =
+  config.startPadding +
+  timelineData.length * config.eventSpacing +
+  config.endPadding;
 
-  // Safety check if elements exist
-  if (!scrollContainer || !svgCanvas || !spacer) return;
+// Set Spacer height (controls how "long" the scroll feels)
+// We make it relative to the width to ensure scrubbing feels 1:1
+spacer.style.height = `${totalContentWidth * 0.1}px`;
+scrollContainer.style.width = `${totalContentWidth}px`;
 
-  // Calculate Total Width based on data
-  const totalContentWidth =
-    config.startPadding +
-    timelineData.length * config.eventSpacing +
-    config.endPadding;
+// Update SVG Viewbox to match pixel dimensions exactly
+function resizeSvg() {
+  const h = window.innerHeight;
+  svgCanvas.setAttribute("viewBox", `0 0 ${totalContentWidth} ${h}`);
+  svgCanvas.setAttribute("width", totalContentWidth);
+  svgCanvas.setAttribute("height", h);
+}
+resizeSvg();
 
-  // Set Spacer height (controls how "long" the scroll feels)
-  spacer.style.height = `${totalContentWidth * 0.1}px`;
-  
-  // CLS FIX: Set width immediately to prevent layout shifts later
-  scrollContainer.style.width = `${totalContentWidth}px`;
+// --- 3. Build Content & SVG Paths ---
 
-  // Update SVG Viewbox to match pixel dimensions exactly
-  function resizeSvg() {
-    const h = window.innerHeight;
-    svgCanvas.setAttribute("viewBox", `0 0 ${totalContentWidth} ${h}`);
-    svgCanvas.setAttribute("width", totalContentWidth);
-    svgCanvas.setAttribute("height", h);
-  }
-  resizeSvg();
-
-  // --- 3. Build Content & SVG Paths ---
+function buildTimeline() {
   const centerY = window.innerHeight / 2;
   let mainPathD = `M 0 ${centerY}`;
-  
-  // Use a document fragment for batch DOM insertion (Performance)
-  const fragment = document.createDocumentFragment();
 
   // Generate Nodes and Branches
   timelineData.forEach((item, index) => {
     const isEven = index % 2 === 0;
     const nodeX = config.startPadding + (index + 1.1) * config.eventSpacing;
 
+    // Determine Y position (Connection Point)
+    // If even index (Top Node), connection point is at centerY - offset
+    // If odd index (Bottom Node), connection point is at centerY + offset
     const nodeY = isEven
       ? centerY - config.branchYOffset
       : centerY + config.branchYOffset;
-    
+
     // 1. Create HTML Node
     const nodeEl = document.createElement("div");
     nodeEl.className = `event-node ${isEven ? "top" : "bottom"}`;
+    
+    // Position the anchor point of the node
     nodeEl.style.left = `${nodeX}px`;
-    nodeEl.style.top = `${centerY}px`;
+    nodeEl.style.top = `${nodeY}px`; 
 
-    const yTransform = isEven
-      ? -config.branchYOffset - 100
-      : config.branchYOffset - 100;
-    nodeEl.style.transform = `translate(-50%, ${yTransform}px)`;
+    // Adjust Transform based on position relative to branch
+    // If Top Node: It sits ABOVE the connection point (translateY -100%)
+    // If Bottom Node: It sits BELOW the connection point (translateY 0%)
+    // -50% X centers it horizontally on the branch tip
+    const yTransformPercent = isEven ? -100 : 0;
+    
+    // Add a small margin (e.g., 20px) so it doesn't touch the line exactly
+    const margin = isEven ? -20 : 20;
+    // Actually, let's incorporate margin into the transform or just use the gap
+    // Using pixels in translate for margin
+    
+    nodeEl.style.transform = `translate(-50%, ${yTransformPercent}%) translateY(${margin}px)`;
 
-    // Added Explicit dimensions to inner images for layout stability
     nodeEl.innerHTML = `
                     <div class="image-mask">
-                        <img src="${item.img}" alt="${item.title}" class="event-image" width="400" height="300" loading="lazy">
+                        <img src="${item.img}" alt="${item.title}" class="event-image" data-parallax-speed="0.8">
                     </div>
                     <div class="meta-data text-center mt-4">
                         <div class="year-label">${item.year}</div>
@@ -106,31 +116,38 @@ function buildAndInitTimeline() {
                         <p>${item.desc}</p>
                     </div>
                 `;
-    fragment.appendChild(nodeEl);
+    scrollContainer.appendChild(nodeEl);
 
     // 2. Create Branch Path in SVG
-    const branchStartX = nodeX - 200;
+    // Logic: Branch starts on main line, slightly before the node X
+    const branchStartX = nodeX - (isMobile ? 100 : 200);
+
+    // Create SVG Path element for the branch
     const branchPath = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "path"
     );
     branchPath.classList.add("branch-path");
 
-    const cp1X = branchStartX + 100;
+    // Bezier Curve Logic
+    // Start at main line (branchStartX, centerY)
+    // Curve to (nodeX, nodeY)
+    // Control points for S-curve
+    const cp1X = branchStartX + (isMobile ? 50 : 100);
     const cp1Y = centerY;
-    const cp2X = nodeX - 50;
+    const cp2X = nodeX - (isMobile ? 20 : 50);
     const cp2Y = nodeY;
 
     const d = `M ${branchStartX} ${centerY} C ${cp1X} ${cp1Y}, ${cp2X} ${cp2Y}, ${nodeX} ${nodeY}`;
     branchPath.setAttribute("d", d);
 
+    // Store metadata for animation
     branchPath.dataset.triggerX = branchStartX;
     branchPath.id = `branch-${index}`;
     svgCanvas.appendChild(branchPath);
-  });
 
-  // Append all DOM nodes at once
-  scrollContainer.appendChild(fragment);
+    // Add to main path string (just a straight line through everything)
+  });
 
   // Finish Main Path
   mainPathD += ` L ${totalContentWidth} ${centerY}`;
@@ -141,23 +158,29 @@ function buildAndInitTimeline() {
   );
   mainPath.setAttribute("d", mainPathD);
   mainPath.id = "main-line";
+  // Prepend main path so branches render on top
   svgCanvas.insertBefore(mainPath, svgCanvas.firstChild);
-
-  // --- 4. Init Animation Logic ---
-  initAnimation(totalContentWidth, SCROLL_FACTOR, scrollContainer);
 }
 
+buildTimeline();
 
-function initAnimation(totalContentWidth, SCROLL_FACTOR, scrollContainer) {
+// --- 4. Animation Logic ---
+
+window.onload = () => {
+  initAnimation();
+};
+
+function initAnimation() {
   // Master Timeline
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: ".viewport-wrapper", // Pin this wrapper
       start: "top top",
-      end: () => `+=${(totalContentWidth - window.innerWidth) * SCROLL_FACTOR}`,
+      end: () => `+=${(totalContentWidth - window.innerWidth) * SCROLL_FACTOR}`, // Scroll amount matches content width
       pin: true,
-      scrub: 1.5,
+      scrub: true, // Use true for 1:1 scroll sync (no smoothing delay)
       invalidateOnRefresh: true,
+      anticipatePin: 1, // Helps prevent jumps when pinning starts
       onUpdate: (self) => {
         // Update UI progress bar
         gsap.set(".progress-bar", { width: self.progress * 100 + "%" });
@@ -166,12 +189,13 @@ function initAnimation(totalContentWidth, SCROLL_FACTOR, scrollContainer) {
   });
 
   // 1. Horizontal Scroll
+  // Move the container left as we scroll down
   tl.to(
     scrollContainer,
     {
       x: () => -(totalContentWidth - window.innerWidth),
       ease: "none",
-      duration: 10,
+      duration: 10, // Arbitrary duration unit, acts as reference for child tweens
     },
     0
   );
@@ -180,11 +204,13 @@ function initAnimation(totalContentWidth, SCROLL_FACTOR, scrollContainer) {
   const mainLine = document.getElementById("main-line");
   const mainLength = mainLine.getTotalLength();
 
+  // Set initial dash state
   gsap.set(mainLine, {
     strokeDasharray: mainLength,
     strokeDashoffset: mainLength,
   });
 
+  // Animate stroke offset
   tl.to(
     mainLine,
     {
@@ -203,21 +229,26 @@ function initAnimation(totalContentWidth, SCROLL_FACTOR, scrollContainer) {
     const node = nodes[i];
     const length = branch.getTotalLength();
 
+    // Calculate timing
+    // The branch starts drawing when the main line reaches branch.dataset.triggerX
     const startX = parseFloat(branch.dataset.triggerX);
     const startTime = (startX / totalContentWidth) * 10;
 
+    // Prepare branch stroke
     gsap.set(branch, { strokeDasharray: length, strokeDashoffset: length });
 
+    // Animate Branch
     tl.to(
       branch,
       {
         strokeDashoffset: 0,
         ease: "power2.out",
-        duration: 0.5,
+        duration: 0.5, // Quick draw
       },
       startTime
     );
 
+    // Animate Node Reveal (just after branch starts)
     tl.fromTo(
       node,
       { opacity: 0, scale: 0.5 },
@@ -225,32 +256,23 @@ function initAnimation(totalContentWidth, SCROLL_FACTOR, scrollContainer) {
       startTime + 0.3
     );
 
+    // Add Parallax to Images
     const img = node.querySelector(".event-image");
+    
     tl.fromTo(
       img,
       { x: "-10%" },
-      { x: "5%", ease: "none", duration: 4 }, 
-      startTime - 2
+      { x: "5%", ease: "none", duration: 4 }, // Parallax duration covers the time the node is on screen
+      startTime - 2 // Start slightly before it appears
     );
   });
 }
 
 // Handle Resize
-let resizeTimer;
-window.addEventListener("resize", () => {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => {
-    // Only reload if width changed significantly (mobile vertical resize protection)
-    // For now, simpler is better:
-    location.reload();
-  }, 250);
-});
-
-// Initialization Strategy: 
-// Wait for Load (all assets) + slight delay to ensure LCP is done.
-window.addEventListener('load', () => {
-    // Use requestAnimationFrame to yield to browser rendering
-    requestAnimationFrame(() => {
-        buildAndInitTimeline();
-    });
-});
+// let resizeTimer;
+// window.addEventListener("resize", () => {
+//   clearTimeout(resizeTimer);
+//   resizeTimer = setTimeout(() => {
+//     location.reload();
+//   }, 250);
+// });

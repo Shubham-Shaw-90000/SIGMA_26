@@ -1,74 +1,79 @@
 /**
  * Navigation Controller
+ * Handles Lenis initialization, GSAP synchronization, and Smart Navbar logic.
+ * * Dependencies: GSAP 3+, ScrollTrigger, Lenis
  */
 
-document.addEventListener("DOMContentLoaded", () => {
+console.log("nav");
 
+document.addEventListener("DOMContentLoaded", () => {
+  // Check for reduced motion preference
   const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
+    "(prefers-reduced-motion: reduce)",
   ).matches;
 
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-    direction: "vertical",
-    gestureDirection: "vertical",
-    smooth: true,
-    mouseMultiplier: 1,
-    smoothTouch: false, 
-    touchMultiplier: 2,
-  });
+  const lenis = window.lenis;
 
-  lenis.on("scroll", ScrollTrigger.update);
-
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-
-  gsap.ticker.lagSmoothing(500, 33);
+  // 5. --- Smart Navbar Logic ---
 
   const navbar = document.querySelector(".navbar");
   let lastScrollY = 0;
   let isHidden = false;
+  let heroRemoved = false; // Track if hero intro is complete
 
-  const threshold = 100; 
-  const tolerance = 5; 
- 
-  if (!prefersReducedMotion) {
-    gsap.from(navbar, {
-      yPercent: -100,
-      opacity: 0,
-      duration: 1,
-      ease: "power4.out",
-      delay: 0.5, 
-    });
-  }
+  // Config
+  const threshold = 100; // Minimum scroll before hiding starts
+  const tolerance = 5; // Small buffer to prevent jitter
 
-  lenis.on("scroll", ({ scroll }) => {
-   
-    const currentScroll = Math.max(0, scroll);
+  // Listen for hero removal event
+  window.addEventListener("heroAway", () => {
+    heroRemoved = true;
+  });
 
-     if (currentScroll < threshold) {
-      if (isHidden) {
+  // Navbar Entrance Animation - Triggered from animations.js or local
+  window.revealNavbar = () => {
+    if (!prefersReducedMotion) {
+      gsap.to(navbar, {
+        yPercent: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: "expo.out",
+      });
+    } else {
+      gsap.set(navbar, { opacity: 1, yPercent: 0 });
+    }
+  };
+
+  // Initial state: Hidden until hero animation completes
+  gsap.set(navbar, { yPercent: -100, opacity: 0 });
+
+  // Scroll Handler for Hide/Show
+  if (lenis && lenis.on) {
+    lenis.on("scroll", ({ scroll }) => {
+      // Don't run hide/show logic until hero is removed
+      if (!heroRemoved) return;
+
+      const currentScroll = Math.max(0, scroll);
+
+      if (currentScroll < threshold) {
+        if (isHidden) {
+          showNavbar();
+        }
+        lastScrollY = currentScroll;
+        return;
+      }
+
+      const diff = currentScroll - lastScrollY;
+
+      if (diff > tolerance && !isHidden) {
+        hideNavbar();
+      } else if (diff < -tolerance && isHidden) {
         showNavbar();
       }
+
       lastScrollY = currentScroll;
-      return;
-    }
-
-    const diff = currentScroll - lastScrollY;
-
-   
-    if (diff > tolerance && !isHidden) {
-      hideNavbar();
-    }
-   
-    else if (diff < -tolerance && isHidden) {
-      showNavbar();
-    }
-
-    lastScrollY = currentScroll;
-  });
+    });
+  }
 
   function hideNavbar() {
     if (prefersReducedMotion) return;
@@ -78,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
       yPercent: -100,
       duration: 0.4,
       ease: "power2.inOut",
-      overwrite: true, 
+      overwrite: true, // Ensure we kill any conflicting tweens
     });
   }
 
@@ -92,42 +97,42 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  //--- Scroll-To Section Logic ---
+  // 4. --- Scroll-To Section Logic ---
 
   const navLinks = document.querySelectorAll(".nav-links a");
 
-  
+  // Map data-targets to actual DOM IDs
+  // 0: Home (#hero), 1: About (#about), 2: Team (#team), 3: Contact (Footer)
   const targetMap = {
     0: "#hero",
     1: "#about",
     2: "#team",
     3: ".site-footer",
+    4: "./pebbles.html",
+    5: "./register.html",
   };
 
   navLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
-  
       const targetKey = link.getAttribute("data-target");
       if (!targetKey) return;
-
-      e.preventDefault();
 
       const selector = targetMap[targetKey];
       const targetSection = document.querySelector(selector);
 
-      if (targetSection) {
-        lenis.scrollTo(targetSection, {
+      if (targetSection && window.lenis) {
+        e.preventDefault();
+        window.lenis.scrollTo(targetSection, {
           offset: 0,
           duration: 1.5,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          immediate: false, 
         });
       }
     });
   });
 
-  //--- Accessibility Fixes ---
+  // 5. --- Accessibility Fixes ---
 
+  // Ensure keyboard focus brings navbar into view
   navbar.addEventListener("focusin", () => {
     if (isHidden) showNavbar();
   });
@@ -146,7 +151,7 @@ if (logo && eggModal && closeGameBtn) {
   logo.addEventListener("click", (e) => {
     e.preventDefault(); // Prevent jump to top if any
     clickCount++;
-    
+
     // Reset count if user stops clicking
     clearTimeout(clickTimer);
     clickTimer = setTimeout(() => {
@@ -157,11 +162,11 @@ if (logo && eggModal && closeGameBtn) {
     if (clickCount === 3) {
       // 1. Show the Modal
       eggModal.classList.remove("hidden");
-      
+
       // 2. Load the game (only loads now to save performance)
       // Ensure 'game.html' is in the same directory, or update path
-      gameIframe.src = "../HTML/game.html"; 
-      
+      gameIframe.src = "../HTML/game.html";
+
       clickCount = 0;
     }
   });
@@ -170,15 +175,14 @@ if (logo && eggModal && closeGameBtn) {
   closeGameBtn.addEventListener("click", () => {
     eggModal.classList.add("hidden");
     // Clear src to stop game execution/music/timers
-    gameIframe.src = ""; 
+    gameIframe.src = "";
   });
-  
+
   // Close if clicking outside the game window (on the backdrop)
   eggModal.addEventListener("click", (e) => {
     if (e.target === eggModal) {
-        eggModal.classList.add("hidden");
-        gameIframe.src = "";
+      eggModal.classList.add("hidden");
+      gameIframe.src = "";
     }
   });
 }
-
