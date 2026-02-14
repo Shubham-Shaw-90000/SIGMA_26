@@ -1,782 +1,774 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Science Association</title>
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-    
-    <link rel="icon" type="image/x-icon" href="../Assets/favicon-32x32.avif">
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <link rel="stylesheet" href="./CSS/hero_style.css" />
-        <link rel="stylesheet" href="./CSS/perspective.css">
-    <link rel="stylesheet" href="./CSS/loading.css">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Home page for SIGMA, annual Science Association event of St. Xavier's College(Autonomous) Kolkata">
+  <meta name="keywords" content="SIGMA, sxcsa, Science Association, SXC">
+  <meta name="author" content="Shubham">
+  <title>Science Association</title>
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="icon" type="image/x-icon" href="../Assets/favicon-32x32.avif">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="./CSS/hero_style.css" />
+  <link rel="stylesheet" href="./CSS/perspective.css">
+  <link rel="stylesheet" href="./CSS/loading.css">
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-     <!--Loading Screen Section-->
-    <div class="loading-screen-wrapper">
-        <div class="background-frame"></div>
+  <!--Loading Screen Section-->
+  <div class="loading-screen-wrapper">
+    <div class="background-frame"></div>
 
-        <div class="background-image default" id="default-bg"></div>
-        <div class="background-image focus" id="focus-bg"></div>
-        <div class="background-image presence" id="presence-bg"></div>
-        <div class="background-image feel" id="feel-bg"></div>
+    <div class="background-image default" id="default-bg"></div>
 
-        <div class="bottom-gradient"></div>
+    <div class="bottom-gradient"></div>
 
-        <div class="text-background">
-            <div class="text-item" style="top: 5%; left: 8%;" data-text="QUANTUM">QUANTUM</div>
-            <div class="text-item" style="top: 5%; left: 15%;" data-text="PARTICLES">PARTICLES</div>
-            <div class="text-item" style="top: 5%; left: 28%;" data-text="ATOMS">ATOMS</div>
-            <div class="text-item" style="top: 5%; left: 42%;" data-text="ENERGY">ENERGY</div>
-            <div class="text-item" style="top: 5%; left: 55%;" data-text="MATTER">MATTER</div>
-            <div class="text-item" style="top: 5%; left: 75%;" data-text="&">&</div>
-            <div class="text-item" style="top: 5%; left: 85%;" data-text="SPACE">SPACE</div>
+    <div class="text-background">
+      <div class="text-item" style="top: 5%; left: 8%;" data-text="QUANTUM">QUANTUM</div>
+      <div class="text-item" style="top: 5%; left: 15%;" data-text="PARTICLES">PARTICLES</div>
+      <div class="text-item" style="top: 5%; left: 28%;" data-text="ATOMS">ATOMS</div>
+      <div class="text-item" style="top: 5%; left: 42%;" data-text="ENERGY">ENERGY</div>
+      <div class="text-item" style="top: 5%; left: 55%;" data-text="MATTER">MATTER</div>
+      <div class="text-item" style="top: 5%; left: 75%;" data-text="&">&</div>
+      <div class="text-item" style="top: 5%; left: 85%;" data-text="SPACE">SPACE</div>
 
-            <div class="text-item" style="top: 10%; left: 12%;" data-text="EXPERIMENT">EXPERIMENT</div>
-            <div class="text-item" style="top: 10%; left: 45%;" data-text="DISCOVERY">DISCOVERY</div>
-            <div class="text-item" style="top: 10%; right: 20%;" data-text="EVIDENCE">EVIDENCE</div>
+      <div class="text-item" style="top: 10%; left: 12%;" data-text="EXPERIMENT">EXPERIMENT</div>
+      <div class="text-item" style="top: 10%; left: 45%;" data-text="DISCOVERY">DISCOVERY</div>
+      <div class="text-item" style="top: 10%; right: 20%;" data-text="EVIDENCE">EVIDENCE</div>
 
-            <div class="text-item" style="top: 15%; left: 8%;" data-text="THE">THE</div>
-            <div class="text-item" style="top: 15%; left: 30%;" data-text="RESEARCH">RESEARCH</div>
-            <div class="text-item" style="top: 15%; left: 55%;" data-text="PROCESS">PROCESS</div>
-            <div class="text-item" style="top: 15%; right: 20%;" data-text="IS">IS</div>
-            <div class="text-item" style="top: 15%; right: 5%;" data-text="REVOLUTIONARY">REVOLUTIONARY</div>
+      <div class="text-item" style="top: 15%; left: 8%;" data-text="THE">THE</div>
+      <div class="text-item" style="top: 15%; left: 30%;" data-text="RESEARCH">RESEARCH</div>
+      <div class="text-item" style="top: 15%; left: 55%;" data-text="PROCESS">PROCESS</div>
+      <div class="text-item" style="top: 15%; right: 20%;" data-text="IS">IS</div>
+      <div class="text-item" style="top: 15%; right: 5%;" data-text="REVOLUTIONARY">REVOLUTIONARY</div>
 
-            <div class="text-item" style="top: 25%; left: 5%;" data-text="S">S</div>
-            <div class="text-item" style="top: 25%; left: 10%;" data-text="C">C</div>
-            <div class="text-item" style="top: 25%; left: 15%;" data-text="I">I</div>
-            <div class="text-item" style="top: 25%; left: 20%;" data-text="E">E</div>
-            <div class="text-item" style="top: 25%; left: 25%;" data-text="N">N</div>
-            <div class="text-item" style="top: 25%; left: 30%;" data-text="C">C</div>
-            <div class="text-item" style="top: 25%; left: 35%;" data-text="E">E</div>
+      <div class="text-item" style="top: 25%; left: 5%;" data-text="S">S</div>
+      <div class="text-item" style="top: 25%; left: 10%;" data-text="C">C</div>
+      <div class="text-item" style="top: 25%; left: 15%;" data-text="I">I</div>
+      <div class="text-item" style="top: 25%; left: 20%;" data-text="E">E</div>
+      <div class="text-item" style="top: 25%; left: 25%;" data-text="N">N</div>
+      <div class="text-item" style="top: 25%; left: 30%;" data-text="C">C</div>
+      <div class="text-item" style="top: 25%; left: 35%;" data-text="E">E</div>
 
-            <div class="text-item" style="top: 35%; left: 25%;" data-text="OBSERVE NATURE">OBSERVE NATURE</div>
-            <div class="text-item" style="top: 35%; left: 65%;" data-text="VERIFY DATA">VERIFY DATA</div>
+      <div class="text-item" style="top: 35%; left: 25%;" data-text="OBSERVE NATURE">OBSERVE NATURE</div>
+      <div class="text-item" style="top: 35%; left: 65%;" data-text="VERIFY DATA">VERIFY DATA</div>
 
-            <div class="text-item" style="top: 50%; left: 5%;" data-text="TEST HYPOTHESES">TEST HYPOTHESES</div>
-            <div class="text-item" style="top: 50%; right: 5%;" data-text="CHALLENGE THEORIES">CHALLENGE THEORIES</div>
+      <div class="text-item" style="top: 50%; left: 5%;" data-text="TEST HYPOTHESES">TEST HYPOTHESES</div>
+      <div class="text-item" style="top: 50%; right: 5%;" data-text="CHALLENGE THEORIES">CHALLENGE THEORIES</div>
 
-            <div class="text-item" style="top: 75%; left: 20%;" data-text="LOGIC">LOGIC</div>
-            <div class="text-item" style="top: 75%; right: 20%;" data-text="REASON">REASON</div>
+      <div class="text-item" style="top: 75%; left: 20%;" data-text="LOGIC">LOGIC</div>
+      <div class="text-item" style="top: 75%; right: 20%;" data-text="REASON">REASON</div>
 
-            <div class="text-item" style="top: 80%; left: 10%;" data-text="PRECISION">PRECISION</div>
-            <div class="text-item" style="top: 80%; left: 35%;" data-text="ANALYSIS">ANALYSIS</div>
-            <div class="text-item" style="top: 80%; left: 65%;" data-text="INNOVATION">INNOVATION</div>
-            <div class="text-item" style="top: 80%; right: 10%;" data-text="KNOWLEDGE">KNOWLEDGE</div>
+      <div class="text-item" style="top: 80%; left: 10%;" data-text="PRECISION">PRECISION</div>
+      <div class="text-item" style="top: 80%; left: 35%;" data-text="ANALYSIS">ANALYSIS</div>
+      <div class="text-item" style="top: 80%; left: 65%;" data-text="INNOVATION">INNOVATION</div>
+      <div class="text-item" style="top: 80%; right: 10%;" data-text="KNOWLEDGE">KNOWLEDGE</div>
 
-            <div class="text-item" style="top: 85%; left: 25%;" data-text="EVOLVE">EVOLVE</div>
-            <div class="text-item" style="top: 85%; right: 25%;" data-text="DISCOVER">DISCOVER</div>
-        </div>
-
-        <div class="main-content">
-            <div class="expand-rectangle" id="expand-rectangle"></div>
-
-            <div class="sliced-container">
-                <div class="text-row" data-row-id="precision">
-                    <div class="text-content" data-text="PRECISION">PRECISION</div>
-                    <div class="interactive-area"></div>
-                </div>
-
-                <div class="text-row" data-row-id="analysis">
-                    <div class="text-content" data-text="ANALYSIS">ANALYSIS</div>
-                    <div class="interactive-area"></div>
-                </div>
-
-                <div class="text-row" data-row-id="discovery">
-                    <div class="text-content" data-text="DISCOVERY">DISCOVERY</div>
-                    <div class="interactive-area"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="type" id="kinetic-type" aria-hidden="true">
-            <div class="type-line odd">science science science</div>
-            <div class="type-line even">discovery discovery discovery</div>
-            <div class="type-line odd">innovation innovation innovation</div>
-            <div class="type-line even">precision precision precision</div>
-            <div class="type-line odd">knowledge knowledge knowledge</div>
-            <div class="type-line even">research research research</div>
-            <div class="type-line odd">analysis analysis analysis</div>
-            <div class="type-line even">experiment experiment experiment</div>
-            <div class="type-line odd">evolution evolution evolution</div>
-            <div class="type-line even">discovery discovery discovery</div>
-            <div class="type-line odd">truth truth truth</div>
-            <div class="type-line even">science science science</div>
-        </div>
-
-        <div class="loading-container">
-            <div class="loading-bar">
-                <div class="loading-progress"></div>
-            </div>
-            <div class="loading-text">INITIALIZING RESEARCH...</div>
-            <div class="loading-percentage">0%</div>
-        </div>
+      <div class="text-item" style="top: 85%; left: 25%;" data-text="EVOLVE">EVOLVE</div>
+      <div class="text-item" style="top: 85%; right: 25%;" data-text="DISCOVER">DISCOVER</div>
     </div>
 
-    <!-- perspective images section -->
+    <div class="main-content">
+      <div class="expand-rectangle" id="expand-rectangle"></div>
 
-    <div class="hero_college">
-
-        <div class="perspective-container">
-            <img src="./Assets/flash.avif" alt="flash" id="flash-img">
-            <div class="layer layer1" data-z="-50">
-                <img src="./Assets/l-footpath.avif" alt="Front layer" class="layer-img">
-            </div>
-
-            <div class="layer layer2" data-z="-100">
-
-            </div>
-
-            <div class="layer layer3" data-z="-105">
-                <img src="./Assets/l-wall.avif" alt="Center layer" class="layer-img">
-            </div>
-
-            <div class="layer layer4" data-z="">
-            </div>
-
-            <div class="layer layer5" data-z="-305">
-                <img src="./Assets/l-front-buildings.avif" alt="Back layer" class="layer-img">
-            </div>
+      <div class="sliced-container">
+        <div class="text-row" data-row-id="precision">
+          <div class="text-content" data-text="PRECISION">PRECISION</div>
+          <div class="interactive-area"></div>
         </div>
-    </div>
 
-    <!--background-->
-    <!-- <div class="bg-vignette"></div> -->
-    <div class="bg-noise"></div>
+        <div class="text-row" data-row-id="analysis">
+          <div class="text-content" data-text="ANALYSIS">ANALYSIS</div>
+          <div class="interactive-area"></div>
+        </div>
 
-    </svg>
-
-    <!--Nav Bar-->
-    <header class="navbar">
-      <div>
-        <!-- Explicit dimensions for logo -->
-        <img
-          src="./Assets/SA_logo_nobg.avif"
-          class="logo"
-          id="logo"
-          alt="SA_logo"
-          width="72"
-          height="72"
-        />
+        <div class="text-row" data-row-id="discovery">
+          <div class="text-content" data-text="DISCOVERY">DISCOVERY</div>
+          <div class="interactive-area"></div>
+        </div>
       </div>
-      <nav class="nav-links glass">
-        <a href="#hero" data-target="0">HOME</a>
-        <a href="#about" data-target="1">ABOUT</a>
-        <a href="#team" data-target="2">TEAM</a>
-        <a href="./HTML/Pebbles.html">PEBBLES</a>
-        <a href="./HTML/Events.html">SIGMA</a>
-        <a href="#footer" data-target="3">CONTACT</a>
-      </nav>
-    </header>
+    </div>
 
-    <!--EASTER EGG GAME-->
-   <div class="easter-egg-modal hidden" id="easterEggModal">
+    <div class="type" id="kinetic-type" aria-hidden="true">
+      <div class="type-line odd">science science science</div>
+      <div class="type-line even">discovery discovery discovery</div>
+      <div class="type-line odd">innovation innovation innovation</div>
+      <div class="type-line even">precision precision precision</div>
+      <div class="type-line odd">knowledge knowledge knowledge</div>
+      <div class="type-line even">research research research</div>
+      <div class="type-line odd">analysis analysis analysis</div>
+      <div class="type-line even">experiment experiment experiment</div>
+      <div class="type-line odd">evolution evolution evolution</div>
+      <div class="type-line even">discovery discovery discovery</div>
+      <div class="type-line odd">truth truth truth</div>
+      <div class="type-line even">science science science</div>
+    </div>
+
+    <div class="loading-container">
+      <div class="loading-bar">
+        <div class="loading-progress"></div>
+      </div>
+      <div class="loading-text">INITIALIZING RESEARCH...</div>
+      <div class="loading-percentage">0%</div>
+    </div>
+  </div>
+
+  <!-- perspective images section -->
+
+  <div class="college">
+
+    <div class="perspective-container">
+      <!-- <img src="./assets/home_page/flash.png" alt="flash" id="flash-img"> -->
+      <div class="layer layer1" data-z="-50">
+        <img src="./Assets/l-footpath.avif" alt="Front layer" class="layer-img">
+      </div>
+
+      <div class="layer layer2" data-z="-100">
+
+      </div>
+
+      <div class="layer layer3" data-z="-105">
+        <img src="./Assets/l-wall.avif" alt="Center layer" class="layer-img">
+      </div>
+
+      <div class="layer layer4" data-z="">
+      </div>
+
+      <div class="layer layer5" data-z="-205">
+        <img src="./Assets/l-front-buildings.avif" alt="Back layer" class="layer-img">
+      </div>
+
+      <div class="layer layer6" data-z="-305">
+        <img src="./Assets/back-building.png" alt="Back BUILDING" class="layer-img">
+      </div>
+    </div>
+  </div>
+
+  <div id="tap-hint" class="tap-hint">
+    <img src="./Assets/tap tap.gif" alt="Tap to continue">
+  </div>
+
+  <!-- <div class="bg-vignette"></div> -->
+  <div class="bg-noise"></div>
+
+  <!--Nav Bar-->
+  <header class="navbar">
+    <div>
+      <img src="./Assets/SA_logo_nobg.avif" class="logo" id="logo" alt="SA_logo" width="72" height="72" />
+    </div>
+    <nav class="nav-links glass">
+      <a href="#hero" data-target="0">HOME</a>
+      <a href="#about" data-target="1">ABOUT</a>
+      <a href="#team" data-target="2">TEAM</a>
+      <a href="./HTML/Pebbles.html">PEBBLES</a>
+      <a href="./HTML/Events.html">SIGMA</a>
+      <a href="#footer" data-target="3">CONTACT</a>
+    </nav>
+  </header>
+
+  <!--EASTER EGG GAME-->
+  <div class="easter-egg-modal hidden" id="easterEggModal">
     <div class="game-window">
-        <button class="close-game-btn" id="closeGameBtn">✕</button>
-        <iframe id="gameIframe" src="" title="Scientist Memory Game"></iframe>
+      <button class="close-game-btn" id="closeGameBtn">✕</button>
+      <iframe id="gameIframe" src="" title="Scientist Memory Game"></iframe>
     </div>
-</div>
+  </div>
 
-    <!-- HERO SECTION -->
-    <section id="hero" class="desktop-hero-section">
-      <h1 class="hero-header-text">CELEBRATING</h1>
+  <!-- HERO SECTION -->
+  <section id="hero" class="desktop-hero-section">
+    <h1 class="hero-header-text">CELEBRATING</h1>
+    <div class="desktop-canvas" id="mainCanvas">>
+      <div class="canvas-glass-bg">
+        <div class="canvas-cursor-light" id="cursorLight"></div>
+      </div>
 
-      <div class="desktop-canvas" id="mainCanvas">
-        <!-- NEW: Separate Glass Background Layer (Clipped) -->
-        <div class="canvas-glass-bg">
-          <div class="canvas-cursor-light" id="cursorLight"></div>
+      <div class="hero-grid">
+        <!-- S: S.N. Bose -->
+        <div class="hero-item" style="--theme: 0, 255, 157">
+          <div class="hero-char">S</div>
+          <div class="hero-img-backdrop">
+            <img src="./Assets/S.N.Bose.avif" alt="S.N. Bose" decoding="async" />
+          </div>
+          <div class="scientist-card" style="--theme: rgb(0, 255, 157)">
+            <div class="card-header">
+              <span>1894-1974</span><span>Physics</span>
+            </div>
+            <h3 class="sc-name">S.N. Bose</h3>
+            <p class="sc-achievements">Laid the foundation of quantum statistics through Bose–Einstein statistics,
+              revolutionizing modern physics.</p>
+          </div>
         </div>
 
-        <div class="hero-grid">
-          <!-- S: S.N. Bose -->
-          <div class="hero-item" style="--theme: 0, 255, 157">
-            <div class="hero-char">S</div>
-            <div class="hero-img-backdrop">
-              <img
-                src="./Assets/S.N.Bose.avif"
-                alt="S.N. Bose"
-                decoding="async"
-              />
-            </div>
-            <div class="scientist-card" style="--theme: rgb(0, 255, 157)">
-              <div class="card-header">
-                <span>1894-1974</span><span>Physics</span>
-              </div>
-              <h3 class="sc-name">S.N. Bose</h3>
-              <p class="sc-achievements">Laid the foundation of quantum statistics through Bose–Einstein statistics, revolutionizing modern physics.</p>
-            </div>
+        <!-- C: C.V. Raman -->
+        <div class="hero-item" style="--theme: 0, 229, 255">
+          <div class="hero-char">C</div>
+          <div class="hero-img-backdrop">
+            <img src="./Assets/CVRamen.avif" alt="C.V. Raman" decoding="async" />
           </div>
-
-          <!-- C: C.V. Raman -->
-          <div class="hero-item" style="--theme: 0, 229, 255">
-            <div class="hero-char">C</div>
-            <div class="hero-img-backdrop">
-              <img
-                src="./Assets/CVRamen.avif"
-                alt="C.V. Raman"
-                decoding="async"
-              />
+          <div class="scientist-card" style="--theme: rgb(0, 229, 255)">
+            <div class="card-header">
+              <span>1888-1970</span><span>Physics</span>
             </div>
-            <div class="scientist-card" style="--theme: rgb(0, 229, 255)">
-              <div class="card-header">
-                <span>1888-1970</span><span>Physics</span>
-              </div>
-              <h3 class="sc-name">C.V. Raman</h3>
-               <p class="sc-achievements">Discovered the Raman Effect, revealing the scattering of light and earning India its first Nobel Prize in Science.</p>
-            </div>
+            <h3 class="sc-name">C.V. Raman</h3>
+            <p class="sc-achievements">Discovered the Raman Effect, revealing the scattering of light and earning India
+              its first Nobel Prize in Science.</p>
           </div>
+        </div>
 
-          <!-- I: Indira Hinduja -->
-          <div class="hero-item" style="--theme: 255, 0, 85">
-            <div class="hero-char">I</div>
-            <div class="hero-img-backdrop">
-              <img
-                src="./Assets/Indira.avif"
-                alt="Indira Hinduja"
-                decoding="async"
-              />
-            </div>
-            <div class="scientist-card" style="--theme: rgb(255, 0, 85)">
-              <div class="card-header">
-                <span>born 1941</span><span>Medical</span>
-              </div>
-              <h3 class="sc-name">Indira Hinduja</h3>
-              <p class="sc-achievements">Pioneered assisted reproductive technology in India, delivering the country’s first test-tube baby.</p>
-            </div>
+        <!-- I: Indira Hinduja -->
+        <div class="hero-item" style="--theme: 255, 0, 85">
+          <div class="hero-char">I</div>
+          <div class="hero-img-backdrop">
+            <img src="./Assets/Indira.avif" alt="Indira Hinduja" decoding="async" />
           </div>
-
-          <!-- E: E.C.G. Sudarshan -->
-          <div class="hero-item" style="--theme: 255, 145, 0">
-            <div class="hero-char">E</div>
-            <div class="hero-img-backdrop">
-              <img
-                src="./Assets/ECGSudarshan.avif"
-                alt="Sudarshan"
-                decoding="async"
-              />
+          <div class="scientist-card" style="--theme: rgb(255, 0, 85)">
+            <div class="card-header">
+              <span>born 1941</span><span>Medical</span>
             </div>
-            <div class="scientist-card" style="--theme: rgb(255, 145, 0)">
-              <div class="card-header">
-                <span>1931-2018</span><span>Quantum</span>
-              </div>
-              <h3 class="sc-name">E.C.G. Sudarshan</h3>
-              <p class="sc-achievements">- Made profound contributions to quantum optics and particle physics, including the development of the Glauber–Sudarshan P-representation.</p>
-            </div>
+            <h3 class="sc-name">Indira Hinduja</h3>
+            <p class="sc-achievements">Pioneered assisted reproductive technology in India, delivering the country’s
+              first test-tube baby.</p>
           </div>
+        </div>
 
-          <!-- N: N.S. Kapany -->
-          <div class="hero-item" style="--theme: 189, 0, 255">
-            <div class="hero-char">N</div>
-            <div class="hero-img-backdrop">
-              <img src="./Assets/NSKapany.avif" alt="Kapany" decoding="async" />
-            </div>
-            <div class="scientist-card" style="--theme: rgb(189, 0, 255)">
-              <div class="card-header">
-                <span>1926-2020</span><span>Optics</span>
-              </div>
-              <h3 class="sc-name">N.S. Kapany</h3>
-              <p class="sc-achievements">Known as the “Father of Fibre Optics” for his ground-breaking work in transmitting light through optical fibers.</p>
-            </div>
+        <!-- E: E.C.G. Sudarshan -->
+        <div class="hero-item" style="--theme: 255, 145, 0">
+          <div class="hero-char">E</div>
+          <div class="hero-img-backdrop">
+            <img src="./Assets/ECGSudarshan.avif" alt="Sudarshan" decoding="async" />
           </div>
-
-          <!-- C: Seshadri -->
-          <div class="hero-item" style="--theme: 235, 255, 0">
-            <div class="hero-char">C</div>
-            <div class="hero-img-backdrop">
-              <img
-                src="./Assets/CSSeshadri.avif"
-                alt="Seshadri"
-                decoding="async"
-              />
+          <div class="scientist-card" style="--theme: rgb(255, 145, 0)">
+            <div class="card-header">
+              <span>1931-2018</span><span>Quantum</span>
             </div>
-            <div class="scientist-card" style="--theme: rgb(235, 255, 0)">
-              <div class="card-header">
-                <span>1932-2020</span><span>Math</span>
-              </div>
-              <h3 class="sc-name">C.S. Seshadri</h3>
-              <p class="sc-achievements">Advanced the field of algebraic geometry through his work on vector bundles and the Narasimhan–Seshadri theorem.</p>
-            </div>
+            <h3 class="sc-name">E.C.G. Sudarshan</h3>
+            <p class="sc-achievements">- Made profound contributions to quantum optics and particle physics, including
+              the development of the Glauber–Sudarshan P-representation.</p>
           </div>
+        </div>
 
-          <!-- E: Janaki -->
-          <div class="hero-item" style="--theme: 0, 255, 234">
-            <div class="hero-char">E</div>
-            <div class="hero-img-backdrop">
-              <img src="./Assets/EKJanaki.avif" alt="Janaki" decoding="async" />
+        <!-- N: N.S. Kapany -->
+        <div class="hero-item" style="--theme: 189, 0, 255">
+          <div class="hero-char">N</div>
+          <div class="hero-img-backdrop">
+            <img src="./Assets/NSKapany.avif" alt="Kapany" decoding="async" />
+          </div>
+          <div class="scientist-card" style="--theme: rgb(189, 0, 255)">
+            <div class="card-header">
+              <span>1926-2020</span><span>Optics</span>
             </div>
-            <div class="scientist-card" style="--theme: rgb(0, 255, 234)">
-              <div class="card-header">
-                <span>1897-1984</span><span>Botany</span>
-              </div>
-              <h3 class="sc-name">E.K. Janaki Ammal</h3>
-              <p class="sc-achievements">A pioneering botanist and cytogeneticist who made significant contributions to plant breeding and biodiversity conservation.</p>
+            <h3 class="sc-name">N.S. Kapany</h3>
+            <p class="sc-achievements">Known as the “Father of Fibre Optics” for his ground-breaking work in
+              transmitting light through optical fibers.</p>
+          </div>
+        </div>
+
+        <!-- C: Seshadri -->
+        <div class="hero-item" style="--theme: 235, 255, 0">
+          <div class="hero-char">C</div>
+          <div class="hero-img-backdrop">
+            <img src="./Assets/CSSeshadri.avif" alt="Seshadri" decoding="async" />
+          </div>
+          <div class="scientist-card" style="--theme: rgb(235, 255, 0)">
+            <div class="card-header">
+              <span>1932-2020</span><span>Math</span>
             </div>
+            <h3 class="sc-name">C.S. Seshadri</h3>
+            <p class="sc-achievements">Advanced the field of algebraic geometry through his work on vector bundles and
+              the Narasimhan–Seshadri theorem.</p>
+          </div>
+        </div>
+
+        <!-- E: Janaki -->
+        <div class="hero-item" style="--theme: 0, 255, 234">
+          <div class="hero-char">E</div>
+          <div class="hero-img-backdrop">
+            <img src="./Assets/EKJanaki.avif" alt="Janaki" decoding="async" />
+          </div>
+          <div class="scientist-card" style="--theme: rgb(0, 255, 234)">
+            <div class="card-header">
+              <span>1897-1984</span><span>Botany</span>
+            </div>
+            <h3 class="sc-name">E.K. Janaki Ammal</h3>
+            <p class="sc-achievements">A pioneering botanist and cytogeneticist who made significant contributions to
+              plant breeding and biodiversity conservation.</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="about_interactive">
-      <div class="text-content">
-        <h1 class="section-title">ABOUT</h1>
-        <p>
-          We at Science Association, St. Xavier's College (Autonomous), Kolkata
-          aim to cultivate a vibrant, scientific community where ideas are
-          exchanged, discoveries are celebrated and curiosity is nurtured.
-          Through our activities we encourage critical thinking and scientific
-          literacy within and beyond the college campus.
-        </p>
+  <!-- ABOUT SECTION -->
+  <section id="about" class="about_interactive">
+    <div class="text-content">
+      <h1 class="section-title">ABOUT</h1>
+      <p>
+        We at Science Association, St. Xavier's College (Autonomous), Kolkata
+        aim to cultivate a vibrant, scientific community where ideas are
+        exchanged, discoveries are celebrated and curiosity is nurtured.
+        Through our activities we encourage critical thinking and scientific
+        literacy within and beyond the college campus.
+      </p>
+    </div>
+
+    <div class="frame">
+      <div class="photo glass">
+        <img src="./Assets/Father Principal.avif" alt="Portrait of Father Principal" width="400" height="200"
+          loading="lazy" />
+        <h3>Rev. Dr. Dominic Savio, SJ <br> Father Principal</h3>
       </div>
 
-      <div class="frame">
+      <div class="frame-bottom">
         <div class="photo glass">
-          <img
-            src="./Assets/Father Principal.avif" 
-            alt="Portrait of Father Principal"
-            width="400"
-            height="200"
-            loading="lazy"
-          />
-          <h3>Rev. Dr. Dominic Savio, SJ <br> Father Principal</h3>
+          <img src="./Assets/AKM sir.avif" alt="Portrait of Vice Principal" width="400" height="200" loading="lazy" />
+          <h3>Dr. Arup Kumar Mitra <br> Deputy President</h3>
         </div>
 
-        <div class="frame-bottom">
-          <div class="photo glass">
-            <img
-              src="./Assets/AKM sir.avif"
-              alt="Portrait of Vice Principal"
-              width="400"
-              height="200"
-              loading="lazy"
-            />
-            <h3>Dr. Arup Kumar Mitra <br> Deputy President</h3>
-          </div>
-
-          <div class="photo glass">
-            <img
-              src="./Assets/Rana Sir.avif"
-              alt="Portrait of Professor"
-              width="400"
-              height="200"
-              loading="lazy"
-            />
-            <h3>Mr. Rana Biswas <br> Vice Deputy President</h3>
-          </div>
+        <div class="photo glass">
+          <img src="./Assets/Rana Sir.avif" alt="Portrait of Professor" width="400" height="200" loading="lazy" />
+          <h3>Mr. Rana Biswas <br> Vice Deputy President</h3>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!--Team Section-->
-    <section id="team" class="team-section-glass">
+  <!--Team Section-->
+  <section id="team" class="team-section-glass">
     <div class="team-header-container">
-        <h1 class="section-title">Our Team</h1>
-        <p class="section-subtitle">The Powerhouse of SA.</p>
+      <h1 class="section-title">Our Team</h1>
+      <p class="section-subtitle">The Powerhouse of SA.</p>
     </div>
 
     <div class="glass-team-grid">
-        
-        <div class="glass-card-wrapper">
-            <div class="glass-card group">
-                <div class="glow-blob glow-blue"></div>
-                <div class="card-image-box">
-                    <img src="./Assets/AnkitaDeb.avif" alt="Ankita Deb" loading="lazy">
-                    <div class="card-img-overlay"></div>
-                    <div class="card-vertical-line"></div>
-                </div>
-                <div class="card-info-box">
-                    <div>
-                        <h3 class="card-name">Ankita Deb</h3>
-                        <p class="card-role text-blue">SECRETARY</p>
-                    </div>
-                    <p class="card-desc">Leading the association with vision and precision.</p>
-                    <div class="card-socials">
-                        <!-- <a href="#"><i class="fa-brands fa-linkedin"></i></a> -->
-                        <a href="https://www.instagram.com/ankita._.deb?igsh=YWdvODF4cXhka2Jz" title="Open"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="copy-email" data-email="ankitadeb20502@gmail.com" title="Copy"><i class="fa-solid fa-envelope"></i></a>
-                        <a href="#" class="copy-phone" data-phone="+919476387254" title="Copy"><i class="fa-solid fa-phone"></i></a>
-                    </div>
-                </div>
+
+      <div class="glass-card-wrapper">
+        <div class="glass-card group">
+          <div class="glow-blob glow-blue"></div>
+          <div class="card-image-box">
+            <img src="./Assets/AnkitaDeb.avif" alt="Ankita Deb" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <div class="card-vertical-line"></div>
+          </div>
+          <div class="card-info-box">
+            <div>
+              <h3 class="card-name">Ankita Deb</h3>
+              <p class="card-role text-blue">SECRETARY</p>
             </div>
-        </div>
-
-        <div class="glass-card-wrapper">
-            <div class="glass-card group">
-                <div class="glow-blob glow-amber"></div>
-                <div class="card-image-box">
-                    <img src="./Assets/DiyaKonar.avif" alt="Diya Konar" loading="lazy">
-                    <div class="card-img-overlay"></div>
-                    <div class="card-vertical-line"></div>
-                </div>
-                <div class="card-info-box">
-                    <div>
-                        <h3 class="card-name">Diya Konar</h3>
-                        <p class="card-role text-amber">ASST-SECRETARY</p>
-                    </div>
-                    <p class="card-desc">Coordinating operations and fostering collaboration.</p>
-                    <div class="card-socials">
-                        <a href="https://www.linkedin.com/in/sumeet-sikdar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="open"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="https://www.instagram.com/__.diiiyyyaaaa.__?igsh=dXYzMjQ4djVueDVi&utm_source=qr" title="Open"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="copy-email" data-email="apurba.sxc@gmail.com" title="Copy"><i class="fa-solid fa-envelope"></i></a>
-                        <a href="#" class="copy-phone" data-phone="+918972572486" title="Copy"><i class="fa-solid fa-phone"></i></a>
-                    </div>
-                </div>
+            <p class="card-desc">Leading the association with vision and precision.</p>
+            <div class="card-socials">
+              <!-- <a href="#"><i class="fa-brands fa-linkedin"></i></a> -->
+              <a href="https://www.instagram.com/ankita._.deb?igsh=YWdvODF4cXhka2Jz" title="Open"><i
+                  class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="copy-email" data-email="ankitadeb20502@gmail.com" title="Copy"><i
+                  class="fa-solid fa-envelope"></i></a>
+              <a href="#" class="copy-phone" data-phone="+919476387254" title="Copy"><i
+                  class="fa-solid fa-phone"></i></a>
             </div>
-        </div>
-
-        <div class="glass-card-wrapper">
-            <div class="glass-card group">
-                <div class="glow-blob glow-purple"></div>
-                <div class="card-image-box">
-                    <img src="./Assets/Sumeet.avif" alt="Sumeet Sikdar" loading="lazy">
-                    <div class="card-img-overlay"></div>
-                    <div class="card-vertical-line"></div>
-                </div>
-                <div class="card-info-box">
-                    <div>
-                        <h3 class="card-name">Sumeet Sikdar</h3>
-                        <p class="card-role text-purple">DESIGN-CCM</p>
-                    </div>
-                    <p class="card-desc">Crafting the visual identity and creative.</p>
-                    <div class="card-socials">
-                        <a href="https://www.linkedin.com/in/sumeet-sikdar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="open"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="https://www.instagram.com/sumeet.sikdar?igsh=MWxhNWlodm5mdjgzMw==" title="Open"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="copy-email" data-email="sumeetsikdar4@gmail.com" title="Copy"><i class="fa-solid fa-envelope"></i></a>
-                        <a href="#" class="copy-phone" data-phone="+919836421748" title="Copy"><i class="fa-solid fa-phone"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card-wrapper">
-            <div class="glass-card group">
-                <div class="glow-blob glow-pink"></div>
-                <div class="card-image-box">
-                    <img src="./Assets/ArchismanBanerjee.avif" alt="Archishman Banerjee" loading="lazy">
-                    <div class="card-img-overlay"></div>
-                    <div class="card-vertical-line"></div>
-                </div>
-                <div class="card-info-box">
-                    <div>
-                        <h3 class="card-name">Archishman Banerjee</h3>
-                        <p class="card-role text-pink">PR-CCM</p>
-                    </div>
-                    <p class="card-desc">Managing public relations and external communications.</p>
-                    <div class="card-socials">
-                        <a href="https://www.linkedin.com/in/archishman-banerjee/" title="open"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="https://www.instagram.com/archi.baner/" title="Open"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://github.com/ArchieBaner" title="Open"><i class="fa-brands fa-github"></i></a>
-                        <a href="#" class="copy-email" data-email="archi2109baner@gmail.com" title="Copy"><i class="fa-solid fa-envelope"></i></a>
-                        <a href="#" class="copy-phone" data-phone="+918017695799" title="Copy"><i class="fa-solid fa-phone"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card-wrapper">
-            <div class="glass-card group">
-                <div class="glow-blob glow-blue"></div>
-                <div class="card-image-box">
-                    <img src="./Assets/AdrijaChakroborty.avif" alt="Adrija Chakroborty" loading="lazy">
-                    <div class="card-img-overlay"></div>
-                    <div class="card-vertical-line"></div>
-                </div>
-                <div class="card-info-box">
-                    <div>
-                        <h3 class="card-name">Adrija Chakroborty</h3>
-                        <p class="card-role text-blue">PHOTOGRAPHY-CCM</p>
-                    </div>
-                    <p class="card-desc">Capturing moments and documenting our journey.</p>
-                    <div class="card-socials">
-                        <a href="https://www.instagram.com/adrija_chakraborty_02_?igsh=MTFwYjM1N2M0MWd0cA%3D%3D&utm_source=qr" title="Open"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="copy-email" data-email="adrijachakraborty02@gmail.com" title="Copy"><i class="fa-solid fa-envelope"></i></a>
-                        <a href="#" class="copy-phone" data-phone="+919474089847" title="Copy"><i class="fa-solid fa-phone"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card-wrapper">
-            <div class="glass-card group">
-                <div class="glow-blob glow-amber"></div>
-                <div class="card-image-box">
-                    <img src="./Assets/Apurba.avif" alt="Apurba Das" loading="lazy">
-                    <div class="card-img-overlay"></div>
-                    <div class="card-vertical-line"></div>
-                </div>
-                <div class="card-info-box">
-                    <div>
-                        <h3 class="card-name">Apurba Das</h3>
-                        <p class="card-role text-amber">FINANCE-CCM</p>
-                    </div>
-                    <p class="card-desc">Ensuring fiscal responsibility and resource management.</p>
-                    <div class="card-socials">
-                        <a href="https://www.instagram.com/daszz_wonders?igsh=dndxa3JjM3B5MzRh" title="Open"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="copy-email" data-email="apurba.sxc@gmail.com" title="Copy"><i class="fa-solid fa-envelope"></i></a>
-                        <a href="#" class="copy-phone" data-phone="+917003931172" title="Copy"><i class="fa-solid fa-phone"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card-wrapper">
-            <div class="glass-card group">
-                <div class="glow-blob glow-purple"></div>
-                <div class="card-image-box">
-                    <img src="./Assets/Ritisha.avif" alt="Ritisha Chakraborty" loading="lazy">
-                    <div class="card-img-overlay"></div>
-                    <div class="card-vertical-line"></div>
-                </div>
-                <div class="card-info-box">
-                    <div>
-                        <h3 class="card-name">Ritisha Chakraborty</h3>
-                        <p class="card-role text-purple">EVENT-CCM</p>
-                    </div>
-                    <p class="card-desc">Orchestrating memorable events and logistics.</p>
-                    <div class="card-socials">
-                        <a href="https://www.linkedin.com/in/ritisha-chakraborty-328a20316?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="Open"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="#" class="copy-email" data-email="chakraborty.ritisha@gmail.com" title="Copy"><i class="fa-solid fa-envelope"></i></a>
-                        <a href="#" class="copy-phone" data-phone="+919874487189" title="Copy"><i class="fa-solid fa-phone"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card-wrapper">
-            <div class="glass-card group">
-                <div class="glow-blob glow-pink"></div>
-                <div class="card-image-box">
-                    <img src="./Assets/Tiasha.avif" alt="Tiyasa Chandra" loading="lazy">
-                    <div class="card-img-overlay"></div>
-                    <div class="card-vertical-line"></div>
-                </div>
-                <div class="card-info-box">
-                    <div>
-                        <h3 class="card-name">Tiyasa Chandra</h3>
-                        <p class="card-role text-pink">CONTENT-CCM</p>
-                    </div>
-                    <p class="card-desc">Curating engaging content for our community.</p>
-                    <div class="card-socials">
-                        <a href="https://www.instagram.com/_a_random.nyctophile?igsh=MWtzZzJ0ZW1mMnc4OQ==" title="Open"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="copy-email" data-email="chandra.tiyasa2706@gmail.com" title="Copy"><i class="fa-solid fa-envelope"></i></a>
-                        <a href="#" class="copy-phone" data-phone="+917439578480" title="Copy"><i class="fa-solid fa-phone"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card-wrapper">
-            <div class="glass-card group">
-                <div class="glow-blob glow-blue"></div>
-                <div class="card-image-box">
-                    <img src="./Assets/ShubhamShaw.avif" alt="Shubham Shaw" loading="lazy">
-                    <div class="card-img-overlay"></div>
-                    <div class="card-vertical-line"></div>
-                </div>
-                <div class="card-info-box">
-                    <div>
-                        <h3 class="card-name">Shubham Shaw</h3>
-                        <p class="card-role text-blue">PR-TECH-HEAD</p>
-                    </div>
-                    <p class="card-desc">Bridging technology and public relations strategies.</p>
-                    <div class="card-socials">
-                        <a href="https://www.instagram.com/shubh_shubh_bole/" title="Open"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="copy-email" data-email="shubhamshaw90000@gmail.com" title="Copy"><i class="fa-solid fa-envelope"></i></a>
-                        <a href="#" class="copy-phone" data-phone="+916290723914" title="Copy"><i class="fa-solid fa-phone"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card-wrapper">
-            <div class="glass-card group">
-                <div class="glow-blob glow-amber"></div>
-                <div class="card-image-box">
-                    <img src="./Assets/Shruti.avif" alt="Shruti Sen" loading="lazy">
-                    <div class="card-img-overlay"></div>
-                    <div class="card-vertical-line"></div>
-                </div>
-                <div class="card-info-box">
-                    <div>
-                        <h3 class="card-name">Shruti Sen</h3>
-                        <p class="card-role text-amber">FINANCE-HEAD</p>
-                    </div>
-                    <p class="card-desc">Overseeing financial planning and strategy.</p>
-                    <div class="card-socials">
-                        <a href="https://www.instagram.com/shruti.sen._?igsh=MWcwMDBrOG1zZGowbQ==" title="Open"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="copy-email" data-email="sn.shrutisen@gmail.com" title="Copy"><i class="fa-solid fa-envelope"></i></a>
-                        <a href="#" class="copy-phone" data-phone="+919674890751" title="Copy"><i class="fa-solid fa-phone"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card-wrapper">
-            <div class="glass-card group">
-                <div class="glow-blob glow-purple"></div>
-                <div class="card-image-box">
-                    <img src="./Assets/AdriGarai.avif" alt="Adri Garai" loading="lazy">
-                    <div class="card-img-overlay"></div>
-                    <div class="card-vertical-line"></div>
-                </div>
-                <div class="card-info-box">
-                    <div>
-                        <h3 class="card-name">Adri Garai</h3>
-                        <p class="card-role text-purple">DESIGN-HEAD</p>
-                    </div>
-                    <p class="card-desc">Leading the creative direction and visual design.</p>
-                    <div class="card-socials">
-                        <a href="https://www.linkedin.com/in/adri-garai-602b073a6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="Open"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="#" class="copy-email" data-email="adri.garai.16@gmail.com" title="Copy"><i class="fa-solid fa-envelope"></i></a>
-                        <a href="#" class="copy-phone" data-phone="+918902089755" title="Copy"><i class="fa-solid fa-phone"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card-wrapper">
-            <div class="glass-card group">
-                <div class="glow-blob glow-pink"></div>
-                <div class="card-image-box">
-                    <img src="./Assets/SoumyojitModak.avif" alt="Soumyojit Modak" loading="lazy">
-                    <div class="card-img-overlay"></div>
-                    <div class="card-vertical-line"></div>
-                </div>
-                <div class="card-info-box">
-                    <div>
-                        <h3 class="card-name">Soumyojit Modak</h3>
-                        <p class="card-role text-pink">EVENTS-HEAD</p>
-                    </div>
-                    <p class="card-desc">Directing major events and student engagement.</p>
-                    <div class="card-socials">
-                        <a href="https://www.instagram.com/soumyaa_jit?igsh=Nm93dXdxOXlzcHlz" title="Open"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="copy-email" data-email="soumyajjitmodak15@gmail.com" title="Copy"><i class="fa-solid fa-envelope"></i></a>
-                        <a href="#" class="copy-phone" data-phone="+918240069550" title="Copy"><i class="fa-solid fa-phone"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card-wrapper">
-            <div class="glass-card group">
-                <div class="glow-blob glow-blue"></div>
-                <div class="card-image-box">
-                    <img src="./Assets/Arnadeep.avif" alt="Arnadeep Paul" loading="lazy">
-                    <div class="card-img-overlay"></div>
-                    <div class="card-vertical-line"></div>
-                </div>
-                <div class="card-info-box">
-                    <div>
-                        <h3 class="card-name">Arnadeep Paul</h3>
-                        <p class="card-role text-blue">WEB-DEV</p>
-                    </div>
-                    <p class="card-desc">Minimal code. Maximum impact.</p>
-                    <div class="card-socials">
-                        <!-- <a href="https://www.instagram.com/soumyaa_jit?igsh=Nm93dXdxOXlzcHlz" title="Open"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="copy-email" data-email="soumyajjitmodak15@gmail.com" title="Copy"><i class="fa-solid fa-envelope"></i></a> -->
-                        <a href="#" class="copy-phone" data-phone="+918443910077" title="Copy"><i class="fa-solid fa-phone"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-    <!--TIMELINE-->
-    <!-- Added contain: layout paint in CSS for this section to prevent reflow leakage -->
-    <section class="timeline">
-      <h1 class="section-title">Previous Iterations</h1>
-      <!-- UI Overlay -->
-      <div class="progress-ui">
-        <div class="progress-bar"></div>
-      </div>
-      <!-- Scroll Content-->
-      <div id="scroll-height-spacer"></div>
-      <!-- Pinned Viewport -->
-      <div class="viewport-wrapper">
-        <div class="scroll-container" id="scroll-container">
-          <!-- SVG Canvas -->
-          <svg
-            class="svg-layer"
-            id="timeline-svg"
-            preserveAspectRatio="none"
-          ></svg>
-        </div>
-      </div>
-    </section>
-    <!--FOOTER-->
-    <footer class="site-footer" id="footer">
-      <div class="footer-container">
-        <div class="footer-col footer-contact">
-          <h3 class="footer-heading">Get in Touch</h3>
-          <p>Let’s build something great together.</p>
-        </div>
-
-        <div class="footer-col footer-socials">
-          <h3 class="footer-heading">Connect</h3>
-          <nav class="footer-social-links" aria-label="Social Media Links">
-            <nav class="footer-social-links" aria-label="Social Media Links">
-              <a href="https://www.instagram.com/sxcsa_official?igsh=MW8yZzBpbjljcjdsaw%3D%3D&utm_source=qr" title="Open"><i class="fa-brands fa-instagram"></i></a>
-              <a href="#" class="copy-email" data-email="sxcsaofficial@gmail.com" title="Copy"><i class="fa-solid fa-envelope"></i></a>
-            </nav>
-          </nav>
-        </div>
-
-        <div class="footer-col footer-map">
-          <h3 class="footer-heading">Find Us</h3>
-          <div class="map-wrapper">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.806476811749!2d88.35359707481071!3d22.548921033838745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02771aad282713%3A0x62c7778aead16f97!2sSt.%20Xavier&#39;s%20College%20(Autonomous)%20-%20Kolkata!5e0!3m2!1sen!2sin!4v1768151906472!5m2!1sen!2sin"
-              width="800"
-              height="600"
-              style="border: 0"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
           </div>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <p>
-          &copy; <span id="year">2026</span> Science Association. All rights
-          reserved.
-        </p>
+      <div class="glass-card-wrapper">
+        <div class="glass-card group">
+          <div class="glow-blob glow-amber"></div>
+          <div class="card-image-box">
+            <img src="./Assets/DiyaKonar.avif" alt="Diya Konar" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <div class="card-vertical-line"></div>
+          </div>
+          <div class="card-info-box">
+            <div>
+              <h3 class="card-name">Diya Konar</h3>
+              <p class="card-role text-amber">ASST-SECRETARY</p>
+            </div>
+            <p class="card-desc">Coordinating operations and fostering collaboration.</p>
+            <div class="card-socials">
+              <a href="https://www.linkedin.com/in/sumeet-sikdar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                title="open"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="https://www.instagram.com/__.diiiyyyaaaa.__?igsh=dXYzMjQ4djVueDVi&utm_source=qr" title="Open"><i
+                  class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="copy-email" data-email="apurba.sxc@gmail.com" title="Copy"><i
+                  class="fa-solid fa-envelope"></i></a>
+              <a href="#" class="copy-phone" data-phone="+918972572486" title="Copy"><i
+                  class="fa-solid fa-phone"></i></a>
+            </div>
+          </div>
+        </div>
       </div>
-    </footer>
 
-    <!-- GSAP Core -->
-    <!-- Moved scripts to end, defer implied but good for clarity -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/SplitText.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/CustomEase.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrambleTextPlugin.min.js"></script>
-    <script src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js"></script>
+      <div class="glass-card-wrapper">
+        <div class="glass-card group">
+          <div class="glow-blob glow-purple"></div>
+          <div class="card-image-box">
+            <img src="./Assets/Sumeet.avif" alt="Sumeet Sikdar" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <div class="card-vertical-line"></div>
+          </div>
+          <div class="card-info-box">
+            <div>
+              <h3 class="card-name">Sumeet Sikdar</h3>
+              <p class="card-role text-purple">DESIGN-CCM</p>
+            </div>
+            <p class="card-desc">Crafting the visual identity and creative.</p>
+            <div class="card-socials">
+              <a href="https://www.linkedin.com/in/sumeet-sikdar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                title="open"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="https://www.instagram.com/sumeet.sikdar?igsh=MWxhNWlodm5mdjgzMw==" title="Open"><i
+                  class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="copy-email" data-email="sumeetsikdar4@gmail.com" title="Copy"><i
+                  class="fa-solid fa-envelope"></i></a>
+              <a href="#" class="copy-phone" data-phone="+919836421748" title="Copy"><i
+                  class="fa-solid fa-phone"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <!-- Custom Scripts -->
-    <script src="./JAVASC/hero_script.js" defer></script>
-    <script src="./JAVASC/hero_timeline.js" defer></script>
-    <script src="./JAVASC/hero_nav.js" defer></script>
-    <script src="./JAVASC/loading_screen.js"></script>
-    <script src="./JAVASC/lenis.js" defer></script>
-    <script src="./JAVASC/perspective.js" defer></script>
-    <script src="./JAVASC/animations.js"></script>
-  </body>
+      <div class="glass-card-wrapper">
+        <div class="glass-card group">
+          <div class="glow-blob glow-pink"></div>
+          <div class="card-image-box">
+            <img src="./Assets/ArchismanBanerjee.avif" alt="Archishman Banerjee" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <div class="card-vertical-line"></div>
+          </div>
+          <div class="card-info-box">
+            <div>
+              <h3 class="card-name">Archishman Banerjee</h3>
+              <p class="card-role text-pink">PR-CCM</p>
+            </div>
+            <p class="card-desc">Managing public relations and external communications.</p>
+            <div class="card-socials">
+              <a href="https://www.linkedin.com/in/archishman-banerjee/" title="open"><i
+                  class="fa-brands fa-linkedin"></i></a>
+              <a href="https://www.instagram.com/archi.baner/" title="Open"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://github.com/ArchieBaner" title="Open"><i class="fa-brands fa-github"></i></a>
+              <a href="#" class="copy-email" data-email="archi2109baner@gmail.com" title="Copy"><i
+                  class="fa-solid fa-envelope"></i></a>
+              <a href="#" class="copy-phone" data-phone="+918017695799" title="Copy"><i
+                  class="fa-solid fa-phone"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card-wrapper">
+        <div class="glass-card group">
+          <div class="glow-blob glow-blue"></div>
+          <div class="card-image-box">
+            <img src="./Assets/AdrijaChakroborty.avif" alt="Adrija Chakroborty" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <div class="card-vertical-line"></div>
+          </div>
+          <div class="card-info-box">
+            <div>
+              <h3 class="card-name">Adrija Chakroborty</h3>
+              <p class="card-role text-blue">PHOTOGRAPHY-CCM</p>
+            </div>
+            <p class="card-desc">Capturing moments and documenting our journey.</p>
+            <div class="card-socials">
+              <a href="https://www.instagram.com/adrija_chakraborty_02_?igsh=MTFwYjM1N2M0MWd0cA%3D%3D&utm_source=qr"
+                title="Open"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="copy-email" data-email="adrijachakraborty02@gmail.com" title="Copy"><i
+                  class="fa-solid fa-envelope"></i></a>
+              <a href="#" class="copy-phone" data-phone="+919474089847" title="Copy"><i
+                  class="fa-solid fa-phone"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card-wrapper">
+        <div class="glass-card group">
+          <div class="glow-blob glow-amber"></div>
+          <div class="card-image-box">
+            <img src="./Assets/Apurba.avif" alt="Apurba Das" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <div class="card-vertical-line"></div>
+          </div>
+          <div class="card-info-box">
+            <div>
+              <h3 class="card-name">Apurba Das</h3>
+              <p class="card-role text-amber">FINANCE-CCM</p>
+            </div>
+            <p class="card-desc">Ensuring fiscal responsibility and resource management.</p>
+            <div class="card-socials">
+              <a href="https://www.instagram.com/daszz_wonders?igsh=dndxa3JjM3B5MzRh" title="Open"><i
+                  class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="copy-email" data-email="apurba.sxc@gmail.com" title="Copy"><i
+                  class="fa-solid fa-envelope"></i></a>
+              <a href="#" class="copy-phone" data-phone="+917003931172" title="Copy"><i
+                  class="fa-solid fa-phone"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card-wrapper">
+        <div class="glass-card group">
+          <div class="glow-blob glow-purple"></div>
+          <div class="card-image-box">
+            <img src="./Assets/Ritisha.avif" alt="Ritisha Chakraborty" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <div class="card-vertical-line"></div>
+          </div>
+          <div class="card-info-box">
+            <div>
+              <h3 class="card-name">Ritisha Chakraborty</h3>
+              <p class="card-role text-purple">EVENT-CCM</p>
+            </div>
+            <p class="card-desc">Orchestrating memorable events and logistics.</p>
+            <div class="card-socials">
+              <a href="https://www.linkedin.com/in/ritisha-chakraborty-328a20316?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                title="Open"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="#" class="copy-email" data-email="chakraborty.ritisha@gmail.com" title="Copy"><i
+                  class="fa-solid fa-envelope"></i></a>
+              <a href="#" class="copy-phone" data-phone="+919874487189" title="Copy"><i
+                  class="fa-solid fa-phone"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card-wrapper">
+        <div class="glass-card group">
+          <div class="glow-blob glow-pink"></div>
+          <div class="card-image-box">
+            <img src="./Assets/Tiasha.avif" alt="Tiyasa Chandra" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <div class="card-vertical-line"></div>
+          </div>
+          <div class="card-info-box">
+            <div>
+              <h3 class="card-name">Tiyasa Chandra</h3>
+              <p class="card-role text-pink">CONTENT-CCM</p>
+            </div>
+            <p class="card-desc">Curating engaging content for our community.</p>
+            <div class="card-socials">
+              <a href="https://www.instagram.com/_a_random.nyctophile?igsh=MWtzZzJ0ZW1mMnc4OQ==" title="Open"><i
+                  class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="copy-email" data-email="chandra.tiyasa2706@gmail.com" title="Copy"><i
+                  class="fa-solid fa-envelope"></i></a>
+              <a href="#" class="copy-phone" data-phone="+917439578480" title="Copy"><i
+                  class="fa-solid fa-phone"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card-wrapper">
+        <div class="glass-card group">
+          <div class="glow-blob glow-blue"></div>
+          <div class="card-image-box">
+            <img src="./Assets/ShubhamShaw.avif" alt="Shubham Shaw" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <div class="card-vertical-line"></div>
+          </div>
+          <div class="card-info-box">
+            <div>
+              <h3 class="card-name">Shubham Shaw</h3>
+              <p class="card-role text-blue">PR-TECH-HEAD</p>
+            </div>
+            <p class="card-desc">Bridging technology and public relations strategies.</p>
+            <div class="card-socials">
+              <a href="https://www.instagram.com/shubh_shubh_bole/" title="Open"><i
+                  class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="copy-email" data-email="shubhamshaw90000@gmail.com" title="Copy"><i
+                  class="fa-solid fa-envelope"></i></a>
+              <a href="#" class="copy-phone" data-phone="+916290723914" title="Copy"><i
+                  class="fa-solid fa-phone"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card-wrapper">
+        <div class="glass-card group">
+          <div class="glow-blob glow-amber"></div>
+          <div class="card-image-box">
+            <img src="./Assets/Shruti.avif" alt="Shruti Sen" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <div class="card-vertical-line"></div>
+          </div>
+          <div class="card-info-box">
+            <div>
+              <h3 class="card-name">Shruti Sen</h3>
+              <p class="card-role text-amber">FINANCE-HEAD</p>
+            </div>
+            <p class="card-desc">Overseeing financial planning and strategy.</p>
+            <div class="card-socials">
+              <a href="https://www.instagram.com/shruti.sen._?igsh=MWcwMDBrOG1zZGowbQ==" title="Open"><i
+                  class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="copy-email" data-email="sn.shrutisen@gmail.com" title="Copy"><i
+                  class="fa-solid fa-envelope"></i></a>
+              <a href="#" class="copy-phone" data-phone="+919674890751" title="Copy"><i
+                  class="fa-solid fa-phone"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card-wrapper">
+        <div class="glass-card group">
+          <div class="glow-blob glow-purple"></div>
+          <div class="card-image-box">
+            <img src="./Assets/AdriGarai.avif" alt="Adri Garai" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <div class="card-vertical-line"></div>
+          </div>
+          <div class="card-info-box">
+            <div>
+              <h3 class="card-name">Adri Garai</h3>
+              <p class="card-role text-purple">DESIGN-HEAD</p>
+            </div>
+            <p class="card-desc">Leading the creative direction and visual design.</p>
+            <div class="card-socials">
+              <a href="https://www.linkedin.com/in/adri-garai-602b073a6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                title="Open"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="#" class="copy-email" data-email="adri.garai.16@gmail.com" title="Copy"><i
+                  class="fa-solid fa-envelope"></i></a>
+              <a href="#" class="copy-phone" data-phone="+918902089755" title="Copy"><i
+                  class="fa-solid fa-phone"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card-wrapper">
+        <div class="glass-card group">
+          <div class="glow-blob glow-pink"></div>
+          <div class="card-image-box">
+            <img src="./Assets/SoumyojitModak.avif" alt="Soumyojit Modak" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <div class="card-vertical-line"></div>
+          </div>
+          <div class="card-info-box">
+            <div>
+              <h3 class="card-name">Soumyojit Modak</h3>
+              <p class="card-role text-pink">EVENTS-HEAD</p>
+            </div>
+            <p class="card-desc">Directing major events and student engagement.</p>
+            <div class="card-socials">
+              <a href="https://www.instagram.com/soumyaa_jit?igsh=Nm93dXdxOXlzcHlz" title="Open"><i
+                  class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="copy-email" data-email="soumyajjitmodak15@gmail.com" title="Copy"><i
+                  class="fa-solid fa-envelope"></i></a>
+              <a href="#" class="copy-phone" data-phone="+918240069550" title="Copy"><i
+                  class="fa-solid fa-phone"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card-wrapper">
+        <div class="glass-card group">
+          <div class="glow-blob glow-blue"></div>
+          <div class="card-image-box">
+            <img src="./Assets/Arnadeep.avif" alt="Arnadeep Paul" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <div class="card-vertical-line"></div>
+          </div>
+          <div class="card-info-box">
+            <div>
+              <h3 class="card-name">Arnadeep Paul</h3>
+              <p class="card-role text-purple">WEB-DEV</p>
+            </div>
+            <p class="card-desc">Designed and coded this website</p>
+            <div class="card-socials">
+              <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="#"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!--TIMELINE-->
+  <!-- Added contain: layout paint in CSS for this section to prevent reflow leakage -->
+  <section class="timeline">
+    <h1 class="section-title">Previous Iterations</h1>
+    <!-- UI Overlay -->
+    <div class="progress-ui">
+      <div class="progress-bar"></div>
+    </div>
+    <!-- Scroll Content-->
+    <div id="scroll-height-spacer"></div>
+    <!-- Pinned Viewport -->
+    <div class="viewport-wrapper">
+      <div class="scroll-container" id="scroll-container">
+        <!-- SVG Canvas -->
+        <svg class="svg-layer" id="timeline-svg" preserveAspectRatio="none"></svg>
+      </div>
+    </div>
+  </section>
+
+  
+  <!--FOOTER-->
+  <footer class="site-footer" id="footer">
+    <div class="footer-container">
+      <div class="footer-col footer-contact">
+        <h3 class="footer-heading">Get in Touch</h3>
+        <p>Let’s build something great together.</p>
+      </div>
+
+      <div class="footer-col footer-socials">
+        <h3 class="footer-heading">Connect</h3>
+        <nav class="footer-social-links" aria-label="Social Media Links">
+          <nav class="footer-social-links" aria-label="Social Media Links">
+            <a href="https://www.instagram.com/sxcsa_official?igsh=MW8yZzBpbjljcjdsaw%3D%3D&utm_source=qr"
+              title="Open"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="copy-email" data-email="sxcsaofficial@gmail.com" title="Copy"><i
+                class="fa-solid fa-envelope"></i></a>
+          </nav>
+        </nav>
+      </div>
+
+      <div class="footer-col footer-map">
+        <h3 class="footer-heading">Find Us</h3>
+        <div class="map-wrapper">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.806476811749!2d88.35359707481071!3d22.548921033838745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02771aad282713%3A0x62c7778aead16f97!2sSt.%20Xavier&#39;s%20College%20(Autonomous)%20-%20Kolkata!5e0!3m2!1sen!2sin!4v1768151906472!5m2!1sen!2sin"
+            width="800" height="600" style="border: 0" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>
+        &copy; <span id="year">2026</span> Science Association. All rights
+        reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- GSAP Core -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/SplitText.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/CustomEase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrambleTextPlugin.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js"></script>
+
+  <!-- Custom Scripts -->
+  <script src="./JAVASC/lenis.js" defer></script>
+  <script src="./JAVASC/loading_screen.js" defer></script>
+  <script src="./JAVASC/perspective.js" defer></script>
+  <script src="./JAVASC/hero_script.js" defer></script>
+  <script src="./JAVASC/hero_nav.js" defer></script>
+  <script src="./JAVASC/animations.js" defer></script>
+  <script src="./JAVASC/hero_timeline.js" defer></script>
+  <script src="./JAVASC/page_transition.js"></script>
+</body>
+
 </html>
