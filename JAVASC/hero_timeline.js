@@ -16,25 +16,25 @@ const timelineData = [
   {
     year: "2021",
     title: "Inception Point",
-    desc: "The project begins with a single line of code and a vision.",
+    desc: "A spark was lit, where curiosity first found its voice and direction.",
     img: "./Assets/CC2021.avif",
   },
   {
     year: "2022",
-    title: "First Divergence",
-    desc: "Systems split as complexity grows. The architecture expands.",
+    title: "First Ascent",
+    desc: "Momentum took shape, as ideas evolved into action and collective purpose.",
     img: "./Assets/CC2022.avif",
   },
   {
     year: "2023",
-    title: "Neural Integration",
-    desc: "AI models merged with frontend logic creating organic motion.",
+    title: "Sky is the Limit",
+    desc: "The horizon widened, with ambition pushing beyond limits and expectations.",
     img: "./Assets/CC2023.avif",
   },
   {
     year: "2024",
-    title: "Horizon Event",
-    desc: "The final singularity. Design and code become indistinguishable.",
+    title: "Legacy",
+    desc: "A legacy emerged, where changing hands carried the same unyielding flame forward.",
     img: "./Assets/CC2023.avif",
   },
 ];
