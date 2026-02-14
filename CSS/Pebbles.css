@@ -625,12 +625,12 @@ img {
   }
   
   nav ul {
-    /* width: 100%;
+    width: 100%;
     overflow-x: auto; 
     padding-bottom: 5px; 
     justify-content: flex-start; 
     -webkit-overflow-scrolling: touch;
-    gap: 1.5rem; */
+    gap: 1.5rem;
     display: none;
   }
   
