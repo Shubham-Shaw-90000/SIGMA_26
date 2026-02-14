@@ -1,24 +1,25 @@
 :root {
   --bg-deep: #020202;
   --bg-surface: rgba(255, 255, 255, 0.03);
-  --bg-glass: rgba(10, 20, 30, 0.6);
 
   --accent-teal: rgb(26, 212, 241);
   --accent-red: rgb(243, 48, 26);
-  --accent-gold: #d4af37; /* Editorial highlight */
+  --accent-gold: #d4af37;
 
   --text-main: #f0f4f8;
   --text-muted: #8b9bb4;
 
   --font-serif: "Times New Roman", Times, Baskerville, Georgia, serif;
-  --font-sans:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-  --gap: 20px;
-  --radius: 8px; /* Sharper corners for a magazine feel */
+  --gap: clamp(10px, 2vw, 20px); 
+  
+  --radius: 8px;
   --easing: cubic-bezier(0.22, 1, 0.36, 1);
-  --ripple-duration: 4s;
+    /*Transition effects*/  
+  --trans-bg: #000000;
+  --trans-text: #ffffff;
+  --trans-font: "Platfair Display", sans-serif;
 }
 
 /* RESET & BASE */
@@ -30,6 +31,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;/
 }
 
 body {
@@ -39,9 +41,10 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  padding: 0; 
 }
 
-/* GLOBAL TEXTURE OVERLAY (Print Paper Effect) */
+/* GLOBAL TEXTURE OVERLAY */
 .noise-overlay {
   position: fixed;
   inset: 0;
@@ -49,6 +52,64 @@ body {
   pointer-events: none;
   opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Transition style*/
+#kinetic-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--trans-bg);
+  z-index: 99999; /* Must be above everything */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  pointer-events: none; /* Let clicks pass through when hidden */
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* When active, block interactions */
+#kinetic-transition.is-active {
+  pointer-events: all;
+  visibility: visible;
+}
+
+/* Grid layout for the kinetic typography */
+.kinetic-grid {
+  display: grid;
+  width: 100vmax;
+  height: 100vmax;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+/* Individual text lines */
+.trans-line {
+  white-space: nowrap;
+  font-family: var(--trans-font);
+  font-weight: bold;
+  font-size: clamp(5rem, 15vh, 12rem);
+  line-height: 0.8;
+  color: var(--trans-text);
+  text-transform: uppercase;
+  opacity: 0.1; /* Starting opacity */
+  user-select: none;
+  will-change: transform;
+}
+
+.trans-line.odd {
+  transform: translateX(-10%);
+}
+
+.trans-line.even {
+  transform: translateX(10%);
 }
 
 /* NAV */
@@ -61,9 +122,9 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 3rem;
-  background: linear-gradient(to bottom, rgba(2, 4, 8, 0.8), transparent);
-  pointer-events: none; /* Let clicks pass through to hero initially */
+  padding: clamp(1rem, 2vh, 1.5rem) clamp(1.5rem, 5vw, 3rem);
+  background: linear-gradient(to bottom, rgba(2, 4, 8, 0.9), transparent);
+  pointer-events: none;
 }
 
 nav .logo-mark {
@@ -74,7 +135,7 @@ nav .logo-mark {
   pointer-events: auto;
   color: white;
   text-decoration: none;
-  opacity:1;
+  opacity: 1;
 }
 
 nav ul {
@@ -86,7 +147,7 @@ nav ul {
 
 nav ul li a {
   position: relative;
-  color: var(--text-muted);
+  color: var(--text-main);
   text-decoration: none;
   font-size: 0.85rem;
   text-transform: uppercase;
@@ -94,7 +155,6 @@ nav ul li a {
   transition: color 0.3s ease;
 }
 
-/* underline */
 nav ul li a::after {
   content: "";
   position: absolute;
@@ -106,7 +166,6 @@ nav ul li a::after {
   transition: width 0.3s ease;
 }
 
-/* hover state */
 nav ul li a:hover {
   color: #fff;
 }
@@ -115,8 +174,7 @@ nav ul li a:hover::after {
   width: 100%;
 }
 
-/*Hero section Ripples*/
-
+/* HERO SECTION */
 .viewport {
   position: relative;
   width: 100vw;
@@ -145,7 +203,7 @@ nav ul li a:hover::after {
 
 .hero-title {
   font-family: var(--font-serif);
-  font-size: clamp(4rem, 15vw, 10rem); /* Massive, responsive text */
+  font-size: clamp(3rem, 15vw, 10rem); 
   font-weight: 900;
   line-height: 0.9;
   margin-bottom: 1rem;
@@ -154,7 +212,7 @@ nav ul li a:hover::after {
 
 .hero-title span {
   display: block;
-  font-size: 0.4em; /* Smaller part of the title */
+  font-size: 0.4em;
   font-style: italic;
   font-weight: 400;
   margin-bottom: 0.2em;
@@ -162,7 +220,7 @@ nav ul li a:hover::after {
 
 .hero-tagline {
   font-family: var(--font-sans);
-  font-size: 1.1rem;
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
   color: var(--text-light);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -177,7 +235,7 @@ nav ul li a:hover::after {
        SECTION LAYOUTS
        ========================================= */
 section {
-  padding: 6rem 5vw;
+  padding: clamp(4rem, 10vh, 6rem) clamp(1.5rem, 5vw, 5vw);
   max-width: 1600px;
   margin: 0 auto;
 }
@@ -192,7 +250,7 @@ section {
 
 .section-title {
   font-family: var(--font-serif);
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 5vw, 2.5rem);
   font-weight: 300;
   margin: 0;
 }
@@ -202,7 +260,7 @@ section {
   text-align: right;
   font-size: 0.9rem;
   color: var(--text-muted);
-  display: none; /* hidden on mobile */
+  display: none;
 }
 
 @media (min-width: 768px) {
@@ -221,6 +279,7 @@ section {
   grid-auto-flow: dense;
 }
 
+/* Desktop Breakpoints preserved */
 @media (min-width: 600px) {
   .mosaic-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -244,9 +303,7 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  transition:
-    transform 0.4s var(--easing),
-    box-shadow 0.4s var(--easing);
+  transition: transform 0.4s var(--easing), box-shadow 0.4s var(--easing);
   text-decoration: none;
   color: inherit;
 }
@@ -264,9 +321,7 @@ section {
   height: 100%;
   object-fit: cover;
   opacity: 0.7;
-  transition:
-    transform 0.8s var(--easing),
-    opacity 0.4s;
+  transition: transform 0.8s var(--easing), opacity 0.4s;
 }
 
 .card:hover .card-bg {
@@ -321,29 +376,19 @@ section {
   line-height: 1.5;
   margin: 0;
   display: -webkit-box;
-  /* -webkit-line-clamp: 2; */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* Grid Spans */
-.span-col-2 {
-  grid-column: span 1;
-}
-.span-row-2 {
-  grid-row: span 1;
-}
+/* Desktop Spans */
+.span-col-2 { grid-column: span 1; }
+.span-row-2 { grid-row: span 1; }
 
 @media (min-width: 600px) {
-  .span-col-2 {
-    grid-column: span 2;
-  }
-  .span-row-2 {
-    grid-row: span 2;
-  }
+  .span-col-2 { grid-column: span 2; }
+  .span-row-2 { grid-row: span 2; }
 }
 
-/* Dynamic Content Indicator */
 .live-indicator {
   position: absolute;
   top: 1rem;
@@ -358,7 +403,7 @@ section {
 
 /* =========================================
            ISSUES / EDITIONS SECTION
-           ========================================= */
+   ========================================= */
 .issues-scroll {
   overflow: hidden;
   position: relative;
@@ -375,9 +420,6 @@ section {
   min-width: 320px;
   max-width: 320px;
   flex-shrink: 0;
-}
-
-.issue-card {
   background: var(--bg-surface);
   padding: 1.5rem;
   border: 1px solid transparent;
@@ -401,22 +443,15 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  object-fit:fill;
+  object-fit: fill;
   color: rgba(255, 255, 255, 0.2);
   font-family: var(--font-serif);
   font-size: 3rem;
 }
 
-/* Generating different placeholder colors for variety */
-.issue-card:nth-child(1) .issue-cover {
-  background-color: #3e3b36;
-}
-.issue-card:nth-child(2) .issue-cover {
-  background-color: #5d5650;
-}
-.issue-card:nth-child(3) .issue-cover {
-  background-color: #8c8378;
-}
+.issue-card:nth-child(1) .issue-cover { background-color: #3e3b36; }
+.issue-card:nth-child(2) .issue-cover { background-color: #5d5650; }
+.issue-card:nth-child(3) .issue-cover { background-color: #8c8378; }
 
 .issue-meta {
   display: flex;
@@ -474,7 +509,7 @@ section {
   padding: 0.4rem 0.8rem;
   cursor: pointer;
   font-size: 1.2rem;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .arrow:hover {
@@ -487,14 +522,14 @@ section {
        ========================================= */
 .team-grid {
   display: grid;
-  grid-template-columns:  repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 3rem;
   margin-top: 4rem;
 }
 
 .team-member:nth-child(1),
 .team-member:nth-child(2) {
-  grid-column: span 2;   /* each takes 2 columns */
+  grid-column: span 2;
 }
 
 .team-member {
@@ -510,7 +545,7 @@ section {
 .member-photo {
   width: 200px;
   height: 200px;
-  border-radius: 50%; /* Circle portraits */
+  border-radius: 50%;
   margin: 0 auto 1.5rem auto;
   background: #111;
   overflow: hidden;
@@ -569,8 +604,180 @@ footer a:hover {
   opacity: 0.4;
 }
 
-/* UTILITY FOR RESPONSIVE IMAGES */
 img {
   max-width: 100%;
   display: block;
+}
+
+/* ==========================================================================
+   MOBILE OVERRIDES & OPTIMIZATIONS (Max-Width 768px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  
+   /* --- NAVIGATION ADJUSTMENTS --- */
+  nav {
+    flex-direction: column;
+    padding: 1rem;
+    background: transparent;
+    pointer-events: auto; 
+    gap: 1rem;
+  }
+  
+  nav ul {
+    /* width: 100%;
+    overflow-x: auto; 
+    padding-bottom: 5px; 
+    justify-content: flex-start; 
+    -webkit-overflow-scrolling: touch;
+    gap: 1.5rem; */
+    display: none;
+  }
+  
+  nav ul::-webkit-scrollbar {
+    display: none; 
+  }
+
+  .mosaic-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .mosaic-grid .card:nth-of-type(1) {
+    grid-column: span 2;
+    min-height: 250px; 
+  }
+
+  .mosaic-grid .card:nth-of-type(2) {
+    grid-column: span 2;
+    min-height: auto;
+  }
+  
+  .card {
+    min-height: 180px; 
+    padding: 1rem;
+  }
+  
+  .card-content {
+    padding: 0.5rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 20%, transparent);
+  }
+  
+  .card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+  }
+  .card p {
+    font-size: 0.8rem;
+    line-height: 1.3;
+    -webkit-line-clamp: 2; 
+    display: -webkit-box;
+  }
+
+  .about h3 {
+    font-size: 1.1rem;
+  }
+  .about h3::first-letter {
+    font-size: 3rem;
+  }
+
+  .issues-track {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-bottom: 0;
+  }
+
+  .issues-scroll {
+    overflow: visible;
+  }
+  
+  .issues-nav {
+    display: none; 
+  }
+
+  .issue-card {
+    min-width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding: 0.75rem;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    grid-template-areas: 
+      "thumb meta"
+      "thumb title"
+      "thumb link";
+    gap: 0 1rem;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .issue-cover {
+    grid-area: thumb;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0;
+    font-size: 0;
+    border-radius: 4px;
+  }
+
+  .issue-desc {
+    display: none; 
+  }
+
+  .issue-meta {
+    grid-area: meta;
+    margin: 0;
+    border: none;
+    padding: 0;
+    justify-content: flex-start;
+    gap: 1rem;
+    font-size: 0.65rem;
+    opacity: 0.7;
+  }
+  
+  .issue-title {
+    grid-area: title;
+    font-size: 1rem;
+    margin: 0;
+    line-height: 1.2;
+  }
+  
+  .issue-link {
+    grid-area: link;
+    margin-top: 0.2rem;
+    font-size: 0.7rem;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .team-member:nth-child(1),
+  .team-member:nth-child(2) {
+    grid-column: span 1;
+  }
+  
+  .member-photo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 0.75rem;
+  }
+  
+  .member-name {
+    font-size: 0.9rem;
+  }
+  
+  .member-role {
+    font-size: 0.65rem;
+  }
+
+  .team-member {
+    opacity: 1; 
+  }
+  
+  .member-photo img {
+    filter: grayscale(0%); 
+  }
 }

@@ -2,35 +2,35 @@
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: "Gambarino-Regular";
-  src:
-    url("../fonts/Gambarino-Regular.woff2") format("woff2"),
-    url("../fonts/Gambarino-Regular.woff") format("woff"),
-    url("../fonts/Gambarino-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-display: swap;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "ClashDisplay-Semibold";
-  src:
-    url("../fonts/ClashDisplay-Semibold.woff2") format("woff2"),
-    url("../fonts/ClashDisplay-Semibold.woff") format("woff"),
-    url("../fonts/ClashDisplay-Semibold.ttf") format("truetype");
-  font-weight: 600;
-  font-display: swap;
-  font-style: normal;
-}
-
 :root {
-  --image-mask: linear-gradient(
-    to left bottom,
-    /* transparent 100% */ black 0%
-  );
+  /* Typography */
   --font-primary: "Playfair Display", serif;
   --font-scondary: "Montserrat", sans-serif;
+
+  /* Global Effects */
+  --image-mask: linear-gradient(to left bottom, black 0%, transparent 100%);
+  --active-glow: 255, 255, 255;
+
+  /*Transition effects*/
+  --trans-bg: #000000;
+  --trans-text: #ffffff;
+  --trans-font: "Platfair Display", sans-serif;
+
+  /* Timeline Variables */
+  --bg-color: #050505;
+  --line-color: #00f2ff;
+  --line-glow: #00f2ff;
+  --text-color: #ffffff;
+  --node-size: 520px;
+
+  /* Footer Variables */
+  --footer-bg: #121212;
+  --footer-text: #a0a0a0;
+  --footer-heading: #ffffff;
+  --accent-color: #2053d5;
+  --border-color: #2a2a2a;
+  --spacing-unit: 1.5rem;
+  --max-width: 1200px;
 }
 
 body {
@@ -40,38 +40,29 @@ body {
   background-color: #0a0908;
   font-family: var(--font-scondary);
   overflow-x: hidden;
-  overscroll-behavior: none;
+  /* overscroll-behavior: none; */
   scrollbar-gutter: stable;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Noise Texture 
-           A subtle SVG noise pattern overlay to give the dark bg texture 
-        */
-.bg-noise {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -50;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
 
-/* Vignette  
-        */
-.bg-vignette {
-  background: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #222121 70%);
-  position: absolute;
-  inset: 0;
-  z-index: -49;
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01s !important;
+    animation-duration: 0.01s !important;
+  }
 }
 
-/*ALL EFFECTS*/
+/* =========================================
+   2. UTILITIES & EFFECTS
+   ========================================= */
 
+/* Glassmorphism */
 .glass {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
@@ -81,7 +72,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-/* Diagonal light reflection */
+/* Diagonal light reflection for glass */
 .glass::after {
   content: "";
   position: absolute;
@@ -89,7 +80,6 @@ body {
   border-radius: inherit;
   pointer-events: none;
   padding: 1px;
-
   background: linear-gradient(
     10deg,
     transparent 30%,
@@ -106,9 +96,89 @@ body {
   -webkit-mask-composite: xor;
 }
 
-/*=== EFFECTS END ===*/
+/* Background Noise */
+.bg-noise {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -50;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
 
-/* NAVIGATION BAR */
+/* Background Vignette */
+.bg-vignette {
+  background: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #222121 70%);
+  position: absolute;
+  inset: 0;
+  z-index: -49;
+}
+
+/* The fixed overlay container */
+#kinetic-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--trans-bg);
+  z-index: 99999; /* Must be above everything */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  pointer-events: none; /* Let clicks pass through when hidden */
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* When active, block interactions */
+#kinetic-transition.is-active {
+  pointer-events: all;
+  visibility: visible;
+}
+
+/* Grid layout for the kinetic typography */
+.kinetic-grid {
+  display: grid;
+  width: 100vmax;
+  height: 100vmax;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+/* Individual text lines */
+.trans-line {
+  white-space: nowrap;
+  font-family: var(--trans-font);
+  font-weight: bold;
+  font-size: clamp(5rem, 15vh, 12rem);
+  line-height: 0.8;
+  color: var(--trans-text);
+  text-transform: uppercase;
+  opacity: 0.1; /* Starting opacity */
+  user-select: none;
+  will-change: transform;
+}
+
+.trans-line.odd {
+  transform: translateX(-10%);
+}
+
+.trans-line.even {
+  transform: translateX(10%);
+}
+
+/* =========================================
+   3. NAVIGATION BAR
+   ========================================= */
+
 .navbar {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -122,27 +192,32 @@ body {
   will-change: transform;
 }
 
-/* LOGO */
+/* Logo */
 .logo {
-  height: 4.5rem;
-  width: auto; /* Maintains aspect ratio with height fix */
-  font-size: 1.4rem;
-  display: block;
+  height: clamp(3rem, 8vh, 6rem);
+  width: auto;
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  display: flex;
+  align-items: center;
   font-weight: bold;
   color: white;
   cursor: pointer;
   mix-blend-mode: difference;
 }
 
-/* NAV LINKS */
+/* Nav Links */
 .nav-links {
   position: fixed;
   left: 50%;
   transform: translate(-50%);
   display: flex;
   gap: 4rem;
-  padding: 0.8rem 1rem;
-  border-radius: 12px;
+  pointer-events: auto;
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  max-width: 90vw;
+  justify-content: center;
 }
 
 .nav-links a {
@@ -153,7 +228,7 @@ body {
   position: relative;
 }
 
-/* HOVER UNDERLINE */
+/* Hover Underline */
 .nav-links a::after {
   content: "";
   position: absolute;
@@ -169,7 +244,59 @@ body {
   width: 100%;
 }
 
-/* ===== EASTER EGG MODAL ===== */
+@media (max-width: 767px) {
+  .navbar {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .logo {
+    justify-self: center;
+  }
+
+  .nav-links {
+    position: relative;
+    left: auto;
+    transform: none;
+    justify-content: center;
+    width: 100%;
+    margin-top: 0.4rem;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 0.5rem 0.6rem;
+  }
+
+  .logo {
+    justify-self: center;
+  }
+
+  .nav-links {
+    position: relative;
+    left: auto;
+    transform: none;
+    justify-content: center;
+    width: 100%;
+    gap: 0.8rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* =========================================
+   4. EASTER EGG MODAL
+   ========================================= */
+
 .easter-egg-modal {
   position: fixed;
   inset: 0; /* Full screen */
@@ -191,7 +318,7 @@ body {
   pointer-events: none;
 }
 
-/* The actual window containing the game */
+/* Game Window */
 .game-window {
   position: relative;
   width: 90%;
@@ -251,8 +378,8 @@ body {
 }
 
 /* =========================================
-           GPU OPTIMIZED HERO STYLES
-           ========================================= */
+   5. HERO SECTION
+   ========================================= */
 
 .desktop-hero-section {
   width: 100vw;
@@ -262,7 +389,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  /* z-index: 10; */
+  z-index: 10;
   perspective: 2000px;
   /* contain: layout paint; */
 }
@@ -271,7 +398,11 @@ body {
   font-family: var(--font-scondary);
   font-size: 3rem;
   font-weight: 100;
-  background: linear-gradient(to bottom, rgb(10, 10, 10,1), rgb(142, 154, 170,1));
+  background: linear-gradient(
+    to bottom,
+    rgb(10, 10, 10, 1),
+    rgb(142, 154, 170, 1)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: 2.5rem;
@@ -283,36 +414,27 @@ body {
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
-/* 1. The Canvas Wrapper (Structure Only) */
+/* Canvas Wrapper */
 .desktop-canvas {
   position: relative;
   width: 90%;
   max-width: 1300px;
   height: 65vh;
   min-height: 500px;
-
-  /* Layout */
   display: flex;
   align-items: center;
   justify-content: center;
-
-  /* GPU Layer Promotion */
   transform: translateZ(0);
   will-change: transform;
-
-  /* Crucial: Allow images to pop OUT of the box */
   isolation: isolate;
   overflow: visible;
 }
 
-/* 2. The Glass Background Layer (Clipped) 
-           Separated so we can clip the light but let images overflow
-        */
+/* Glass Background Layer */
 .canvas-glass-bg {
   position: absolute;
   inset: 0;
-  z-index: 0; 
-  /* Visuals */
+  z-index: 0;
   background: linear-gradient(
     to bottom,
     rgba(15, 15, 16, 0.85),
@@ -325,11 +447,11 @@ body {
   box-shadow:
     0 30px 40px -10px rgba(0, 0, 0, 0.8),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
-  overflow: hidden; 
+  overflow: hidden;
   pointer-events: none;
 }
 
-/* 3. The "Breath" Background Glow (Behind Everything) */
+/* "Breath" Background Glow */
 .desktop-canvas::before {
   content: "";
   position: absolute;
@@ -339,8 +461,8 @@ body {
     circle at 50% 120%,
     transparent 75%,
     rgba(var(--active-glow), 0.8) 80%,
-    rgb(255, 255, 255,0.9) 84%,
-    rgb(255, 255, 255,0.9) 86%,
+    rgb(255, 255, 255, 0.9) 84%,
+    rgb(255, 255, 255, 0.9) 86%,
     rgba(var(--active-glow), 0.8) 90%,
     transparent 95%
   );
@@ -349,7 +471,7 @@ body {
   pointer-events: none;
 }
 
-/* 4. The "Flashlight" (Moving Div inside Glass Layer) */
+/* "Flashlight" Effect */
 .canvas-cursor-light {
   position: absolute;
   top: 0;
@@ -357,19 +479,15 @@ body {
   width: 600px;
   height: 600px;
   border-radius: 50%;
-
   background: radial-gradient(
     circle,
     rgba(var(--active-glow), 0.15) 0%,
     transparent 70%
   );
-
   margin-top: -300px;
   margin-left: -300px;
-
   pointer-events: none;
   opacity: 0;
-
   transform: translate3d(var(--tx, 50vw), var(--ty, 50vh), 0);
   transition: opacity 0.5s ease;
   will-change: transform;
@@ -379,7 +497,7 @@ body {
   opacity: 1;
 }
 
-/* 5. Grid Layout (Sits on top of glass) */
+/* Grid Layout */
 .hero-grid {
   display: flex;
   width: 100%;
@@ -391,7 +509,7 @@ body {
   transform-style: preserve-3d;
 }
 
-/* 6. Hero Item */
+/* Hero Item */
 .hero-item {
   position: relative;
   flex: 1;
@@ -411,7 +529,7 @@ body {
   z-index: 50; /* Ensure it pops ABOVE everything else */
 }
 
-/* 7. Character */
+/* Character/Letter */
 .hero-char {
   font-family: var(--font-primary);
   font-size: 8rem;
@@ -434,39 +552,44 @@ body {
   filter: blur(0);
   transform: scale(1.1) translateZ(40px);
   color: white;
-  text-shadow: 0 0 40px rgba(var(--theme), 0.6);
+  text-shadow:
+    0 0 20px rgba(var(--theme), 0.8),
+    0 0 40px rgba(var(--theme), 0.4);
+  animation: letterGlow 2s ease-in-out infinite alternate;
 }
 
-/* 8. Image Backdrop (FIXED ASPECT RATIO CARD) */
+@keyframes letterGlow {
+  from {
+    text-shadow:
+      0 0 20px rgba(var(--theme), 0.8),
+      0 0 40px rgba(var(--theme), 0.4);
+  }
+  to {
+    text-shadow:
+      0 0 30px rgba(var(--theme), 1),
+      0 0 60px rgba(var(--theme), 0.6),
+      0 0 100px rgba(var(--theme), 0.3);
+  }
+}
+
+/* Image Backdrop (Fixed Aspect Ratio Card) */
 .hero-img-backdrop {
   position: absolute;
-
-  /* Center the card relative to the letter slot */
   left: 50%;
   top: 50%;
-
-  /* Fixed dimensions to ensure a Perfect Portrait Ratio 
-               This ensures object-fit: cover never cuts off the shoulders/body 
-            */
-  width: 300px;
-  height: 550px;
-
+  width: min(300px, 30vw);
+  aspect-ratio: 300/550;
+  height: auto;
   border-radius: 16px;
   overflow: hidden;
-
   opacity: 0;
   z-index: 5;
   pointer-events: none;
-
-  /* DEFAULT STATE: Scaled down (0.55) to fit inside the narrow column.
-               This prevents layout thrashing while keeping the aspect ratio correct.
-            */
   transform: translate(-50%, -50%) scale(0.55) translateZ(0);
-
   transition:
     opacity 0.3s ease,
-    transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-
+    transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.4s ease;
   will-change: transform, opacity;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
@@ -474,11 +597,8 @@ body {
 .hero-img-backdrop img {
   width: 100%;
   height: 100%;
-
-  /* Cover creates a nice fill, but Top alignment protects the head */
   object-fit: cover;
   object-position: top center;
-
   filter: grayscale(100%) contrast(1.1);
   transform: scale(1.1);
   transition:
@@ -489,13 +609,8 @@ body {
 
 .hero-item:hover .hero-img-backdrop {
   opacity: 1;
-  /* HOVER STATE: Scale UP to 1.1x real size.
-               This makes it ~330px wide x 605px tall on screen.
-               Complete body visibility guaranteed.
-            */
   transform: translate(-50%, -50%) scale(0.8) translateZ(100px)
     rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-
   box-shadow:
     0 40px 80px -20px rgba(0, 0, 0, 0.8),
     0 0 0 1px rgba(var(--theme), 0.5);
@@ -506,18 +621,15 @@ body {
   transform: scale(1);
 }
 
-/* 9. Scientist Card */
+/* Scientist Card */
 .scientist-card {
   position: absolute;
   bottom: 12%;
   left: 50%;
-  width: 260px;
-
-  /* Start state */
+  width: min(260px, 70vw);
   transform: translateX(-50%) translateY(20px) scale(0.95);
   opacity: 0;
   transform-origin: bottom center;
-
   background: rgba(10, 10, 10, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-left: 3px solid var(--theme);
@@ -527,21 +639,20 @@ body {
   z-index: 100;
   transition:
     opacity 0.3s ease,
-    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.3s ease;
   will-change: opacity, transform;
 }
 
 .hero-item:hover .scientist-card {
   opacity: 1;
-  /* 3D Reaction: Floats in front of image (Z: 120px) and rotates with cursor */
   transform: translateX(-50%) translateY(0) scale(1) translateZ(110px)
     rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-
   pointer-events: auto;
   /* transition-delay: 0.1s; */
 }
 
-/* Helpers */
+/* Card Helpers */
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -574,128 +685,117 @@ body {
     opacity: 0.7;
   }
 }
-:root {
-  --active-glow: 255, 255, 255;
-}
-@media (prefers-reduced-motion: reduce) {
-  * {
-    transition-duration: 0.01s !important;
-    animation-duration: 0.01s !important;
-  }
-}
 
-/*====ABOUT SECTION====*/
 /* =========================================
-   ABOUT SECTION REDESIGN
+   6. ABOUT SECTION
    ========================================= */
 
-/* Main Container */
 .about_interactive {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem; 
-    align-items: center; 
-    z-index: 10;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  z-index: 10;
 }
 
 .text-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 2rem;
-    text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  text-align: left;
 }
 
 .section-title {
-    font-family: var(--font-primary, serif);
-    font-size: clamp(3rem, 5vw, 4.5rem);
-    line-height: 1;
-    margin-bottom: 2rem;
-    color: orangered;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
+  font-family: var(--font-primary, serif);
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  line-height: 1;
+  margin-bottom: 2rem;
+  color: orangered;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
 .text-content p {
-    font-family: var(--font-scondary, sans-serif);
-    font-size: 1.5rem;
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 300;
-    margin: 0;
+  font-family: var(--font-scondary, sans-serif);
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 300;
+  margin: 0;
 }
 
 .frame {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-    perspective: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  perspective: 1000px;
 }
 
 .frame-bottom {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 1rem;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
 }
 
 .photo {
-    width: 240px;
-    height: 320px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 12px;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                box-shadow 0.4s ease, 
-                border-color 0.4s ease;
+  width: 240px;
+  height: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  transition:
+    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
 }
 
 .photo:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    border-color: rgba(255, 255, 255, 0.3);
-    z-index: 5;
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.3);
+  z-index: 5;
 }
 
 .photo img {
-    width: 100%;
-    height: 260px;
-    object-fit: contain;
-    object-position: top;
-    border-radius: 12px;
-    margin-bottom: 0.5rem;
-    filter: grayscale(30%);
-    transition: filter 0.4s ease;
+  width: 100%;
+  height: 260px;
+  object-fit: contain;
+  object-position: top;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  filter: grayscale(30%);
+  transition: filter 0.4s ease;
 }
 
 .photo:hover img {
-    filter: grayscale(0%);
+  filter: grayscale(0%);
 }
 
 .photo h3 {
-    font-family: var(--font-scondary, sans-serif);
-    font-size: 1rem;
-    font-weight: 500;
-    color: #fff;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-align: center;
+  font-family: var(--font-scondary, sans-serif);
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
 }
 
-
 /* =========================================
-   NEW TEAM SECTION (Glass Glow Style)
+   7. TEAM SECTION (Glass Glow Style)
    ========================================= */
 
 .team-section-glass {
@@ -704,7 +804,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: transparent; /* Allows global noise/vignette to show */
+  background: transparent;
   position: relative;
   z-index: 1;
 }
@@ -722,26 +822,23 @@ body {
   letter-spacing: 1px;
 }
 
-/* Grid Layout */
 .glass-team-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   width: 100%;
   max-width: 1400px;
   padding-bottom: 4rem;
 }
 
-/* Card Wrapper */
-.glass-card-wrapper {
+/* Center last card if it's the only one in its row */
+.glass-team-grid .glass-card-wrapper:last-child:nth-child(odd) {
+  grid-column: 1 / span 2;
+  justify-self: center;
   width: 100%;
-  max-width: 480px;
-  height: 220px; /* Fixed height for consistency */
-  position: relative;
+  max-width: calc(50% - 1rem);
 }
 
-/* The Glass Card */
 .glass-card {
   position: relative;
   width: 100%;
@@ -750,14 +847,10 @@ body {
   flex-direction: row;
   border-radius: 16px;
   overflow: hidden;
-
-  /* Glass Effect */
   background-color: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-
-  /* Transitions */
   transform: translateY(0);
   transition:
     transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
@@ -771,7 +864,7 @@ body {
   border-color: rgba(255, 255, 255, 0.15);
 }
 
-/* Glow Blobs */
+/* Glow Effects */
 .glow-blob {
   position: absolute;
   bottom: -20px;
@@ -794,7 +887,6 @@ body {
   transform: translateX(-50%) scale(1.1);
 }
 
-/* Glow Colors */
 .glow-blue {
   background: #3b82f6;
 }
@@ -808,7 +900,6 @@ body {
   background: #ec4899;
 }
 
-/* Text Color Matches */
 .text-blue {
   color: rgba(59, 130, 246, 0.9);
 }
@@ -822,7 +913,7 @@ body {
   color: rgba(236, 72, 153, 0.9);
 }
 
-/* Left Side: Image */
+/* Card Content */
 .card-image-box {
   width: 35%;
   position: relative;
@@ -836,6 +927,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0.8;
   filter: grayscale(100%) opacity(0.8);
   transition: all 0.5s ease;
 }
@@ -844,7 +936,6 @@ body {
   filter: grayscale(0%) opacity(1);
 }
 
-/* Inner overlay for blending */
 .card-img-overlay {
   position: absolute;
   inset: 0;
@@ -853,7 +944,6 @@ body {
   pointer-events: none;
 }
 
-/* Thin border line between image and text */
 .card-vertical-line {
   position: absolute;
   top: 0;
@@ -863,7 +953,6 @@ body {
   background: rgba(255, 255, 255, 0.05);
 }
 
-/* Right Side: Info */
 .card-info-box {
   flex: 1;
   padding: 1.5rem;
@@ -918,47 +1007,15 @@ body {
   color: white;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .glass-card-wrapper {
-    height: auto;
-  }
-  .glass-card {
-    flex-direction: column;
-  }
-  .card-image-box {
-    width: 100%;
-    height: 200px;
-  }
-  .card-vertical-line {
-    display: none;
-  }
-  .card-info-box {
-    padding: 1.5rem;
-  }
-}
-
-/*====TIMELINE STYLE====*/
-
-:root {
-  --bg-color: #050505;
-  --line-color: #00f2ff;
-  --line-glow: #00f2ff;
-  --text-color: #ffffff;
-  --node-size: 520px;
-}
-
-::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-}
+/* =========================================
+   8. TIMELINE SECTION
+   ========================================= */
 
 .viewport-wrapper {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   position: relative;
-  /* Ensure timeline has strict boundaries for browser layout optimization */
   contain: strict;
 }
 
@@ -992,41 +1049,40 @@ body {
 
 .event-node {
   position: absolute;
-  width: var(--node-size);
+  width: clamp(500px, 45vw, 700px);
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  align-items: center;
+  gap: 1.5rem;
   opacity: 0;
   z-index: 20;
-}
-
-.event-node.top {
-  margin-top: -150px;
-}
-.event-node.bottom {
-  margin-top: 150px;
+  pointer-events: none;
 }
 
 .image-mask {
-  width: 100%;
-  height: 200px;
+  width: 60%; /* Half width */
+  height: auto;
+  aspect-ratio: 4/3;
+  max-height: 25vh; /* Keep sensible limit */
   border-radius: 12px;
   overflow: hidden;
   position: relative;
   background: #1a1a1a;
   border: 1px solid rgba(0, 242, 255, 0.3);
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0; /* Prevent image shrinking */
 }
 
 .event-image {
-  width: 110%;
+  width: 100%;
   height: auto;
   object-fit: cover;
   position: absolute;
   top: -5%;
   left: -5%;
+  scale: 1.1;
   filter: grayscale(80%) contrast(1.2);
   transition: filter 0.5s ease;
 }
@@ -1036,6 +1092,10 @@ body {
 }
 
 .meta-data {
+  max-height: none; /* Remove height limit in row mode */
+  overflow: visible;
+  flex: 1; /* Take up remaining space */
+  text-align: left; /* Align text left */
   padding: 0 0.5rem;
 }
 
@@ -1074,6 +1134,8 @@ p {
   border-radius: 4px;
   z-index: 50;
   overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .progress-bar {
@@ -1083,15 +1145,9 @@ p {
   box-shadow: 0 0 10px var(--line-color);
 }
 
-:root {
-  --footer-bg: #121212;
-  --footer-text: #a0a0a0;
-  --footer-heading: #ffffff;
-  --accent-color: #2053d5;
-  --border-color: #2a2a2a;
-  --spacing-unit: 1.5rem;
-  --max-width: 1200px;
-}
+/* =========================================
+   9. FOOTER SECTION
+   ========================================= */
 
 .site-footer {
   background-color: var(--footer-bg);
@@ -1201,17 +1257,400 @@ address {
   color: #666;
 }
 
+/* =========================================
+   10. MOBILE RESPONSIVE STYLES
+   ========================================= */
+
+/* --- HERO SECTION --- */
+
+/* Tablet and below */
+@media (max-width: 1024px) {
+  .desktop-canvas {
+    width: 95%;
+    height: 70vh;
+    min-height: 400px;
+  }
+  .hero-grid {
+    padding: 0 1.5rem;
+  }
+
+  .hero-header-text {
+    font-size: 2.4rem;
+    letter-spacing: 1.5rem;
+    padding-top: 6rem;
+    margin-bottom: 3rem;
+  }
+
+  .hero-char {
+    font-size: 6rem;
+  }
+  .hero-img-backdrop {
+    width: 250px;
+    height: 450px;
+  }
+  .scientist-card {
+    width: 220px;
+    padding: 1rem;
+  }
+  .sc-name {
+    font-size: 1.1rem;
+  }
+  .sc-achievements {
+    font-size: 0.75rem;
+  }
+}
+
+/* Mobile landscape and below */
 @media (max-width: 768px) {
-  .footer-container {
+  .desktop-hero-section {
+    height: auto;
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+  .desktop-canvas {
+    width: 95%;
+    height: auto;
+    min-height: unset;
+    flex-direction: column;
+    padding: 2rem 0;
+  }
+  /* Stack letters vertically on mobile with better spacing */
+  .hero-grid {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    gap: 4rem; /* Increased gap for sequential reveal */
+    height: auto;
+    touch-action: pan-y;
+  }
+  .hero-header-text {
+    font-size: 2rem;
+    letter-spacing: 0.9rem;
+    padding-top: 5rem;
+    margin-bottom: 2.5rem;
+  }
+  .hero-item {
+    width: 100%;
+    height: auto; /* Allow height to be determined by content */
+    min-height: 250px;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    margin-bottom: 2rem;
+    touch-action: pan-y;
+    pointer-events: none; /* Disable all tap events to prioritize scrolling */
+  }
+  .hero-char {
+    font-size: clamp(4rem, 15vw, 6rem);
+    position: relative;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.2);
+    z-index: 1;
+    pointer-events: none;
+  }
+  /* Image backdrop on mobile - centered under letter */
+  .hero-img-backdrop {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: scale(0.8) translateY(20px);
+    width: min(280px, 80vw);
+    aspect-ratio: 300/400;
+    margin: 0 auto;
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+  /* Scientist card on mobile - centered under image */
+  .scientist-card {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: min(260px, 85vw);
+    margin: -20px auto 0; /* Slight overlap with image */
+    transform: translateY(20px);
+    opacity: 0;
+    z-index: 3;
+    pointer-events: none; /* Disable to allow touch-through scrolling */
+  }
+  /* Hide elements that rely on hover/tap on mobile */
+  .hero-item:hover .hero-img-backdrop,
+  .hero-item:active .hero-img-backdrop,
+  .hero-item:hover .scientist-card,
+  .hero-item:active .scientist-card {
+    /* These are handled by ScrollTrigger on mobile */
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .card-header {
+    font-size: 0.65rem;
+  }
+  .sc-name {
+    font-size: 1rem;
+    margin-bottom: 0.375rem;
+  }
+  .sc-achievements {
+    font-size: 0.7rem;
+  }
+  .sc-achievements li {
+    margin-bottom: 2px;
+  }
+  /* Disable cursor light on mobile */
+  .canvas-cursor-light {
+    display: none;
+  }
+  /* Simplify glass background */
+  .canvas-glass-bg {
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .desktop-hero-section {
+    padding: 1rem 0;
+  }
+  .desktop-canvas {
+    width: 100%;
+    padding: 1rem 0;
+    border-radius: 0;
+  }
+  .canvas-glass-bg {
+    border-radius: 0;
+  }
+  .hero-grid {
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+  .hero-header-text {
+    font-size: 1.6rem;
+    letter-spacing: 0.5rem;
+    padding-top: 4rem;
+    margin-bottom: 2rem;
+  }
+  .hero-item {
+    height: 100px;
+  }
+  .hero-char {
+    font-size: 3rem;
+  }
+  .hero-img-backdrop {
+    width: 160px;
+    height: 280px;
+    transform: translate(-50%, -50%) scale(0.6) translateZ(0);
+  }
+  .hero-item:hover .hero-img-backdrop,
+  .hero-item:active .hero-img-backdrop {
+    transform: translate(-50%, -50%) scale(0.8) translateZ(0);
+  }
+  .scientist-card {
+    width: 180px;
+    padding: 0.75rem;
+    bottom: 5%;
+  }
+  .card-header {
+    font-size: 0.6rem;
+    margin-bottom: 0.375rem;
+  }
+  .sc-name {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+  }
+  .sc-achievements {
+    font-size: 0.65rem;
+    line-height: 1.3;
+  }
+  .sc-achievements li {
+    margin-bottom: 1px;
+  }
+  .sc-achievements li::before {
+    margin-right: 6px;
+  }
+  /* Mobile Layout Fixes */
+  .desktop-hero-section {
+    padding-top: 130px; /* Prevent overlap with navbar */
+    height: auto;
+    min-height: 100vh;
+  }
+  .navbar {
+    padding: 0.8rem 5%; /* Reduce padding */
+    margin-top: 2rem;
+  }
+  .logo {
+    height: 2.5rem; /* Adapt size */
+    font-size: 1rem;
+  }
+}
+
+/* --- ABOUT SECTION --- */
+
+@media (max-width: 768px) {
+  .about_interactive {
     grid-template-columns: 1fr;
+    padding: 3rem 1.5rem;
+    gap: 2rem;
+    height: auto;
+    min-height: auto;
+    text-align: center;
+  }
+  .text-content {
+    padding: 0;
+    align-items: center;
+  }
+  .text-content p {
+    text-align: center;
+    font-size: 1.1rem;
+  }
+  /* Adjust Photo Card sizing for mobile */
+  .photo {
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+    padding: 10px;
+  }
+  .photo img {
+    height: auto;
+    width: 100%;
+    aspect-ratio: 240/260; /* Maintains original image aspect ratio */
+  }
+  /* Specific sizing for the top single photo */
+  .frame > .photo {
+    width: clamp(200px, 60vw, 260px);
+  }
+  /* Bottom row container */
+  .frame-bottom {
+    width: 100%;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  /* Bottom photos: Ensure they fit side-by-side */
+  .frame-bottom .photo {
+    width: 48%; /* fit two in a row */
+    max-width: 200px; /* prevent becoming too large */
+    min-width: 130px; /* prevent becoming too small */
+  }
+  .photo h3 {
+    font-size: 0.9rem; /* Slightly smaller text for cards */
+  }
+}
+
+@media (max-width: 360px) {
+  /* On extremely small screens, stack the bottom photos */
+  .frame-bottom {
+    flex-wrap: wrap;
+  }
+  .frame-bottom .photo {
+    width: 100%;
+    max-width: 240px;
+  }
+}
+
+/* --- TEAM SECTION --- */
+
+@media (max-width: 768px) {
+  .glass-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 0 0.5rem; /* Add slight padding for very small screens */
+  }
+  .glass-team-grid .glass-card-wrapper:last-child:nth-child(odd) {
+    max-width: calc(50% - 0.5rem);
+  }
+  .glass-card-wrapper {
+    height: auto;
+    min-height: auto; /* Remove fixed min-height to allow natural flow */
+  }
+  .glass-card {
+    flex-direction: column;
+    height: 100%;
+  }
+  .card-image-box {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/5;
+    min-height: 180px;
+  }
+  .card-image-box img {
+    object-position: top center;
+    filter: none;
+  }
+  .card-vertical-line {
+    display: none;
+  }
+  .card-info-box {
+    padding: 1rem;
+    flex: 1;
+    justify-content: flex-start;
+  }
+  .card-name {
+    font-size: 0.85rem;
+  }
+  .card-role {
+    font-size: 0.65rem;
+  }
+  .card-desc {
+    -webkit-line-clamp: 3;
+    font-size: 0.8rem;
+  }
+  .card-socials {
+    margin-top: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .glass-team-grid {
+    gap: 0.75rem;
+  }
+  .glass-team-grid .glass-card-wrapper:last-child:nth-child(odd) {
+    max-width: calc(50% - 0.375rem);
+  }
+  .card-info-box {
+    padding: 0.75rem;
+  }
+  .card-name {
+    font-size: 0.85rem;
+  }
+}
+
+/* --- TIMELINE SECTION --- */
+
+@media (max-width: 768px) {
+  .event-node {
+    width: 280px; /* Fixed width for small screens */
+    flex-direction: column; /* Stack on mobile */
+    gap: 0.8rem;
+  }
+  .image-mask {
+    width: 100%;
+    max-height: 20vh;
+  }
+  .meta-data {
+    text-align: center;
+    max-height: 15vh;
+    overflow: hidden;
+  }
+}
+
+/* --- FOOTER SECTION --- */
+
+@media (max-width: 768px) {
+  #logo {
+    display: none;
+  }
+  .footer-container {
+    grid-template-columns: 1fr; /* Stack everything */
     gap: 2.5rem;
   }
-
   .footer-col p {
-    max-width: 100%;
+    max-width: 100%; /* Full width text on mobile */
   }
-
   .map-wrapper {
-    min-height: 180px;
+    min-height: 250px; /* Taller map on mobile for touch interaction */
+  }
+  .footer-map {
+    display: none;
   }
 }
