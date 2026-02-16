@@ -33,49 +33,50 @@ function initPerspective() {
     cacheDOM();
 
     // =========================================================
-    // First-load detection for perspective animation
+    // Robust Detection (Mirroring loading_screen.js logic)
     // =========================================================
-    // We check for the loading screen wrapper. If it's missing, loading was skipped 
-    // (return visit/internal nav), so we must skip the perspective animation too.
-    const isFirstLoad = document.querySelector('.loading-screen-wrapper') !== null;
+    let shouldPlayPerspective = true;
 
-    if (!isFirstLoad) {
-        // --- SKIP ANIMATION & RENDER STATIC ---
-        
-        // 1. Remove the perspective intro (.college) completely
+    try {
+        const navEntry = performance.getEntriesByType("navigation")[0];
+        const isReload = navEntry ? navEntry.type === 'reload' : performance.navigation.type === 1;
+        const siteAlreadyLoaded = sessionStorage.getItem('siteLoaded');
+
+        // Logic: Skip ONLY if the site was loaded before AND this is NOT a refresh
+        if (siteAlreadyLoaded && !isReload) {
+            shouldPlayPerspective = false;
+        }
+    } catch (e) {
+        // Fallback: If session storage fails, play it to be safe
+        shouldPlayPerspective = true;
+    }
+
+    if (!shouldPlayPerspective) {
+        // --- INSTANT CLEANUP ---
         if (DOM.hero) {
             DOM.hero.remove();
             sessionStorage.setItem('heroRemoved', 'true');
         }
         
-        // 2. Hide the tap hint since there is no interaction
         if (DOM.tapHint) {
             DOM.tapHint.style.display = 'none';
         }
 
-        // 3. CRITICAL: Ensure body scroll is enabled and Lenis is started
         document.body.style.overflow = '';
         if (window.lenis) {
             window.lenis.start();
             window.lenis.resize();
         }
         
-        // 4. CRITICAL: Signal that the hero transition is "done"
-        // This ensures other scripts (like hero text animations) start immediately.
         window.dispatchEvent(new CustomEvent('heroAway'));
-        
-        // Stop execution of animation logic
-        return;
+        return; // Stop the script here
     }
     // =========================================================
 
-    checkInitialLoadingState();
+    // If we passed the check, initialize the 3D parallax
     setupLayers();
     setupEventListeners();
-    
-    // Start animation loop
     gsap.ticker.add(updateParallax);
-    
     state.ready = true;
 }
 
