@@ -260,7 +260,7 @@ header.hero {
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: clamp(2rem, 5vw, 4rem);
+  margin: clamp(2rem, 4vw, 4rem);
   padding: 0 1rem;
 }
 .about-body {
@@ -478,7 +478,7 @@ header.hero {
     justify-content: flex-start; 
     -webkit-overflow-scrolling: touch;
     gap: 1.5rem;
-    /*display: none;*/
+    /* display: none; */
   }
   
   nav ul::-webkit-scrollbar {
@@ -563,6 +563,4 @@ header.hero {
     opacity: 0; 
     font-size: 0;
   }
-
 }
-

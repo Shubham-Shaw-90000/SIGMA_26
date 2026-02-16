@@ -21,7 +21,9 @@
   --line-color: #00f2ff;
   --line-glow: #00f2ff;
   --text-color: #ffffff;
-  --node-size: 520px;
+  
+  /* Before: --node-size: 520px; */
+  --node-size: clamp(320px, 40vw, 520px);
 
   /* Footer Variables */
   --footer-bg: #121212;
@@ -29,7 +31,10 @@
   --footer-heading: #ffffff;
   --accent-color: #2053d5;
   --border-color: #2a2a2a;
-  --spacing-unit: 1.5rem;
+  
+  /* Before: --spacing-unit: 1.5rem; */
+  --spacing-unit: clamp(1rem, 2vw, 2rem);
+  
   --max-width: 1200px;
 }
 
@@ -40,15 +45,10 @@ body {
   background-color: #0a0908;
   font-family: var(--font-scondary);
   overflow-x: hidden;
-  /* overscroll-behavior: none; */
+  overscroll-behavior: none;
   scrollbar-gutter: stable;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -125,7 +125,7 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: var(--trans-bg);
-  z-index: 99999; /* Must be above everything */
+  z-index: 9999; /* Must be above everything */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -162,9 +162,10 @@ body {
   line-height: 0.8;
   color: var(--trans-text);
   text-transform: uppercase;
-  opacity: 0.1; /* Starting opacity */
+  opacity: 0; 
+  visibility: hidden;
   user-select: none;
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
 .trans-line.odd {
@@ -185,7 +186,8 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 0.8rem 1rem;
+  /* Before: padding: 0.8rem 1rem; */
+  padding: clamp(0.5rem, 1vh, 1rem) clamp(0.5rem, 2vw, 1.5rem);
   align-items: center;
   background: transparent;
   z-index: 100;
@@ -196,6 +198,7 @@ body {
 .logo {
   height: clamp(3rem, 8vh, 6rem);
   width: auto;
+  /* Before: font-size: clamp(1rem, 1.5vw, 1.4rem); */
   font-size: clamp(1rem, 1.5vw, 1.4rem);
   display: flex;
   align-items: center;
@@ -211,9 +214,11 @@ body {
   left: 50%;
   transform: translate(-50%);
   display: flex;
-  gap: 4rem;
+  /* Before: gap: 4rem; */
+  gap: clamp(1.5rem, 4vw, 4rem);
   pointer-events: auto;
-  padding: 0.8rem 1.5rem;
+  /* Before: padding: 0.8rem 1.5rem; */
+  padding: 0.8rem clamp(0.8rem, 2vw, 1.5rem);
   border-radius: 0.5rem;
   white-space: nowrap;
   max-width: 90vw;
@@ -223,7 +228,8 @@ body {
 .nav-links a {
   text-decoration: none;
   color: white;
-  font-size: 0.6rem;
+  /* Before: font-size: 0.6rem; */
+  font-size: clamp(0.7rem, 0.9vw, 1rem); /* Prevents text from being too small on mobile */
   letter-spacing: 1px;
   position: relative;
 }
@@ -243,6 +249,11 @@ body {
 .nav-links a:hover::after {
   width: 100%;
 }
+
+.highlight-link{
+
+}
+
 
 @media (max-width: 767px) {
   .navbar {
@@ -288,6 +299,7 @@ body {
   }
 
   .nav-links a {
+    /* Before: font-size: 0.75rem; */
     font-size: 0.75rem;
     letter-spacing: 0.5px;
   }
@@ -368,7 +380,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  /* Changed transition: all to specific properties */
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
 }
 
 .close-game-btn:hover {
@@ -391,12 +404,12 @@ body {
   position: relative;
   z-index: 10;
   perspective: 2000px;
-  /* contain: layout paint; */
+  contain: layout;
 }
 
 .hero-header-text {
   font-family: var(--font-scondary);
-  font-size: 3rem;
+  font-size: clamp(2rem, 5vw, 4.5rem);
   font-weight: 100;
   background: linear-gradient(
     to bottom,
@@ -405,9 +418,9 @@ body {
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 2.5rem;
-  padding-top: 7.5rem;
-  margin-bottom: 4rem; /* Moves canvas down */
+  letter-spacing: clamp(0.5rem, 3vw, 2.5rem);
+  padding-top: clamp(3rem, 10vh, 8rem);
+  margin-bottom: clamp(2rem, 6vh, 5rem);
   text-transform: uppercase;
   z-index: 60;
   text-align: center;
@@ -420,7 +433,8 @@ body {
   width: 90%;
   max-width: 1300px;
   height: 65vh;
-  min-height: 500px;
+  /* Before: min-height: 500px; */
+  min-height: clamp(400px, 50vh, 600px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -502,7 +516,8 @@ body {
   display: flex;
   width: 100%;
   height: 100%;
-  padding: 0 3rem;
+  /* Before: padding: 0 3rem; */
+  padding: 0 clamp(1rem, 4vw, 3rem);
   align-items: center;
   justify-content: space-between;
   z-index: 2; /* Higher than glass background */
@@ -532,10 +547,12 @@ body {
 /* Character/Letter */
 .hero-char {
   font-family: var(--font-primary);
-  font-size: 8rem;
+  /* Before: font-size: 8rem; */
+  font-size: clamp(4rem, 12vw, 10rem);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.915);
-  transition: all 0.4s ease;
+  /* Changed transition: all to specific properties */
+  transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease, color 0.4s ease, text-shadow 0.4s ease;
   will-change: transform, opacity, filter;
   pointer-events: none;
   z-index: 10;
@@ -577,7 +594,8 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: min(300px, 30vw);
+  /* Before: width: min(300px, 30vw); */
+  width: clamp(200px, 30vw, 350px);
   aspect-ratio: 300/550;
   height: auto;
   border-radius: 16px;
@@ -626,7 +644,8 @@ body {
   position: absolute;
   bottom: 12%;
   left: 50%;
-  width: min(260px, 70vw);
+  /* Before: width: min(260px, 70vw); */
+  width: clamp(220px, 70vw, 300px);
   transform: translateX(-50%) translateY(20px) scale(0.95);
   opacity: 0;
   transform-origin: bottom center;
@@ -664,7 +683,8 @@ body {
 .sc-name {
   margin: 0 0 0.5rem;
   font-family: var(--font-primary);
-  font-size: 1.25rem;
+  /* Before: font-size: 1.25rem; */
+  font-size: clamp(1.1rem, 1.5vw, 1.6rem);
   color: white;
 }
 .sc-achievements {
@@ -696,10 +716,12 @@ body {
   min-height: 100vh;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 4rem;
+  /* Before: padding: 4rem; */
+  padding: clamp(2rem, 5vw, 5rem);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  /* Before: gap: 3rem; */
+  gap: clamp(1.5rem, 4vw, 4rem);
   align-items: center;
   z-index: 10;
 }
@@ -714,7 +736,8 @@ body {
 
 .section-title {
   font-family: var(--font-primary, serif);
-  font-size: clamp(3rem, 5vw, 4.5rem);
+  /* Before: font-size: clamp(3rem, 5vw, 4.5rem); */
+  font-size: clamp(3rem, 6vw, 5rem); /* Slightly tuned */
   line-height: 1;
   margin-bottom: 2rem;
   color: orangered;
@@ -724,7 +747,8 @@ body {
 
 .text-content p {
   font-family: var(--font-scondary, sans-serif);
-  font-size: 1.5rem;
+  /* Before: font-size: 1.5rem; */
+  font-size: clamp(1.1rem, 1.4vw, 1.6rem);
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.8);
   font-weight: 300;
@@ -749,8 +773,11 @@ body {
 }
 
 .photo {
-  width: 240px;
-  height: 320px;
+  /* Before: width: 240px; */
+  width: clamp(200px, 18vw, 260px);
+  /* Before: height: 320px; */
+  height: auto;
+  aspect-ratio: 3/4;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -771,7 +798,9 @@ body {
 
 .photo img {
   width: 100%;
-  height: 260px;
+  /* Before: height: 260px; */
+  height: auto;
+  aspect-ratio: 240/260;
   object-fit: contain;
   object-position: top;
   border-radius: 12px;
@@ -800,7 +829,8 @@ body {
 
 .team-section-glass {
   min-height: 100vh;
-  padding: 100px 5%;
+  /* Before: padding: 100px 5%; */
+  padding: clamp(4rem, 10vh, 8rem) 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -825,9 +855,10 @@ body {
 .glass-team-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
+  /* Before: gap: 2rem; */
+  gap: clamp(1rem, 2vw, 2.5rem);
   width: 100%;
-  max-width: 1400px;
+  max-width: 1200px;
   padding-bottom: 4rem;
 }
 
@@ -842,7 +873,9 @@ body {
 .glass-card {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: auto;           
+  aspect-ratio: 21 / 9;         
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   border-radius: 16px;
@@ -929,7 +962,8 @@ body {
   object-fit: cover;
   opacity: 0.8;
   filter: grayscale(100%) opacity(0.8);
-  transition: all 0.5s ease;
+  /* Changed transition: all to specific properties */
+  transition: filter 0.5s ease;
 }
 
 .glass-card:hover .card-image-box img {
@@ -955,7 +989,8 @@ body {
 
 .card-info-box {
   flex: 1;
-  padding: 1.5rem;
+  /* Before: padding: 1.5rem; */
+  padding: clamp(1rem, 1.5vw, 1.5rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -964,7 +999,8 @@ body {
 }
 
 .card-name {
-  font-size: 1.25rem;
+  /* Before: font-size: 1.25rem; */
+  font-size: clamp(1rem, 1.2vw, 1.4rem);
   font-weight: 600;
   color: white;
   margin: 0;
@@ -1027,6 +1063,10 @@ body {
   will-change: transform;
 }
 
+#scroll-height-spacer {
+  display: none !important;
+}
+
 .svg-layer {
   position: absolute;
   top: 0;
@@ -1049,23 +1089,25 @@ body {
 
 .event-node {
   position: absolute;
-  width: clamp(500px, 45vw, 700px);
+  /* Before: width: clamp(300px, 40vw, 600px); */
+  width: clamp(300px, 40vw, 600px);
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1.5rem;
+  /* Before: gap: 1.5rem; */
+  gap: clamp(1rem, 2vw, 2rem);
   opacity: 0;
   z-index: 20;
   pointer-events: none;
 }
 
 .image-mask {
-  width: 60%; /* Half width */
+  width: 50%; /* Half width */
   height: auto;
-  aspect-ratio: 4/3;
-  max-height: 25vh; /* Keep sensible limit */
+  aspect-ratio: 7/5;
+  max-height: 30vh; /* Keep sensible limit */
   border-radius: 12px;
   overflow: hidden;
   position: relative;
@@ -1109,7 +1151,8 @@ body {
 }
 
 h2 {
-  font-size: 2rem;
+  /* Before: font-size: 2rem; */
+  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
   line-height: 1.1;
   margin: 0;
   font-weight: 600;
@@ -1152,25 +1195,25 @@ p {
 .site-footer {
   background-color: var(--footer-bg);
   color: var(--footer-text);
-  padding-top: 2rem;
+  padding-top: 1rem;
   font-size: 0.95rem;
   border-top: 1px solid var(--border-color);
-  contain: content; /* Footer is mostly static */
+  contain: content; 
 }
 
 .footer-container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-unit);
+  padding: 0 clamp(2rem, 6vw, 6rem);
   display: grid;
-  grid-template-columns: 1fr 1fr 1.2fr;
-  gap: 3rem;
-  margin-bottom: 1rem;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1rem, 2vw, 2rem);
+  margin-bottom: 0.5rem;
 }
 
 .footer-heading {
   color: var(--footer-heading);
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 1.2vw, 1.3rem);
   font-weight: 600;
   margin-bottom: 1.25rem;
   text-transform: uppercase;
@@ -1202,8 +1245,26 @@ address {
 
 .footer-social-links {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
+}
+
+.footer-social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;              
+  height: 48px;             
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  color: #888;              
+  font-size: 1.4rem;       
+  transition: transform 0.3s ease;
+}
+
+.footer-social-links a:hover {
+  color: #ccc;              
+  transform: translateY(-3px);
 }
 
 .social-icon {
@@ -1215,7 +1276,7 @@ address {
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.05);
   color: var(--footer-heading);
-  transition: all 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .social-icon svg {
@@ -1251,7 +1312,7 @@ address {
 
 .footer-bottom {
   border-top: 1px solid var(--border-color);
-  padding: 1.5rem var(--spacing-unit);
+  padding: 1rem var(--spacing-unit);
   text-align: center;
   font-size: 0.85rem;
   color: #666;
@@ -1267,22 +1328,29 @@ address {
 @media (max-width: 1024px) {
   .desktop-canvas {
     width: 95%;
-    height: 70vh;
+    height: 70dvh;
     min-height: 400px;
   }
+
+  .desktop-canvas::before {
+    display: none;
+  }
+
   .hero-grid {
     padding: 0 1.5rem;
   }
 
   .hero-header-text {
-    font-size: 2.4rem;
-    letter-spacing: 1.5rem;
-    padding-top: 6rem;
-    margin-bottom: 3rem;
+    /* Handled by clamp in base class */
+    /* font-size: 2.4rem; */
+    /* letter-spacing: 1.5rem; */
+    /* padding-top: 6rem; */
+    /* margin-bottom: 3rem; */
   }
 
   .hero-char {
-    font-size: 6rem;
+    /* Handled by clamp */
+    /* font-size: 6rem; */
   }
   .hero-img-backdrop {
     width: 250px;
@@ -1293,7 +1361,7 @@ address {
     padding: 1rem;
   }
   .sc-name {
-    font-size: 1.1rem;
+    /* font-size: 1.1rem; */
   }
   .sc-achievements {
     font-size: 0.75rem;
@@ -1304,7 +1372,7 @@ address {
 @media (max-width: 768px) {
   .desktop-hero-section {
     height: auto;
-    min-height: 100vh;
+    min-height: 100dvh;
     padding: 2rem 0;
   }
   .desktop-canvas {
@@ -1314,6 +1382,11 @@ address {
     flex-direction: column;
     padding: 2rem 0;
   }
+
+  .desktop-canvas::before {
+    display: none;
+  }
+
   /* Stack letters vertically on mobile with better spacing */
   .hero-grid {
     flex-direction: column;
@@ -1323,10 +1396,11 @@ address {
     touch-action: pan-y;
   }
   .hero-header-text {
-    font-size: 2rem;
-    letter-spacing: 0.9rem;
-    padding-top: 5rem;
-    margin-bottom: 2.5rem;
+    /* Handled by clamp */
+    /* font-size: 2rem; */
+    /* letter-spacing: 0.9rem; */
+    /* padding-top: 5rem; */
+    /* margin-bottom: 2.5rem; */
   }
   .hero-item {
     width: 100%;
@@ -1343,7 +1417,8 @@ address {
     pointer-events: none; /* Disable all tap events to prioritize scrolling */
   }
   .hero-char {
-    font-size: clamp(4rem, 15vw, 6rem);
+    /* Handled by clamp */
+    /* font-size: clamp(4rem, 15vw, 6rem); */
     position: relative;
     margin-bottom: 1rem;
     color: rgba(255, 255, 255, 0.2);
@@ -1388,7 +1463,7 @@ address {
     font-size: 0.65rem;
   }
   .sc-name {
-    font-size: 1rem;
+    /* font-size: 1rem; */
     margin-bottom: 0.375rem;
   }
   .sc-achievements {
@@ -1426,16 +1501,17 @@ address {
     padding: 0.5rem;
   }
   .hero-header-text {
-    font-size: 1.6rem;
-    letter-spacing: 0.5rem;
-    padding-top: 4rem;
-    margin-bottom: 2rem;
+    /* Handled by clamp */
+    /* font-size: 1.6rem; */
+    /* letter-spacing: 0.5rem; */
+    /* padding-top: 4rem; */
+    /* margin-bottom: 2rem; */
   }
   .hero-item {
     height: 100px;
   }
   .hero-char {
-    font-size: 3rem;
+    /* font-size: 3rem; */
   }
   .hero-img-backdrop {
     width: 160px;
@@ -1473,7 +1549,7 @@ address {
   .desktop-hero-section {
     padding-top: 130px; /* Prevent overlap with navbar */
     height: auto;
-    min-height: 100vh;
+    min-height: 100dvh;
   }
   .navbar {
     padding: 0.8rem 5%; /* Reduce padding */
@@ -1486,6 +1562,37 @@ address {
 }
 
 /* --- ABOUT SECTION --- */
+
+@media (max-width: 1024px) {
+  /* --- ABOUT SECTION --- */
+  .about_interactive {
+    grid-template-columns: 1fr;
+    padding: 4rem 2rem;
+    gap: 3rem;
+    text-align: center;
+  }
+  
+  .text-content {
+    align-items: center;
+    padding: 0;
+  }
+  
+  .text-content p {
+    text-align: center;
+  }
+
+  .frame {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .frame-bottom {
+    width: auto;
+    gap: 2rem;
+  }
+}
 
 @media (max-width: 768px) {
   .about_interactive {
@@ -1550,6 +1657,37 @@ address {
 
 /* --- TEAM SECTION --- */
 
+/* Tablet Styles (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .glass-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  .glass-card {
+    flex-direction: row;
+  }
+  .card-image-box {
+    width: 40%;
+  }
+  .card-image-box img {
+    filter: grayscale(0%) opacity(1);
+  }
+  .card-info-box {
+    padding: 1.2rem;
+  }
+  .card-name {
+    font-size: 0.85rem;
+  }
+  .card-role {
+    font-size: 0.6rem;
+  }
+  .card-desc {
+    -webkit-line-clamp: 3;
+    font-size: 0.7rem;
+  }
+}
+
 @media (max-width: 768px) {
   .glass-team-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1566,6 +1704,7 @@ address {
   .glass-card {
     flex-direction: column;
     height: 100%;
+    aspect-ratio: auto;
   }
   .card-image-box {
     width: 100%;
@@ -1617,6 +1756,34 @@ address {
 
 /* --- TIMELINE SECTION --- */
 
+@media (max-width: 1024px) {
+  /* --- TIMELINE SECTION --- */
+  .event-node {
+    gap: 1.2rem;
+  }
+
+  .image-mask {
+    width: 45%;
+    max-height: 25vh;
+  }
+
+  .meta-data h2 {
+    /* Handled by clamp */
+    /* font-size: 1.6rem; */
+  }
+
+  .meta-data .year-label {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .meta-data p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-top: 0.4rem;
+  }
+}
+
 @media (max-width: 768px) {
   .event-node {
     width: 280px; /* Fixed width for small screens */
@@ -1625,11 +1792,11 @@ address {
   }
   .image-mask {
     width: 100%;
-    max-height: 20vh;
+    max-height: 20dvh;
   }
   .meta-data {
     text-align: center;
-    max-height: 15vh;
+    max-height: 15dvh;
     overflow: hidden;
   }
 }
@@ -1641,11 +1808,11 @@ address {
     display: none;
   }
   .footer-container {
-    grid-template-columns: 1fr; /* Stack everything */
-    gap: 2.5rem;
+    grid-template-columns: 1fr; 
+    gap: 2rem;
   }
   .footer-col p {
-    max-width: 100%; /* Full width text on mobile */
+    max-width: 100%; 
   }
   .map-wrapper {
     min-height: 250px; /* Taller map on mobile for touch interaction */

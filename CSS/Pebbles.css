@@ -299,7 +299,7 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: var(--radius);
   overflow: hidden;
-  min-height: 320px;
+  min-height: 240px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -631,7 +631,7 @@ img {
     justify-content: flex-start; 
     -webkit-overflow-scrolling: touch;
     gap: 1.5rem;
-    /*display: none;*/
+    /* display: none; */
   }
   
   nav ul::-webkit-scrollbar {
@@ -645,7 +645,7 @@ img {
 
   .mosaic-grid .card:nth-of-type(1) {
     grid-column: span 2;
-    min-height: 250px; 
+    min-height: 240px; 
   }
 
   .mosaic-grid .card:nth-of-type(2) {
@@ -780,5 +780,4 @@ img {
   .member-photo img {
     filter: grayscale(0%); 
   }
-
 }
