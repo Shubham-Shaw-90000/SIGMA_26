@@ -18,6 +18,9 @@
   <link rel="stylesheet" href="./CSS/hero_style.css" />
   <link rel="stylesheet" href="./CSS/perspective.css">
   <link rel="stylesheet" href="./CSS/loading.css">
+  <!--Preload-->
+  <link rel="preload" href="./HTML/Pebbles.html" as="document">
+  <link rel="preload" href="./HTML/Events.html" as="document">
 
 </head>
 
@@ -169,7 +172,7 @@
       <a href="#about" data-target="1">ABOUT</a>
       <a href="#team" data-target="2">TEAM</a>
       <a href="./HTML/Pebbles.html">PEBBLES</a>
-      <a href="./HTML/Events.html">SIGMA</a>
+      <a href="./HTML/Events.html" class="highlight-link">SIGMA</a>
       <a href="#footer" data-target="3">CONTACT</a>
     </nav>
   </header>
@@ -697,39 +700,29 @@
   <!-- Added contain: layout paint in CSS for this section to prevent reflow leakage -->
   <section class="timeline">
     <h1 class="section-title">Previous Iterations</h1>
-    <!-- UI Overlay -->
     <div class="progress-ui">
       <div class="progress-bar"></div>
     </div>
     <!-- Scroll Content-->
     <div id="scroll-height-spacer"></div>
-    <!-- Pinned Viewport -->
     <div class="viewport-wrapper">
       <div class="scroll-container" id="scroll-container">
-        <!-- SVG Canvas -->
         <svg class="svg-layer" id="timeline-svg" preserveAspectRatio="none"></svg>
       </div>
     </div>
   </section>
 
-  
+
   <!--FOOTER-->
   <footer class="site-footer" id="footer">
     <div class="footer-container">
       <div class="footer-col footer-contact">
         <h3 class="footer-heading">Get in Touch</h3>
-        <p>Let’s build something great together.</p>
-      </div>
-
-      <div class="footer-col footer-socials">
-        <h3 class="footer-heading">Connect</h3>
         <nav class="footer-social-links" aria-label="Social Media Links">
-          <nav class="footer-social-links" aria-label="Social Media Links">
-            <a href="https://www.instagram.com/sxcsa_official?igsh=MW8yZzBpbjljcjdsaw%3D%3D&utm_source=qr"
-              title="Open"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" class="copy-email" data-email="sxcsaofficial@gmail.com" title="Copy"><i
-                class="fa-solid fa-envelope"></i></a>
-          </nav>
+          <a href="https://www.instagram.com/sxcsa_official?igsh=MW8yZzBpbjljcjdsaw%3D%3D&utm_source=qr" title="Open"><i
+              class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="copy-email" data-email="sxcsaofficial@gmail.com" title="Copy"><i
+              class="fa-solid fa-envelope"></i></a>
         </nav>
       </div>
 
@@ -768,7 +761,6 @@
   <script src="./JAVASC/hero_nav.js" defer></script>
   <script src="./JAVASC/animations.js" defer></script>
   <script src="./JAVASC/hero_timeline.js" defer></script>
-  <script src="./JAVASC/page_transition.js"></script>
+  <script src="./JAVASC/page_transition.js" defer></script>
 </body>
-
 </html>
