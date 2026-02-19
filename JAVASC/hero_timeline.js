@@ -5,10 +5,9 @@ console.log("timeline")
 const isMobile = window.innerWidth < 768;
 
 const config = {
-  eventSpacing: isMobile ? 300 : 800, // Reduced spacing on mobile
-  startPadding: isMobile ? window.innerHeight * 0.7 : window.innerWidth * 0.325 ,
-  endPadding: isMobile ? window.innerWidth * 0.5: window.innerWidth * 0.6,
-  // Dynamic offset: Reduced to 8% of viewport height to pull branches closer to center
+  eventSpacing: isMobile ? 300 : 800, 
+  startPadding: isMobile ? window.innerHeight * 0.7 : window.innerWidth * 0.6 ,
+  endPadding: isMobile ? window.innerWidth * 0.5: window.innerWidth * 0.4,
   branchYOffset: window.innerHeight * 0.08, 
 };
 

@@ -1,5 +1,5 @@
 const CONFIG = {
-  zoomAmount: 200,
+  zoomAmount: 500,
   parallaxStrength: 500,
   parallaxDepth: 1,
   mobileBreakpoint: 768,

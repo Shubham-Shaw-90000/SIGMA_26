@@ -39,11 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
     letter.addEventListener("mouseenter", () => {
       if (themeColor) {
         canvas.style.setProperty("--active-glow", themeColor);
+        canvas.classList.add("glow-active");
       }
     });
 
     letter.addEventListener("mouseleave", () => {
       canvas.style.setProperty("--active-glow", "255, 255, 255");
+      canvas.classList.remove("glow-active");
       letter.style.setProperty("--rx", "0deg");
       letter.style.setProperty("--ry", "0deg");
     });
@@ -56,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const xPct = (x / rect.width - 0.5) * 2;
       const yPct = (y / rect.height - 0.5) * 2;
 
-      const maxRot = 15;
+      const maxRot = 12;
 
       letter.style.setProperty("--rx", `${-yPct * maxRot}deg`);
       letter.style.setProperty("--ry", `${xPct * maxRot}deg`);
@@ -66,25 +68,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //Phone and Email Copy
 document.addEventListener("DOMContentLoaded", () => {
-
-    function copyToClipboard(value, label) {
-        navigator.clipboard.writeText(value).then(() => {
-            alert(label + " copied: " + value);
-        });
-    }
-
-    document.querySelectorAll(".copy-phone").forEach(el => {
-        el.addEventListener("click", e => {
-            e.preventDefault();
-            copyToClipboard(el.dataset.phone, "Phone number");
-        });
+  function copyToClipboard(value, label) {
+    navigator.clipboard.writeText(value).then(() => {
+      alert(label + " copied: " + value);
     });
+  }
 
-    document.querySelectorAll(".copy-email").forEach(el => {
-        el.addEventListener("click", e => {
-            e.preventDefault();
-            copyToClipboard(el.dataset.email, "Email");
-        });
+  document.querySelectorAll(".copy-phone").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      copyToClipboard(el.dataset.phone, "Phone number");
     });
+  });
 
+  document.querySelectorAll(".copy-email").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      copyToClipboard(el.dataset.email, "Email");
+    });
+  });
 });
