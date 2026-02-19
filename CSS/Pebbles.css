@@ -236,7 +236,6 @@ nav ul li a:hover::after {
        ========================================= */
 section {
   padding: clamp(4rem, 10vh, 6rem) clamp(1.5rem, 5vw, 5vw);
-  max-width: 1600px;
   margin: 0 auto;
 }
 
@@ -404,10 +403,13 @@ section {
 /* =========================================
            ISSUES / EDITIONS SECTION
    ========================================= */
-.issues-scroll {
-  overflow: hidden;
-  position: relative;
-}
+  .issues-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 1rem;
+    -webkit-overflow-scrolling: touch; 
+    scroll-snap-type: x mandatory; 
+  }
 
 .issues-track {
   display: flex;
@@ -779,5 +781,32 @@ img {
   
   .member-photo img {
     filter: grayscale(0%); 
+  }
+}
+
+
+/* ==========================
+   TABLET: DESKTOP STYLE SCALED
+   ========================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .team-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .team-member:nth-child(1),
+  .team-member:nth-child(2) {
+    grid-column: span 2;
+  }
+  .member-photo {
+    width: clamp(140px, 16vw, 200px);
+    height: clamp(140px, 16vw, 200px);
+  }
+  .member-name {
+    font-size: 0.95rem;
+  }
+  .member-role {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
   }
 }

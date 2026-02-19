@@ -156,7 +156,7 @@
   /* min-width: 100px;
   max-width: 200px; */
   height: auto;
-  filter: drop-shadow(0 0 15px rgba(243, 13, 13, 0.89));
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.89));
 }
 
 @media (max-width: 768px) {
