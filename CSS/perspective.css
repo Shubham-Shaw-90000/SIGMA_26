@@ -1,102 +1,139 @@
 .body {
-    width: 100%;
-    height: 100vh;
-    background: #000000;
-    position: absolute;
+  width: 100%;
+  height: 100vh;
+  background: #000000;
+  /* position: absolute; */
 }
 
 .college {
-    position: fixed;  
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;  
-    z-index: 5000;     
-    background: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 5000;
+  background: #ffffff;
 }
 
 .perspective-container {
-    width: 100vw;
-    height: 100vh;
-    perspective: 12px;
-    /* overflow: hidden;   */
-    position: relative;
+  width: 100vw;
+  height: 100vh;
+  perspective: 12px;
+  /* overflow: hidden;   */
+  position: relative;
+  transform-style: preserve-3d;
 }
 
 .layer {
-    position: absolute;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
-
 .layer img {
-    display: block;
-    width: 100vw;
-    height: 100vh;
-    object-fit: scale-down;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;
 }
 
-.layer1 { z-index: 10; }
-.layer2 { z-index: 9; }
-.layer3 { z-index: 8; }
-.layer4 { z-index: 7; }
-.layer5 { z-index: 6; }
-.layer6 { z-index: 5; }
+.layer1 {
+  z-index: 10;
+}
+.layer2 {
+  z-index: 9;
+}
+.layer3 {
+  z-index: 8;
+}
+.layer4 {
+  z-index: 7;
+}
+.layer5 {
+  z-index: 6;
+}
+.layer6 {
+  z-index: 5;
+}
 
 #flash-img {
-    position: absolute;
-    display: none;
-    filter: brightness(0);
-    z-index: 2;
+  position: absolute;
+  display: none;
+  filter: brightness(0);
+  z-index: 2;
 }
 
 @media (max-width: 600px) {
-    .perspective-container {
-        width: 100%;
-        height: 100%;
-        transform: translateY(0%);
-    }
+  .perspective-container {
+    width: 100%;
+    height: 100%;
+    transform: translateY(0%);
+  }
 
-    .layer img {
-        max-width: 100vw;
-        object-fit: contain;
-        min-width: 0;
-        max-height: none;
-        min-height: 0;
-    }
+  .layer img {
+    max-width: 100vw;
+    object-fit: contain;
+    min-width: 0;
+    max-height: none;
+    min-height: 0;
+  }
 }
 
 @media (max-width: 767px) {
-    .perspective-container {
-        width: 100vw;
-        height: 100vh;
-    }
-    .layer1 img { transform: scale(6); }
-    .layer3 img { transform: scale(11); }
-    .layer5 img { transform: scale(20); }
-    .layer6 img { transform: scale(32); }
+  .perspective-container {
+    width: 100vw;
+    height: 100vh;
+  }
+  .layer1 img {
+    transform: scale(6);
+  }
+  .layer3 img {
+    transform: scale(11);
+  }
+  .layer5 img {
+    transform: scale(20);
+  }
+  .layer6 img {
+    transform: scale(32);
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .perspective-container {
-        width: 100vw;
-        height: 100vh;
-    }
-    .layer1 img { transform: scale(6); }
-    .layer3 img { transform: scale(11); }
-    .layer5 img { transform: scale(20); }
-    .layer6 img { transform: scale(30); }
+  .perspective-container {
+    width: 100vw;
+    height: 100vh;
+  }
+  .layer1 img {
+    transform: scale(6);
+  }
+  .layer3 img {
+    transform: scale(11);
+  }
+  .layer5 img {
+    transform: scale(20);
+  }
+  .layer6 img {
+    transform: scale(30);
+  }
 }
 
 @media (min-width: 1025px) {
-    .perspective-container {
-        width: 100vw;
-        height: 100vh;
-        transform: translateY(-20%);
-    }
-    .layer1 img { transform: scale(8.5); }
-    .layer3 img { transform: scale(16); }
-    .layer5 img { transform: scale(30); }
-    .layer6 img { transform: scale(45); }
+  .perspective-container {
+    width: 100vw;
+    height: 100vh;
+    transform: translateY(-20%);
+  }
+  .layer1 img {
+    transform: scale(8.5);
+  }
+  .layer3 img {
+    transform: scale(16);
+  }
+  .layer5 img {
+    transform: scale(30);
+  }
+  .layer6 img {
+    transform: scale(45);
+  }
 }
 
 /* Tap Hint Styling */
@@ -110,7 +147,9 @@
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    visibility 0.5s ease;
 }
 
 .tap-hint img {
@@ -124,7 +163,7 @@
 @media (max-width: 768px) {
   .tap-hint {
     /* bottom: 1.5rem; */
-      bottom: 33vh;
+    bottom: 33vh;
   }
   .tap-hint img {
     width: 30vw;
