@@ -24,13 +24,6 @@
   --trans-font: "Platfair Display", sans-serif;
 }
 
-body {
-  outline: 2px solid red;
-}
-footer {
-  outline: 2px solid blue;
-}
-
 /* RESET & BASE */
 *,
 *::before,
@@ -692,7 +685,7 @@ img {
     width: 100%;
     overflow-x: auto;
     padding-bottom: 5px;
-    justify-content: flex-start;
+    justify-content: center;
     -webkit-overflow-scrolling: touch;
     gap: 1.5rem;
   }
@@ -701,7 +694,7 @@ img {
     display: none;
   }
   nav ul li a {
-    font-size: clamp(0.7rem, 3vw, 1rem);
+    font-size: clamp(0.8rem, 3vw, 1rem);
     letter-spacing: 0.05em;
   }
 
@@ -871,3 +864,4 @@ img {
     letter-spacing: 0.08em;
   }
 }
+
