@@ -492,7 +492,7 @@ header.hero {
     width: 100%;
     overflow-x: auto;
     padding-bottom: 5px;
-    justify-content: flex-start;
+    justify-content: center;
     -webkit-overflow-scrolling: touch;
     gap: 1rem;
   }
@@ -588,3 +588,4 @@ header.hero {
     font-size: 0;
   }
 }
+
