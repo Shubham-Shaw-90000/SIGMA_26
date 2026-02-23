@@ -138,8 +138,12 @@
 /* Tap Hint Styling */
 .tap-hint {
   position: fixed;
-  /* bottom: 2rem; */
-  bottom: 33vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  bottom: 25vh;
   left: 50%;
   transform: translateX(-50%);
   z-index: 6000;
@@ -157,6 +161,30 @@
   max-width: 200px; */
   height: auto;
   filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.89));
+}
+
+.tap-text {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(0.8rem, 2vw, 2rem);
+  letter-spacing: clamp(0.1rem, 0.2vw, 0.4rem);
+  color: #313131;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+  animation: pulseTap 1.4s infinite ease-in-out;
+}
+
+@keyframes pulseTap {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
 }
 
 @media (max-width: 768px) {

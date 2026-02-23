@@ -211,11 +211,9 @@ body {
   left: 50%;
   transform: translate(-50%);
   display: flex;
-  /* Before: gap: 4rem; */
   gap: clamp(1.5rem, 4vw, 4rem);
   pointer-events: auto;
-  /* Before: padding: 0.8rem 1.5rem; */
-  padding: 0.8rem clamp(0.8rem, 2vw, 1.5rem);
+  padding: 0.4rem clamp(0.8rem, 2vw, 1.5rem);
   border-radius: 0.5rem;
   white-space: nowrap;
   max-width: 90vw;
@@ -225,14 +223,10 @@ body {
 .nav-links a {
   text-decoration: none;
   color: white;
-  /* Before: font-size: 0.6rem; */
-  font-size: clamp(
-    0.7rem,
-    0.9vw,
-    1rem
-  ); /* Prevents text from being too small on mobile */
+  font-size: clamp(0.7rem, 0.9vw, 1rem );
   letter-spacing: 1px;
   position: relative;
+  padding: 0.4rem 0.2rem;
 }
 
 /* Hover Underline */
@@ -252,6 +246,39 @@ body {
 }
 
 .highlight-link {
+  position: relative;
+  display: inline-block;
+  padding: 2px;
+  border-radius: 2px;
+  overflow: hidden;         
+}
+
+/* light sweep layer */
+.highlight-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: lightSweep 2s ease-in-out infinite;
+}
+
+/* animation */
+@keyframes lightSweep {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
 }
 
 /* =========================================
@@ -823,13 +850,13 @@ body {
   height: 100%;
   object-fit: cover;
   opacity: 0.8;
-  filter: grayscale(60%);
+  filter: grayscale(25%);
   transition: filter 0.5s ease;
   scale: 1.08;
 }
 
 .glass-card:hover .card-image-box img {
-  filter: grayscale(0%) brightness(1.2) saturate(1.1);
+  filter: grayscale(0%) brightness(1.1) saturate(1.1);
 }
 
 .card-img-overlay {

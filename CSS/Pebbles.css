@@ -460,7 +460,7 @@ section {
 
 /* ISSUES / EDITIONS SECTION */
 .issues-scroll {
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: hidden;
   padding: 0 1rem;
   -webkit-overflow-scrolling: touch;
@@ -864,4 +864,3 @@ img {
     letter-spacing: 0.08em;
   }
 }
-
