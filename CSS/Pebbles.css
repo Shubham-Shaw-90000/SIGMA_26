@@ -856,7 +856,7 @@ img {
     width: clamp(140px, 16vw, 200px);
     height: clamp(140px, 16vw, 200px);
   }
-  .team-member:hover .member-photo img {
+  .member-photo img {
   filter: grayscale(0%);
   }
   .member-name {
@@ -867,4 +867,5 @@ img {
     letter-spacing: 0.08em;
   }
 }
+
 
