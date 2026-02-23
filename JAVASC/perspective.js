@@ -31,6 +31,26 @@ const DOM = {
 };
 
 function initPerspective() {
+
+    // 🚫 SKIP ANIMATION FOR IOS TEMPORARY
+  if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+    const hero = document.querySelector(".college");
+    const tapHint = document.getElementById("tap-hint");
+
+    if (tapHint) tapHint.remove();
+    if (hero) hero.remove();
+
+    document.body.style.overflow = "";
+
+    if (window.lenis) {
+      window.lenis.start();
+      window.lenis.resize();
+    }
+
+    window.dispatchEvent(new CustomEvent("heroAway"));
+    return; // STOP everything here
+  }
+  
   cacheDOM();
   checkInitialLoadingState();
 
@@ -365,3 +385,4 @@ if (document.readyState !== "loading") {
     setTimeout(initPerspective, 50);
   });
 }
+
