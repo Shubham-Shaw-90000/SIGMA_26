@@ -1,4 +1,6 @@
-window.scrollTo(0, 0);
+if (window.innerWidth > 768) {
+  window.scrollTo(0, 0);
+}
 if (window.lenis) {
   window.lenis.scrollTo(0, { immediate: true });
 }

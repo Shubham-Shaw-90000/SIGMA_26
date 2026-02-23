@@ -37,10 +37,14 @@ function initPerspective() {
   // Wait for loading screen to complete before initializing parallax
   if (!state.loadingComplete) {
     // Loading screen is still active - listen for completion
-    window.addEventListener('loadingComplete', () => {
-      state.loadingComplete = true;
-      setupParallaxAnimation();
-    }, { once: true });
+    window.addEventListener(
+      "loadingComplete",
+      () => {
+        state.loadingComplete = true;
+        setupParallaxAnimation();
+      },
+      { once: true },
+    );
   } else {
     // Loading screen already complete - initialize directly
     setupParallaxAnimation();
@@ -193,7 +197,9 @@ function updateParallax() {
 }
 
 function toggleZoom() {
-  window.scrollTo(0, 0);
+  if (window.innerWidth > 768) {
+    window.scrollTo(0, 0);
+  }
 
   if (state.zoomed) return;
 
@@ -206,7 +212,6 @@ function toggleZoom() {
   //     duration: 0.5,
   //   });
   // }
-
 
   const tl = gsap.timeline({
     defaults: { duration: CONFIG.animation.duration },
@@ -307,7 +312,9 @@ function cleanupHero() {
   }
 
   // Reset Scroll Position
-  window.scrollTo(0, 0);
+  if (window.innerWidth > 768) {
+    window.scrollTo(0, 0);
+  }
   if (window.lenis) {
     window.lenis.scrollTo(0, { immediate: true });
   }
@@ -323,7 +330,9 @@ function cleanupHero() {
       sessionStorage.setItem("heroRemoved", "true");
 
       // Force scroll to top again after removal
-      window.scrollTo(0, 0);
+      if (window.innerWidth > 768) {
+        window.scrollTo(0, 0);
+      }
       if (window.lenis) {
         window.lenis.scrollTo(0, { immediate: true });
       }
@@ -350,7 +359,7 @@ function cleanupHero() {
 window.addEventListener("load", initPerspective);
 
 // Also initialize immediately if script loads after DOM is ready
-if (document.readyState !== 'loading') {
+if (document.readyState !== "loading") {
   // DOM already loaded, initialize with a small delay to ensure bindings are ready
   requestAnimationFrame(() => {
     setTimeout(initPerspective, 50);
