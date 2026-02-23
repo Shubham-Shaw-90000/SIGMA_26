@@ -510,4 +510,27 @@ function setupHeroGridAnimations() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", initAnimations);
+document.addEventListener("DOMContentLoaded", () => {
+  // Wait for loading screen to complete before initializing scroll animations
+  const loadingWrapper = document.querySelector('.loading-screen-wrapper');
+  
+  if (!loadingWrapper) {
+    // Loading screen already removed, start immediately with a small delay for safety
+    requestAnimationFrame(() => {
+      setTimeout(initAnimations, 100);
+    });
+  } else {
+    // Wait for loading complete event
+    window.addEventListener('loadingComplete', () => {
+      // Give ScrollTrigger time to recalculate after DOM changes
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          initAnimations();
+          if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+          }
+        }, 100);
+      });
+    }, { once: true });
+  }
+});

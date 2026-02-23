@@ -32,7 +32,22 @@ const DOM = {
 
 function initPerspective() {
   cacheDOM();
+  checkInitialLoadingState();
 
+  // Wait for loading screen to complete before initializing parallax
+  if (!state.loadingComplete) {
+    // Loading screen is still active - listen for completion
+    window.addEventListener('loadingComplete', () => {
+      state.loadingComplete = true;
+      setupParallaxAnimation();
+    }, { once: true });
+  } else {
+    // Loading screen already complete - initialize directly
+    setupParallaxAnimation();
+  }
+}
+
+function setupParallaxAnimation() {
   // =========================================================
   // Robust Detection (Mirroring loading_screen.js logic)
   // =========================================================
@@ -43,10 +58,10 @@ function initPerspective() {
     const isReload = navEntry
       ? navEntry.type === "reload"
       : performance.navigation.type === 1;
-    const siteAlreadyLoaded = sessionStorage.getItem("siteLoaded");
+    const heroRemoved = sessionStorage.getItem("heroRemoved");
 
-    // Logic: Skip ONLY if the site was loaded before AND this is NOT a refresh
-    if (siteAlreadyLoaded && !isReload) {
+    // Logic: Skip parallax setup ONLY if hero was already removed in previous session
+    if (heroRemoved && !isReload) {
       shouldPlayPerspective = false;
     }
   } catch (e) {
@@ -55,10 +70,9 @@ function initPerspective() {
   }
 
   if (!shouldPlayPerspective) {
-    // --- INSTANT CLEANUP ---
+    // --- INSTANT CLEANUP (Hero already removed in previous session) ---
     if (DOM.hero) {
       DOM.hero.remove();
-      sessionStorage.setItem("heroRemoved", "true");
     }
 
     if (DOM.tapHint) {
@@ -179,16 +193,20 @@ function updateParallax() {
 }
 
 function toggleZoom() {
+  window.scrollTo(0, 0);
+
   if (state.zoomed) return;
 
   // Hide tap hint immediately
-  if (DOM.tapHint) {
-    gsap.to(DOM.tapHint, {
-      opacity: 0,
-      visibility: "hidden",
-      duration: 0.5,
-    });
-  }
+  DOM.tapHint.remove();
+  // if (DOM.tapHint) {
+  //   gsap.to(DOM.tapHint, {
+  //     opacity: 0,
+  //     visibility: "hidden",
+  //     duration: 0.5,
+  //   });
+  // }
+
 
   const tl = gsap.timeline({
     defaults: { duration: CONFIG.animation.duration },
@@ -330,3 +348,11 @@ function cleanupHero() {
 }
 
 window.addEventListener("load", initPerspective);
+
+// Also initialize immediately if script loads after DOM is ready
+if (document.readyState !== 'loading') {
+  // DOM already loaded, initialize with a small delay to ensure bindings are ready
+  requestAnimationFrame(() => {
+    setTimeout(initPerspective, 50);
+  });
+}

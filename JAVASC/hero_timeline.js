@@ -1,37 +1,37 @@
-console.log("timeline")
+console.log("timeline");
 
 // --- 1. Configuration & Data ---
 // Made config dynamic based on screen size
 const isMobile = window.innerWidth < 768;
 
 const config = {
-  eventSpacing: isMobile ? 300 : 800, 
-  startPadding: isMobile ? window.innerHeight * 0.7 : window.innerWidth * 0.6 ,
-  endPadding: isMobile ? window.innerWidth * 0.5: window.innerWidth * 0.4,
-  branchYOffset: window.innerHeight * 0.08, 
+  eventSpacing: isMobile ? 300 : 800,
+  startPadding: isMobile ? window.innerHeight * 0.7 : window.innerWidth * 0.6,
+  endPadding: isMobile ? window.innerWidth * 0.5 : window.innerWidth * 0.4,
+  branchYOffset: window.innerHeight * 0.08,
 };
 
 const timelineData = [
   {
-    year: "2021",
+    year: "2021-2022",
     title: "Inception Point",
     desc: "A spark was lit, where curiosity first found its voice and direction.",
     img: "./Assets/CC2021.avif",
   },
   {
-    year: "2022",
+    year: "2022-2023",
     title: "First Ascent",
     desc: "Momentum took shape, as ideas evolved into action and collective purpose.",
     img: "./Assets/CC2022.avif",
   },
   {
-    year: "2023",
+    year: "2023-2024",
     title: "Sky is the Limit",
     desc: "The horizon widened, with ambition pushing beyond limits and expectations.",
     img: "./Assets/CC2023.avif",
   },
   {
-    year: "2024",
+    year: "2024-2025",
     title: "Legacy",
     desc: "A legacy emerged, where changing hands carried the same unyielding flame forward.",
     img: "./Assets/CC2024.avif",
@@ -87,22 +87,22 @@ function buildTimeline() {
     // 1. Create HTML Node
     const nodeEl = document.createElement("div");
     nodeEl.className = `event-node ${isEven ? "top" : "bottom"}`;
-    
+
     // Position the anchor point of the node
     nodeEl.style.left = `${nodeX}px`;
-    nodeEl.style.top = `${nodeY}px`; 
+    nodeEl.style.top = `${nodeY}px`;
 
     // Adjust Transform based on position relative to branch
     // If Top Node: It sits ABOVE the connection point (translateY -100%)
     // If Bottom Node: It sits BELOW the connection point (translateY 0%)
     // -50% X centers it horizontally on the branch tip
     const yTransformPercent = isEven ? -100 : 0;
-    
+
     // Add a small margin (e.g., 20px) so it doesn't touch the line exactly
     const margin = isEven ? -20 : 20;
     // Actually, let's incorporate margin into the transform or just use the gap
     // Using pixels in translate for margin
-    
+
     nodeEl.style.transform = `translate(-50%, ${yTransformPercent}%) translateY(${margin}px)`;
 
     nodeEl.innerHTML = `
@@ -124,7 +124,7 @@ function buildTimeline() {
     // Create SVG Path element for the branch
     const branchPath = document.createElementNS(
       "http://www.w3.org/2000/svg",
-      "path"
+      "path",
     );
     branchPath.classList.add("branch-path");
 
@@ -153,7 +153,7 @@ function buildTimeline() {
 
   const mainPath = document.createElementNS(
     "http://www.w3.org/2000/svg",
-    "path"
+    "path",
   );
   mainPath.setAttribute("d", mainPathD);
   mainPath.id = "main-line";
@@ -165,9 +165,32 @@ buildTimeline();
 
 // --- 4. Animation Logic ---
 
-window.onload = () => {
-  initAnimation();
-};
+function waitForLoadingComplete() {
+  const loadingWrapper = document.querySelector(".loading-screen-wrapper");
+
+  if (!loadingWrapper) {
+    // Loading screen already removed, start immediately
+    initAnimation();
+  } else {
+    // Loading screen still present, wait for it to complete
+    window.addEventListener("loadingComplete", initAnimation, { once: true });
+
+    // Timeout fallback: if loading screen doesn't dispatch event within 15 seconds, start anyway
+    setTimeout(() => {
+      if (document.querySelector(".loading-screen-wrapper")) {
+        initAnimation();
+      }
+    }, 15000);
+  }
+}
+
+// Check if DOM is ready
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", waitForLoadingComplete);
+} else {
+  // DOM already loaded
+  waitForLoadingComplete();
+}
 
 function initAnimation() {
   // Master Timeline
@@ -196,7 +219,7 @@ function initAnimation() {
       ease: "none",
       duration: 10, // Arbitrary duration unit, acts as reference for child tweens
     },
-    0
+    0,
   );
 
   // 2. Animate Main Line Drawing
@@ -217,7 +240,7 @@ function initAnimation() {
       ease: "none",
       duration: 10,
     },
-    0
+    0,
   );
 
   // 3. Animate Branches & Nodes
@@ -244,7 +267,7 @@ function initAnimation() {
         ease: "power2.out",
         duration: 0.5, // Quick draw
       },
-      startTime
+      startTime,
     );
 
     // Animate Node Reveal (just after branch starts)
@@ -252,17 +275,17 @@ function initAnimation() {
       node,
       { opacity: 0, scale: 0.5 },
       { opacity: 1, scale: 1, ease: "back.out(1.7)", duration: 0.8 },
-      startTime + 0.3
+      startTime + 0.3,
     );
 
     // Add Parallax to Images
     const img = node.querySelector(".event-image");
-    
+
     tl.fromTo(
       img,
       { x: "-10%" },
       { x: "5%", ease: "none", duration: 4 }, // Parallax duration covers the time the node is on screen
-      startTime - 2 // Start slightly before it appears
+      startTime - 2, // Start slightly before it appears
     );
   });
 }
