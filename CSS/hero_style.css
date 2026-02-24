@@ -70,6 +70,9 @@ body {
   backdrop-filter: blur(5.9px);
   -webkit-backdrop-filter: blur(5.9px);
   border: 1px solid rgba(255, 255, 255, 0.12);
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* Diagonal light reflection for glass */
@@ -174,6 +177,15 @@ body {
 
 .trans-line.even {
   transform: translateX(10%);
+}
+
+/* Add this anywhere in your CSS */
+.fa-icon {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  display: inline-block;
+  vertical-align: -0.125em; /* Aligns perfectly with text */
 }
 
 /* =========================================
@@ -322,6 +334,9 @@ body {
   overflow: hidden;
   pointer-events: none;
   transition: box-shadow 0.4s ease;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .desktop-canvas.glow-active {
@@ -746,10 +761,13 @@ body {
     transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
     background-color 0.4s ease,
     border-color 0.4s ease;
+  will-change: transform;
+  transform: translateZ(0) translateY(0);
+  backface-visibility: hidden;
 }
 
 .glass-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-6px) translateZ(0);
   background-color: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.15);
 }
@@ -846,7 +864,6 @@ body {
 
 .card-info-box {
   flex: 1;
-  /* Before: padding: 1.5rem; */
   padding: clamp(1rem, 1.5vw, 1.5rem);
   display: flex;
   flex-direction: column;
@@ -856,8 +873,7 @@ body {
 }
 
 .card-name {
-  /* Before: font-size: 1.25rem; */
-  font-size: clamp(0.7rem, 1.2vw, 1.4rem);
+  font-size: clamp(0.75rem, 1.2vw, 1.4rem);
   font-weight: 600;
   color: white;
   margin: 0;
@@ -1741,4 +1757,3 @@ address {
     margin-bottom: 0.75rem;
   }
 }
-
