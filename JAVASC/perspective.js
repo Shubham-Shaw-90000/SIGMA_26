@@ -219,7 +219,7 @@ function updateParallax() {
 }
 
 function toggleZoom() {
-  if (window.innerWidth > 1024) {
+  if (window.innerWidth > 1023) {
     window.scrollTo(0, 0);
   }
 
@@ -333,7 +333,7 @@ function cleanupHero() {
   }
 
   // Reset Scroll Position
-  if (window.innerWidth > 1024) {
+  if (window.innerWidth > 1023) {
     window.scrollTo(0, 0);
   }
   if (window.lenis) {
@@ -359,7 +359,7 @@ function cleanupHero() {
       DOM.flashImg = null;
 
       // Force scroll to top again after removal
-      if (window.innerWidth > 1024) {
+      if (window.innerWidth > 1023) {
         window.scrollTo(0, 0);
       }
       if (window.lenis) {

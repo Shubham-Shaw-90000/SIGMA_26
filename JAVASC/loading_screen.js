@@ -1,4 +1,4 @@
-if (window.innerWidth > 1024) {
+if (window.innerWidth > 1023) {
   window.scrollTo(0, 0);
 }
 if (window.lenis) {
