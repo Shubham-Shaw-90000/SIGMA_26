@@ -1,6 +1,6 @@
 const CONFIG = {
   zoomAmount: 500,
-  parallaxStrength: 500,
+  parallaxStrength: 120,
   parallaxDepth: 1,
   mobileBreakpoint: 768,
   animation: {
@@ -32,7 +32,7 @@ const DOM = {
 
 function initPerspective() {
 
-    // 🚫 SKIP ANIMATION FOR IOS TEMPORARY
+  // 🚫 SKIP ANIMATION FOR IOS TEMPORARY
   if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
     const hero = document.querySelector(".college");
     const tapHint = document.getElementById("tap-hint");
@@ -50,13 +50,10 @@ function initPerspective() {
     window.dispatchEvent(new CustomEvent("heroAway"));
     return; // STOP everything here
   }
-  
+
   cacheDOM();
   checkInitialLoadingState();
-
-  // Wait for loading screen to complete before initializing parallax
   if (!state.loadingComplete) {
-    // Loading screen is still active - listen for completion
     window.addEventListener(
       "loadingComplete",
       () => {
@@ -66,7 +63,6 @@ function initPerspective() {
       { once: true },
     );
   } else {
-    // Loading screen already complete - initialize directly
     setupParallaxAnimation();
   }
 }
@@ -326,7 +322,6 @@ function cleanupHero() {
   console.log("afterZoomIn / cleanupHero");
 
   if (!DOM.hero) {
-    // Safety fallback if hero is missing
     window.dispatchEvent(new CustomEvent("heroAway"));
     return;
   }
@@ -345,9 +340,17 @@ function cleanupHero() {
     duration: 0.5,
     ease: CONFIG.animation.easePower2,
     onComplete: () => {
+      // FIX 1: STOP THE INFINITE LOOP!
+      gsap.ticker.remove(updateParallax);
+
       // Remove from DOM
       DOM.hero.remove();
       sessionStorage.setItem("heroRemoved", "true");
+
+      // FIX 2: SEVER REFERENCES FOR GARBAGE COLLECTION
+      DOM.layers = null;
+      DOM.hero = null;
+      DOM.flashImg = null;
 
       // Force scroll to top again after removal
       if (window.innerWidth > 768) {
@@ -362,6 +365,7 @@ function cleanupHero() {
         window.lenis.start();
       }
       document.body.style.setProperty("overflow", "");
+      
       // Signal transition completion
       window.dispatchEvent(new CustomEvent("heroAway"));
 
@@ -385,4 +389,3 @@ if (document.readyState !== "loading") {
     setTimeout(initPerspective, 50);
   });
 }
-

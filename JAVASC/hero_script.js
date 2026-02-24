@@ -2,19 +2,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("mainCanvas");
   const letters = document.querySelectorAll(".hero-item");
 
-  // --- OPTIMIZATION 1: Cached Rects ---
-  let canvasRect = canvas
-    ? canvas.getBoundingClientRect()
-    : { left: 0, top: 0 };
+  // Detect if the primary input mechanism is touch (no hover capability)
+  const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+  let canvasRect = canvas ? canvas.getBoundingClientRect() : { left: 0, top: 0 };
 
   window.addEventListener("resize", () => {
-    canvasRect = canvas.getBoundingClientRect();
+    if (canvas) canvasRect = canvas.getBoundingClientRect();
   });
 
-  // --- OPTIMIZATION 2: Single Mouse Listener for Cursor Light ---
-  if (canvas) {
-    let tx = 0,
-      ty = 0;
+  // ONLY add cursor tracking if it's NOT a touch device
+  if (canvas && !isTouchDevice) {
+    let tx = 0, ty = 0;
     let isRendering = false;
 
     canvas.addEventListener("mousemove", (e) => {
@@ -32,38 +31,47 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // --- OPTIMIZATION 3: Delegated & Calculated Tilt ---
-  letters.forEach((letter) => {
-    const themeColor = letter.style.getPropertyValue("--theme");
+  // ONLY add 3D tilt tracking if it's NOT a touch device
+  if (!isTouchDevice) {
+    letters.forEach((letter) => {
+      const themeColor = letter.style.getPropertyValue("--theme");
 
-    letter.addEventListener("mouseenter", () => {
-      if (themeColor) {
-        canvas.style.setProperty("--active-glow", themeColor);
-        canvas.classList.add("glow-active");
-      }
+      letter.addEventListener("mouseenter", () => {
+        // FIX: Ask the browser for dimensions ONLY ONCE when the mouse enters
+        letter._cachedRect = letter.getBoundingClientRect(); 
+        
+        if (themeColor) {
+          canvas.style.setProperty("--active-glow", themeColor);
+          canvas.classList.add("glow-active");
+        }
+      });
+
+      letter.addEventListener("mouseleave", () => {
+        // Clear the glow and rotation
+        canvas.style.setProperty("--active-glow", "255, 255, 255");
+        canvas.classList.remove("glow-active");
+        letter.style.setProperty("--rx", "0deg");
+        letter.style.setProperty("--ry", "0deg");
+      });
+
+      letter.addEventListener("mousemove", (e) => {
+        // FIX: Read from the saved cache! No layout thrashing!
+        const rect = letter._cachedRect; 
+        if (!rect) return; // Safety check
+        
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const xPct = (x / rect.width - 0.5) * 2;
+        const yPct = (y / rect.height - 0.5) * 2;
+
+        const maxRot = 12;
+
+        letter.style.setProperty("--rx", `${-yPct * maxRot}deg`);
+        letter.style.setProperty("--ry", `${xPct * maxRot}deg`);
+      });
     });
-
-    letter.addEventListener("mouseleave", () => {
-      canvas.style.setProperty("--active-glow", "255, 255, 255");
-      canvas.classList.remove("glow-active");
-      letter.style.setProperty("--rx", "0deg");
-      letter.style.setProperty("--ry", "0deg");
-    });
-
-    letter.addEventListener("mousemove", (e) => {
-      const rect = letter.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const xPct = (x / rect.width - 0.5) * 2;
-      const yPct = (y / rect.height - 0.5) * 2;
-
-      const maxRot = 12;
-
-      letter.style.setProperty("--rx", `${-yPct * maxRot}deg`);
-      letter.style.setProperty("--ry", `${xPct * maxRot}deg`);
-    });
-  });
+  }
 });
 
 //Phone and Email Copy
