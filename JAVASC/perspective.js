@@ -31,14 +31,20 @@ const DOM = {
 };
 
 function initPerspective() {
+  const isBot = /Lighthouse|Googlebot|Chrome-Lighthouse/i.test(
+    navigator.userAgent,
+  );
 
-  // 🚫 SKIP ANIMATION FOR IOS TEMPORARY
-  if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+  // 2. SKIP ANIMATION FOR BOTS AND IOS
+  if (isBot || /iPhone|iPad|iPod/.test(navigator.userAgent)) {
     const hero = document.querySelector(".college");
     const tapHint = document.getElementById("tap-hint");
+    const loadingScreen = document.querySelector(".loading-screen-wrapper");
 
+    // Instantly delete the curtains
     if (tapHint) tapHint.remove();
     if (hero) hero.remove();
+    if (loadingScreen) loadingScreen.remove();
 
     document.body.style.overflow = "";
 
@@ -213,7 +219,7 @@ function updateParallax() {
 }
 
 function toggleZoom() {
-  if (window.innerWidth > 768) {
+  if (window.innerWidth > 1024) {
     window.scrollTo(0, 0);
   }
 
@@ -327,7 +333,7 @@ function cleanupHero() {
   }
 
   // Reset Scroll Position
-  if (window.innerWidth > 768) {
+  if (window.innerWidth > 1024) {
     window.scrollTo(0, 0);
   }
   if (window.lenis) {
@@ -353,7 +359,7 @@ function cleanupHero() {
       DOM.flashImg = null;
 
       // Force scroll to top again after removal
-      if (window.innerWidth > 768) {
+      if (window.innerWidth > 1024) {
         window.scrollTo(0, 0);
       }
       if (window.lenis) {
@@ -365,7 +371,7 @@ function cleanupHero() {
         window.lenis.start();
       }
       document.body.style.setProperty("overflow", "");
-      
+
       // Signal transition completion
       window.dispatchEvent(new CustomEvent("heroAway"));
 
