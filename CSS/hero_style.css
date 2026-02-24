@@ -185,7 +185,8 @@ body {
   height: 1em;
   fill: currentColor;
   display: inline-block;
-  vertical-align: -0.125em; /* Aligns perfectly with text */
+  vertical-align: -0.125em; 
+  pointer-events: none;
 }
 
 /* =========================================
