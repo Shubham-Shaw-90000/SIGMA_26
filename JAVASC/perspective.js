@@ -371,7 +371,9 @@ function cleanupHero() {
 
       // Refresh libraries to detect layout changes
       if (typeof ScrollTrigger !== "undefined") {
-        ScrollTrigger.refresh();
+        setTimeout(() => {
+          requestAnimationFrame(() => ScrollTrigger.refresh());
+        }, 100);
       }
       if (window.lenis) {
         window.lenis.resize();
