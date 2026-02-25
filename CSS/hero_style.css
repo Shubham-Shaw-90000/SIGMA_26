@@ -259,7 +259,67 @@ body {
   width: 100%;
 }
 
+/*Sparkle*/
 .highlight-link {
+  position: relative;
+  display: inline-block;
+}
+
+.sp-left::before,
+.sp-left::after,
+.sp-right::before,
+.sp-right::after {
+  content: "✦";
+  position: absolute;
+  color: var(--line-color); 
+  font-size: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  animation: sparkle-anim 2s ease-in-out infinite;
+}
+
+/* Top Left */
+.sp-left::before {
+  top: -15px;
+  left: -10px;
+  animation-delay: 0s;
+}
+
+/* Bottom Left */
+.sp-left::after {
+  bottom: -8px;
+  left: -15px;
+  animation-delay: 1s;
+}
+
+/* Top Right */
+.sp-right::before {
+  top: -10px;
+  right: -15px;
+  animation-delay: 0.5s;
+}
+
+/* Bottom Right */
+.sp-right::after {
+  bottom: -8px;
+  right: -15px;
+  animation-delay: 1.5s;
+}
+
+@keyframes sparkle-anim {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(90deg);
+    text-shadow: 0 0 10px var(--line-color);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(180deg);
+  }
 }
 
 /* =========================================
@@ -282,7 +342,7 @@ body {
 .hero-header-text {
   font-family: var(--font-scondary);
   font-size: clamp(2rem, 5vw, 4.5rem);
-  font-weight: 100;
+  font-weight: 300;
   background: linear-gradient(
     to bottom,
     rgb(10, 10, 10, 1),
@@ -1239,8 +1299,7 @@ address {
   }
 
   .nav-links a {
-    /* Before: font-size: 0.75rem; */
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     letter-spacing: 0.5px;
   }
 }
@@ -1270,9 +1329,9 @@ address {
     margin-bottom: 3rem;
   }
 
-  .hero-char {
-    /* font-size: 6rem; */
-  }
+  /* .hero-char {
+    font-size: 6rem;
+  } */
   .hero-img-backdrop {
     width: 250px;
     height: 450px;
@@ -1281,9 +1340,9 @@ address {
     width: 220px;
     padding: 1rem;
   }
-  .sc-name {
-    /* font-size: 1.1rem; */
-  }
+  /* .sc-name {
+    font-size: 1.1rem;
+  } */
   .sc-achievements {
     font-size: 0.75rem;
   }
@@ -1490,11 +1549,9 @@ address {
 }
 
 /* --- ABOUT SECTION --- */
-
-@media (max-width: 1024px) {
-  /* --- ABOUT SECTION --- */
+ @media (max-width: 1024px) {
   .about_interactive {
-    grid-template-columns: 1fr;
+    grid-template-columns:1fr 1fr;
     padding: 4rem 2rem;
     gap: 3rem;
     text-align: center;
@@ -1510,18 +1567,18 @@ address {
   }
 
   .frame {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     gap: 2rem;
   }
 
   .frame-bottom {
-    width: auto;
+    width: 100%; 
     gap: 2rem;
+    justify-content: center;
   }
 }
-
 @media (max-width: 768px) {
   .about_interactive {
     grid-template-columns: 1fr;
@@ -1568,7 +1625,7 @@ address {
     min-width: 130px; /* prevent becoming too small */
   }
   .photo h3 {
-    font-size: 0.9rem; /* Slightly smaller text for cards */
+    font-size: 0.9rem; 
   }
 }
 
@@ -1605,7 +1662,7 @@ address {
     padding: 1.2rem;
   }
   .card-name {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
   .card-role {
     font-size: 0.6rem;
@@ -1660,7 +1717,7 @@ address {
   }
   .card-desc {
     -webkit-line-clamp: 3;
-    font-size: 0.8rem;
+    font-size: 0.65rem;
   }
   .card-socials {
     margin-top: auto;
@@ -1680,6 +1737,10 @@ address {
   .card-name {
     font-size: 0.7rem;
   }
+  .card-desc {
+    -webkit-line-clamp: 3;
+    font-size: 0.65rem;
+  }
 }
 
 /* --- TIMELINE SECTION --- */
@@ -1695,10 +1756,10 @@ address {
     max-height: 25vh;
   }
 
-  .meta-data h2 {
-    /* Handled by clamp */
-    /* font-size: 1.6rem; */
-  }
+  /* .meta-data h2 {
+    Handled by clamp
+    font-size: 1.6rem;
+  } */
 
   .meta-data .year-label {
     font-size: 0.8rem;

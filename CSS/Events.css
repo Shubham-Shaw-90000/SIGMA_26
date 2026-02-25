@@ -191,7 +191,7 @@ header.hero {
 }
 
 .hero-meta {
-  font-size: 0.9rem;
+  font-size: clamp(0.75rem, 0.8vw, 0.9rem);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-primary);
@@ -491,10 +491,10 @@ header.hero {
   nav ul {
     width: 100%;
     overflow-x: auto;
-    padding-bottom: 5px;
+    padding: 0 12px; 
     justify-content: center;
     -webkit-overflow-scrolling: touch;
-    gap: 1rem;
+    gap: 0.5rem;
   }
 
   nav ul::-webkit-scrollbar {
@@ -504,6 +504,7 @@ header.hero {
   nav ul li a {
     font-size: clamp(0.6rem, 2.5vw, 0.75rem);
     letter-spacing: 0.05em;
+    padding: 6px 6px; 
   }
 
   .hero-details {

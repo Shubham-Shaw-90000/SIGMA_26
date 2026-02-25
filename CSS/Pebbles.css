@@ -178,6 +178,69 @@ nav ul li a:hover::after {
   width: 100%;
 }
 
+/*Sparkle*/
+.highlight-link {
+  position: relative;
+  display: inline-block;
+}
+
+.sp-left::before,
+.sp-left::after,
+.sp-right::before,
+.sp-right::after {
+  content: "✦";
+  position: absolute;
+  color: var(--line-color); 
+  font-size: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  animation: sparkle-anim 2s ease-in-out infinite;
+}
+
+/* Top Left */
+.sp-left::before {
+  top: -15px;
+  left: -10px;
+  animation-delay: 0s;
+}
+
+/* Bottom Left */
+.sp-left::after {
+  bottom: -8px;
+  left: -15px;
+  animation-delay: 1s;
+}
+
+/* Top Right */
+.sp-right::before {
+  top: -10px;
+  right: -15px;
+  animation-delay: 0.5s;
+}
+
+/* Bottom Right */
+.sp-right::after {
+  bottom: -8px;
+  right: -15px;
+  animation-delay: 1.5s;
+}
+
+@keyframes sparkle-anim {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(90deg);
+    text-shadow: 0 0 10px var(--line-color);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(180deg);
+  }
+}
+
 /* HERO SECTION */
 .viewport {
   position: relative;
@@ -867,5 +930,3 @@ img {
     letter-spacing: 0.08em;
   }
 }
-
-
