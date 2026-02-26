@@ -989,6 +989,13 @@ body {
   contain: strict;
 }
 
+.timeline {
+  margin-top: -50vh; 
+  position: relative;
+  z-index: 10;
+  pointer-events: none; 
+}
+
 .scroll-container {
   display: flex;
   height: 100%;
@@ -1023,14 +1030,12 @@ body {
 
 .event-node {
   position: absolute;
-  /* Before: width: clamp(300px, 40vw, 600px); */
   width: clamp(300px, 40vw, 600px);
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* Before: gap: 1.5rem; */
   gap: clamp(1rem, 2vw, 2rem);
   opacity: 0;
   z-index: 20;
