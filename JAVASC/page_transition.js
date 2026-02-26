@@ -25,39 +25,33 @@
   };
 
   function injectOverlay() {
-    if (document.getElementById(transitionId)) return;
-
-    const overlay = document.createElement("div");
-    overlay.id = transitionId;
-
-    // Mobile Optimization
-    overlay.style.height = "100dvh";
-
-    const grid = document.createElement("div");
-    grid.className = "kinetic-grid";
-
-    // Create 11 lines for density
-    for (let i = 0; i < 11; i++) {
-      const line = document.createElement("div");
-      line.className = `trans-line ${i % 2 === 0 ? "even" : "odd"}`;
-      line.textContent = "";
-      grid.appendChild(line);
+    let overlay = document.getElementById(transitionId);
+    // 1. If it doesn't exist at all, create it (Fallback)
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = transitionId;
+      overlay.style.height = "100dvh";
+      document.body.appendChild(overlay);
     }
-
-    overlay.appendChild(grid);
-    document.body.appendChild(overlay);
-
-    // Populate Cache
+    if (overlay.children.length === 0) {
+      const grid = document.createElement("div");
+      grid.className = "kinetic-grid";
+      for (let i = 0; i < 11; i++) {
+        const line = document.createElement("div");
+        line.className = `trans-line ${i % 2 === 0 ? "even" : "odd"}`;
+        line.textContent = ""; // Starts empty
+        grid.appendChild(line);
+      }
+      overlay.appendChild(grid);
+    }
     domCache.overlay = overlay;
-    domCache.grid = grid;
+    domCache.grid = overlay.querySelector(".kinetic-grid");
     domCache.lines = overlay.querySelectorAll(".trans-line");
     domCache.oddLines = overlay.querySelectorAll(".trans-line.odd");
     domCache.evenLines = overlay.querySelectorAll(".trans-line.even");
   }
-
   document.addEventListener("DOMContentLoaded", () => {
     injectOverlay();
-    // Optional: Animate OUT if we just arrived (Entry Transition)
     animateEntry();
   });
 

@@ -6,7 +6,7 @@ const isMobile = window.innerWidth < 768;
 
 const config = {
   eventSpacing: isMobile ? 300 : 800,
-  startPadding: isMobile ? window.innerHeight * 0.7 : window.innerWidth * 0.6,
+  startPadding: isMobile ? window.innerHeight * 0.6 : window.innerWidth * 0.3,
   endPadding: isMobile ? window.innerWidth * 0.5 : window.innerWidth * 0.4,
   branchYOffset: window.innerHeight * 0.08,
 };
