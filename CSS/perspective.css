@@ -20,6 +20,7 @@
   width: 100vw;
   height: 100vh;
   perspective: 12px;
+  transform-style: preserve-3d;
   /* overflow: hidden;   */
   position: relative;
 }
@@ -189,8 +190,7 @@
 
 @media (max-width: 768px) {
   .tap-hint {
-    /* bottom: 1.5rem; */
-    bottom: 33vh;
+    bottom: 25vh;
   }
   .tap-hint img {
     width: 30vw;
