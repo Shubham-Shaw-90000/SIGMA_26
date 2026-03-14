@@ -4,7 +4,7 @@
 
   --accent-teal: rgb(26, 212, 241);
   --accent-red: rgb(243, 48, 26);
-  --accent-gold: #d4af37;
+  --accent-gold: #f7e4b6;
 
   --text-main: #f0f4f8;
   --text-muted: #8b9bb4;
@@ -347,7 +347,7 @@ section {
     grid-template-columns: repeat(2, 1fr);
   }
   .card {
-    min-height: 200px; /* Reduced height explicitly for tablet */
+    min-height: 200px; 
   }
 }
 @media (min-width: 1024px) {
@@ -355,7 +355,7 @@ section {
     grid-template-columns: repeat(4, 1fr);
   }
   .card {
-    min-height: 210px; /* Reduced height explicitly for desktop */
+    min-height: 210px; 
   }
 }
 
@@ -367,7 +367,7 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: var(--radius);
   overflow: hidden;
-  min-height: 180px; /* Reduced base height */
+  min-height: 180px; 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -445,6 +445,23 @@ section {
   color: var(--accent-red);
 }
 
+.highlight {
+  position: relative;
+  font-weight: 600;
+  color: #000;
+  padding: 0 0.3em;
+  z-index: 1;
+}
+
+.highlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent-gold);
+  transform: skewX(-10deg);
+  z-index: -1;
+}
+
 .card p {
   font-size: 0.9rem;
   color: var(--text-muted);
@@ -476,7 +493,7 @@ section {
        DYNAMIC CARD INTERACTIONS & ANIMATIONS
        ========================================= */
 .dynamic-card {
-  cursor: zoom-in;
+  cursor:pointer;
 }
 
 /* Crossfade animation logic for global rotation */
@@ -493,7 +510,6 @@ section {
 
 /* Expanded State inside the natural Grid boundaries */
 .dynamic-card.expanded {
-  cursor: zoom-out;
   z-index: 10;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
   border-color: rgba(255, 255, 255, 0.3);
@@ -512,8 +528,8 @@ section {
 
 .dynamic-card.expanded p {
   color: var(--text-main);
-  -webkit-line-clamp: unset; /* Override mobile truncation */
-  display: block; /* Allows natural wrapping without clipping */
+  -webkit-line-clamp: unset;
+  display: block; 
 }
 
 .dynamic-card.expanded .card-bg {
