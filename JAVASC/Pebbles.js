@@ -76,7 +76,7 @@ const factsData = [
       shortDesc: "Evidence of an everpresent background of cosmic hum.",
       fullDesc:
         "Scientists have found evidence of an everpresent background of ultra-low frequency gravitational waves. It is a collection of weak, independent sources of gravitational waves superimposing to form an incoherent cosmic hum across the fabric of the universe.",
-      img: "../Assets/astrophysics.avif",
+      img: "../Assets/astrophysics.webp",
     },
     {
       tag: "Cosmology",
@@ -84,7 +84,7 @@ const factsData = [
       shortDesc: "The essential building blocks of life were forged in stars.",
       fullDesc:
         "In the cores of stars, intense heat fuses lighter elements to form heavier ones. When massive stars explode as supernovae, they scatter these elements. Every atom of iron in your blood and calcium in your bones once existed inside an ancient star.",
-      img: "../Assets/cosmology.avif",
+      img: "../Assets/cosmology.webp",
     },
     {
       tag: "Astrochemistry",
@@ -92,7 +92,7 @@ const factsData = [
       shortDesc: "Tryptophan detected 1000 light-years from Earth.",
       fullDesc:
         "The amino acid tryptophan was detected in the IC348 star-forming region within the Perseus Molecular Cloud Complex. This finding suggests such chemical signatures are common in the gas and dust where planets form, which is key to discovering exoplanetary life.",
-      img: "../Assets/astrochemistry.avif",
+      img: "../Assets/astrochemistry.webp",
     },
     {
       tag: "Quantum Physics",
@@ -100,7 +100,7 @@ const factsData = [
       shortDesc: "Entanglement could make hacking fundamentally impossible.",
       fullDesc:
         "Researchers are developing a quantum internet. In quantum communication, any attempt to intercept data changes its quantum state, instantly revealing the intrusion. If scaled globally, it could create virtually unhackable networks for global defense and banking.",
-      img: "../Assets/quantum_physics.avif",
+      img: "../Assets/quantum_physics.webp",
     },
     {
       tag: "Mathematics",
@@ -108,7 +108,7 @@ const factsData = [
       shortDesc: "A 41-million-digit mathematical behemoth discovered.",
       fullDesc:
         "The largest known prime is a Mersenne prime containing over 41 million digits, discovered through the GIMPS project. Although not directly used in encryption today, the testing methods developed through these searches strengthen cryptographic research globally.",
-      img: "../Assets/mathematics.avif",
+      img: "../Assets/mathematics.webp",
     },
   ],
   [
@@ -119,7 +119,7 @@ const factsData = [
       shortDesc: "A secret fungal network connects entire forests.",
       fullDesc:
         "Underneath almost every forest is a vast web of fungal threads called mycorrhizal networks. Trees use this network to trade nutrients and 'talk', sending chemical distress signals to warn neighbors of impending insect attacks before they even happen.",
-      img: "../Assets/ecology.avif",
+      img: "../Assets/ecology.webp",
     },
     {
       tag: "Biogeochemistry",
@@ -127,7 +127,7 @@ const factsData = [
       shortDesc: "Why humans are exceptionally sensitive to petrichor.",
       fullDesc:
         "The distinct smell of rain, petrichor, is primarily due to geosmin, a by-product of soil bacteria. Human noses are incredibly sensitive to it, able to detect it at 0.4 parts per billion—likely an evolutionary trait our ancestors developed to locate water.",
-      img: "../Assets/biogeochemistry.avif",
+      img: "../Assets/biogeochemistry.webp",
     },
     {
       tag: "Artificial Intelligence",
@@ -135,7 +135,7 @@ const factsData = [
       shortDesc: "Forecasting storms and heatwaves faster than ever.",
       fullDesc:
         "Researchers developed AI systems that analyze decades of climate data within minutes. These models can forecast complex weather events faster than traditional systems, vastly improving disaster preparedness and community safety worldwide.",
-      img: "../Assets/artificial_intelligence.avif",
+      img: "../Assets/artificial_intelligence.webp",
     },
     {
       tag: "Biology",
@@ -143,7 +143,7 @@ const factsData = [
       shortDesc: "Why flies seem to dodge your swatter effortlessly.",
       fullDesc:
         "Different species perceive time differently. Smaller animals with higher metabolisms that must deal with rapid environmental changes experience time much slower than humans. To a fly, your swinging hand is simply moving in slow motion.",
-      img: "../Assets/biology.avif",
+      img: "../Assets/biology.webp",
     },
     {
       tag: "Evolution",
@@ -151,7 +151,7 @@ const factsData = [
       shortDesc: "Parthenogenesis allows reproduction without fertilization.",
       fullDesc:
         "Parthenogenesis is an asexual reproduction strategy where embryos develop from unfertilised eggs, seen in komodo dragons and some sharks. While it avoids the energy costs of sexual reproduction, it risks accumulating harmful mutations over generations.",
-      img: "../Assets/evolution.avif",
+      img: "../Assets/evolution.webp",
     },
   ],
   [
@@ -162,7 +162,7 @@ const factsData = [
       shortDesc: "A completely new carbon-free aromatic ring.",
       fullDesc:
         "Scientists discovered pentasilacyclopentadienide, a planar and aromatic compound where all five carbon atoms are replaced by silicon. This breakthrough equilibrium discovery may lead to entirely new classes of electronic, optical, or catalytic materials.",
-      img: "../Assets/chemistry.avif",
+      img: "../Assets/chemistry.webp",
     },
     {
       tag: "Neuroscience",
@@ -170,7 +170,7 @@ const factsData = [
       shortDesc: "The human brain remains adaptable throughout life.",
       fullDesc:
         "Neuroplasticity is the brain’s incredible ability to reorganize its neural pathways. Whether learning new skills, recovering from an injury, or adapting to stress, the brain is constantly undergoing physical and structural changes.",
-      img: "../Assets/neuroscience.avif",
+      img: "../Assets/neuroscience.webp",
     },
     {
       tag: "Computing",
@@ -178,7 +178,7 @@ const factsData = [
       shortDesc: "Your phone dwarfs the Apollo 11 computers.",
       fullDesc:
         "The guidance computer used in the Apollo 11 moon landing had only about 4KB of RAM. Today's modern smartphones have millions of times more processing power, placing an astronomical technological leap right in the palm of your hand.",
-      img: "../Assets/computing.avif",
+      img: "../Assets/computing.webp",
     },
     {
       tag: "Acoustics",
@@ -186,7 +186,7 @@ const factsData = [
       shortDesc: "Why we hate hearing our own recorded voices.",
       fullDesc:
         "When we speak, bone conduction in our skull amplifies the lower frequencies, making our voice sound deeper and richer to ourselves. Recordings lack this internal conduction, exposing the unfamiliar, unfiltered pitch of our voice.",
-      img: "../Assets/acoustics.avif",
+      img: "../Assets/acoustics.webp",
     },
     {
       tag: "Statistics",
@@ -194,7 +194,7 @@ const factsData = [
       shortDesc: "When data trends completely reverse themselves.",
       fullDesc:
         "Simpson's Paradox occurs when a trend appears in isolated groups of data but vanishes or reverses when combined. Confining variables properly is crucial in medical studies to avoid drawing false-positive conclusions and prescribing ineffective treatments.",
-      img: "../Assets/statistics.avif",
+      img: "../Assets/statistics.webp",
     },
   ],
 ];

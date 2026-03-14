@@ -643,7 +643,7 @@ gsap.registerPlugin(CustomEase, SplitText, ScrambleTextPlugin);
       currentRowIndex: 0,
       isLoading: true,
       loadingProgress: 0,
-      totalDuration: 120, // 15 seconds
+      totalDuration: 5000, //miliseconds
     };
 
     const rowIds = ["precision", "analysis", "discovery"];

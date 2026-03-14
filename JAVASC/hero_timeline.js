@@ -16,25 +16,25 @@ const timelineData = [
     year: "2021-2022",
     title: "Inception Point",
     desc: "A spark was lit, where curiosity first found its voice and direction.",
-    img: "./Assets/CC2021.avif",
+    img: "./Assets/CC2021.webp",
   },
   {
     year: "2022-2023",
     title: "First Ascent",
     desc: "Momentum took shape, as ideas evolved into action and collective purpose.",
-    img: "./Assets/CC2022.avif",
+    img: "./Assets/CC2022.webp",
   },
   {
     year: "2023-2024",
     title: "Sky is the Limit",
     desc: "The horizon widened, with ambition pushing beyond limits and expectations.",
-    img: "./Assets/CC2023.avif",
+    img: "./Assets/CC2023.webp",
   },
   {
     year: "2024-2025",
     title: "Legacy",
     desc: "A legacy emerged, where changing hands carried the same unyielding flame forward.",
-    img: "./Assets/CC2024.avif",
+    img: "./Assets/CC2024.webp",
   },
 ];
 

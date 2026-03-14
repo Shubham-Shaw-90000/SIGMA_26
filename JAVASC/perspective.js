@@ -188,10 +188,13 @@ function handleMouseMove(e) {
 }
 
 function handleZoomTrigger() {
-  // Guard: Don't allow zoom if loading isn't finished
   if (!state.loadingComplete) {
     state.loadingComplete = true;
   }
+
+  // REMOVE the listeners immediately so further clicks do nothing
+  window.removeEventListener("mousedown", handleZoomTrigger);
+  window.removeEventListener("touchstart", handleZoomTrigger);
 
   toggleZoom();
 }
